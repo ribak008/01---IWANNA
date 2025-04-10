@@ -1,25 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native';
+import HeaderPrincipal from '../components/Header';
 
 const imgPerfil = require('../assets/images/perfil.png') ;
-const imgLogo = require('../assets/images/icons/logo.jpg');
 
 
 export default function MiPerfil() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* logo */}
-      <View style={styles.fixedHeader}>
-        <Image source={imgLogo} style={{ width: 100, height: 100 }} />
-        <Text style={styles.titulo}>MI PERFIL</Text>
-      </View>
+      <HeaderPrincipal titulo='MI PERFIL' bgColor='#00BCD4'/>
 
       {/* seccion de scroll */}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.container}>
-          {/* <Text style={styles.titulo}>MI PERFIL</Text> */}
-        </View>
 
         <View style={styles.container}>
           <Image
@@ -70,12 +64,7 @@ export default function MiPerfil() {
 }
 
 const styles = StyleSheet.create({
-  fixedHeader: {
-    alignItems: 'center',
-    paddingVertical: 10,
-    backgroundColor: '#fff', 
 
-  },
   scrollContainer: {
     paddingBottom: 20,
   },
@@ -85,18 +74,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-  titulo:{
-    fontSize: 20,
-    backgroundColor: '#00BCD4',
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingTop: 10,
-    paddingBottom: 10,
-    borderRadius: 40,
-    color: '#F5F5F5',
-  },
-
   info:{
     marginTop: 10,
     marginBottom: 10,
