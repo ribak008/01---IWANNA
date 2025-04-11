@@ -3,14 +3,15 @@ import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import HeaderPrincipal from '../components/Header';
 
-const imgPerfil = require('../assets/images/perfil.png') ;
+
+const imgPerfil = require('../assets/images/perfil.png');
 
 
 export default function MiPerfil() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* logo */}
-      <HeaderPrincipal titulo='MI PERFIL' bgColor='#00BCD4'/>
+      <HeaderPrincipal titulo='MI PERFIL' bgColor='#00BCD4' />
 
       {/* seccion de scroll */}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -31,7 +32,7 @@ export default function MiPerfil() {
         <View style={styles.container}>
           <View style={styles.info}>
             <Text style={{ fontWeight: '800' }}>Datos personales:</Text>
-            <Text>Nombre: Juan Gana</Text>
+            <Text>Nombre: Juan Ganadero</Text>
             <Text>Edad: 20 años</Text>
             <Text>Profesión: Maestro parrillero</Text>
           </View>
@@ -53,13 +54,19 @@ export default function MiPerfil() {
 
           <View style={styles.info}>
             <Text style={{ fontWeight: '800' }}>Mis publicaciones:</Text>
-            
+
+
+            <View style={styles.container}>
+              <Text>Tab [Home|Settings]</Text>
+            </View>
           </View>
         </View>
 
         <StatusBar style="auto" />
       </ScrollView>
     </SafeAreaView>
+
+
   );
 }
 
@@ -74,7 +81,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  info:{
+  info: {
     marginTop: 10,
     marginBottom: 10,
     backgroundColor: '#F5F5F5',
@@ -83,8 +90,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     color: '#000000',
     boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
-  
-    
+
+
   }
+
 
 });
