@@ -38,8 +38,8 @@ const Home = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             {/* CABEZERA */}
-            <HeaderPrincipal titulo='Home' bgColor='#00BCD4'/>
-
+            <HeaderPrincipal/>
+            
             {/* DATA */}
             <FlatList
                 data={posts}
