@@ -1,4 +1,5 @@
 import { Pressable, View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+
 import React, { useState } from 'react';
 
 const Register = () => {
@@ -22,6 +23,7 @@ const Register = () => {
     };
 
     const handleRegister = () => {
+
         if (!usuario || !contrasena || !contrasenaVal) {
             Alert.alert('Error', 'Todos los campos son obligatorios.');
             return;
@@ -50,7 +52,7 @@ const Register = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Crear Cuenta!!</Text>
+            <Text style={styles.title}>Crear Cuenta</Text>
 
             <TextInput
                 style={styles.input}
@@ -110,8 +112,8 @@ const styles = StyleSheet.create({
         borderRadius: 45,
     },
     buttonText: {
-        color: '#fff',
-        fontWeight: 'bold',
+        color: '#424242',
+        fontWeight: 400,
     },
 });
 

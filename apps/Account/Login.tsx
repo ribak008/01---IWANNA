@@ -12,7 +12,7 @@ const Login = () => {
     return (
         <View style={styles.container}>
             <Image
-                source={require('../assets/images/icons/logo.jpg')} // Ruta de la imagen
+                source={require('../../assets/images/icons/logo.jpg')}
                 style={styles.logo}
             />
 
