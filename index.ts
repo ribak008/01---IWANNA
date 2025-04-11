@@ -7,9 +7,12 @@ import Categorias from "./apps/(tabs)/categorias";
 import DetalleCategorias from "./apps/DetalleCategoria";
 import Home from "./apps/home";
 import layout from "./apps/_layout";
+import Register from "./apps/Register";
+import Recover from "./apps/Recover";
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
 // the environment is set up appropriately
 //registerRootComponent(layout);
-registerRootComponent(Login);
+// registerRootComponent(Login);
+registerRootComponent(Register);
