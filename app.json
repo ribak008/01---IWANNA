@@ -4,11 +4,11 @@
     "slug": "IWANNA",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icons/logo.png",
+    "icon": "./assets/images/icons/logo.jpg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/icons/logo.png",
+      "image": "./assets/images/icons/logo.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,12 +17,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/icons/logo.png",
+        "foregroundImage": "./assets/images/icons/logo.jpg",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "favicon": "./assets/images/icons/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
