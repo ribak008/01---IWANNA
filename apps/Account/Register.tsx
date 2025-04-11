@@ -7,7 +7,7 @@ const Register = () => {
     const [contrasenaVal, setContrasenaVal] = useState('');
 
     const validarCorreo = (correo: string) => {
-        const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Valida formato de correo
+        const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return correoRegex.test(correo);
     };
 
@@ -50,7 +50,7 @@ const Register = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Crear Cuenta</Text>
+            <Text style={styles.title}>Crear Cuenta!!</Text>
 
             <TextInput
                 style={styles.input}
