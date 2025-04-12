@@ -5,7 +5,7 @@ import MiPerfil from './apps/Mi-perfil';
 import Login from './apps/Login';
 import Categorias from './apps/(tabs)/categorias';
 import DetalleCategorias from './apps/DetalleCategoria';
-import Home from './apps/home';
+import Home from './apps/(tabs)/home';
 import layout from './apps/_layout'
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);

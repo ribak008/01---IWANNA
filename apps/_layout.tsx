@@ -1,11 +1,10 @@
-// App.tsx o donde inicias la navegación
+
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-// Importa tus pantallas
 import HomeScreen from './(tabs)/home';
 import FavoritosScreen from './(tabs)/favoritos';
 import CategoriasScreen from './(tabs)/categorias';
@@ -33,7 +32,7 @@ const App = () => {
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: '#007AFF',
+          tabBarActiveTintColor: '#84AE46',
           tabBarInactiveTintColor: 'gray',
         })}
       >

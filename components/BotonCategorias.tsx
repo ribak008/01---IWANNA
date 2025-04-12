@@ -4,10 +4,11 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 type Props = {
-    textoBoton: string;
-    colorTexto: string
-    bgColor: string;
- 
+    textoBoton?: string;
+    colorTexto?: string;
+    textoBotonSub?: string;
+    colorTextoSub?: string;
+    bgColor?: string;
     onPress: (event: GestureResponderEvent) => void;
     iconoDerecha?: any;
     colorIconoDerecha?: string;
@@ -15,9 +16,10 @@ type Props = {
     colorIconoIzquierda?: string;
 };
 
-const BotonCategorias: React.FC<Props> = ({ textoBoton, colorTexto, onPress,
-                                            bgColor, iconoDerecha, colorIconoDerecha, 
-                                            iconoIzquierda, colorIconoIzquierda 
+const BotonCategorias: React.FC<Props> = ({ 
+  textoBoton, colorTexto, onPress,
+  bgColor, iconoDerecha, colorIconoDerecha, 
+  iconoIzquierda, colorIconoIzquierda, colorTextoSub, textoBotonSub,
     }) => {
     return (
 
@@ -29,10 +31,24 @@ const BotonCategorias: React.FC<Props> = ({ textoBoton, colorTexto, onPress,
     >
     <View style={styles.contenidoBoton}>
         <View  style={{ flexDirection: 'row', gap:10 }}>
-            <Ionicons size={20} name={iconoIzquierda} color={colorIconoIzquierda} style={{ fontWeight: '800'}}></Ionicons>
-            <Text style={{ fontWeight: '800', color: colorTexto }}>{textoBoton}</Text>
+            <Ionicons style={{alignSelf: 'center', display: 'flex', fontWeight: '800'  }} size={30} name={iconoIzquierda} color={colorIconoIzquierda}></Ionicons>
+            
+            <View style={{gap: 5, justifyContent: 'center', maxWidth: '80%'}}>            
+            <Text style={{  fontWeight: '800', color: colorTexto }}>{textoBoton}</Text>
+            {textoBotonSub &&(
+              <Text style={{ 
+                fontWeight: '400', 
+                color: colorTextoSub, 
+                flexWrap: 'wrap',
+                overflow: 'hidden',
+                width: '100%', 
+              }}>{textoBotonSub}</Text>
+            )}
+            
+            </View>
+            
         </View>
-        <Ionicons name={iconoDerecha} size={20} color={colorIconoDerecha} style={styles.icono} />
+        <Ionicons name={iconoDerecha} size={30} color={colorIconoDerecha} style={[styles.icono, {alignSelf: 'center', display: 'flex', fontWeight: '800'}  ]} />
     </View>
     </TouchableHighlight>
         );
@@ -41,20 +57,21 @@ const BotonCategorias: React.FC<Props> = ({ textoBoton, colorTexto, onPress,
 
     const styles = StyleSheet.create({
     boton: {
-        marginVertical: 10,
-        // backgroundColor: '#F5F5F5',
-        width: 350,
-        padding: 20,
-        borderRadius: 50,
-        boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
+      justifyContent: 'center',      
+      marginVertical: 10,
+      width: 350,
+      padding: 20,
+      borderRadius: 50,
+      boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
       },
-      contenidoBoton: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-      },
-      icono: {
-        marginRight: 8,
-        
+    contenidoBoton: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      flex: 1,
+      alignItems: 'center',
+    },
+    icono: {
+      marginRight: 8,      
       },
     });
 
