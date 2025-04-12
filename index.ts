@@ -16,4 +16,4 @@ import Categoria from "./apps/Categoria";
 // the environment is set up appropriately
 //registerRootComponent(layout);
 // registerRootComponent(Login);
-registerRootComponent(Categoria);
+registerRootComponent(Home);
