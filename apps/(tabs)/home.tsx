@@ -1,37 +1,112 @@
 import React from 'react';
 import { FlatList, View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
 import HeaderPrincipal from '../../components/Header';
+import Post from '../../components/post';
 import { FontAwesome } from '@expo/vector-icons';
-
-
 
 const posts = [ 
     {
-        id: '1',
+        id: 1,
         nombre: 'juanito_dev',
         profesion: 'Desarrollador Frontend',
-        profilePic: 'https://randomuser.me/api/portraits/men/32.jpg',
-        image: 'https://picsum.photos/600/600?random=1',
+        img_perfil: 'https://randomuser.me/api/portraits/men/32.jpg',
+        img_post: 'https://picsum.photos/600/600?random=1',
         descripcion: 'Un día soleado en la playa 🌞🏖️',
-        icono: 132,
-        comments: [
-            { id: '1', user: 'maria123', text: '¡Qué envidia! 😍' },
-            { id: '2', user: 'coderlife', text: 'Disfruta hermano!' },
-        ],
+        likes: 132,
+        comentarios: 5
     },
     {
-        id: '2',
+        id: 2,
         nombre: 'codinglife',
         profesion: 'Ingeniero de Software',
-        profilePic: 'https://randomuser.me/api/portraits/men/55.jpg',
-        image: 'https://picsum.photos/600/600?random=2',
+        img_perfil: 'https://randomuser.me/api/portraits/men/55.jpg',
+        img_post: 'https://picsum.photos/600/600?random=2',
         descripcion: 'Codificando con café ☕👨‍💻',
-        icono: 210,
-        comments: [
-            { id: '1', user: 'devgirl', text: 'Mood diario 🔥' },
-        ],
+        likes: 210,
+        comentarios: 2
+    },
+    {
+        id: 3,
+        nombre: 'tech_girl',
+        profesion: 'Diseñadora UX/UI',
+        img_perfil: 'https://randomuser.me/api/portraits/women/45.jpg',
+        img_post: 'https://picsum.photos/600/600?random=3',
+        descripcion: 'Trabajando en un nuevo proyecto 💻🎨',
+        likes: 154,
+        comentarios: 7
+    },
+    {
+        id: 4,
+        nombre: 'marky_mark',
+        profesion: 'Desarrollador Backend',
+        img_perfil: 'https://randomuser.me/api/portraits/men/48.jpg',
+        img_post: 'https://picsum.photos/600/600?random=4',
+        descripcion: '¡El código nunca para! 💻⚡',
+        likes: 98,
+        comentarios: 1
+    },
+    {
+        id: 5,
+        nombre: 'luisdev',
+        profesion: 'DevOps Engineer',
+        img_perfil: 'https://randomuser.me/api/portraits/men/72.jpg',
+        img_post: 'https://picsum.photos/600/600?random=5',
+        descripcion: 'Automatizando todo lo que puedo 🔧🖥️',
+        likes: 45,
+        comentarios: 3
+    },
+    {
+        id: 6,
+        nombre: 'mariah_tech',
+        profesion: 'Data Scientist',
+        img_perfil: 'https://randomuser.me/api/portraits/women/23.jpg',
+        img_post: 'https://picsum.photos/600/600?random=6',
+        descripcion: 'Análisis de datos en progreso 📊🔍',
+        likes: 233,
+        comentarios: 6
+    },
+    {
+        id: 7,
+        nombre: 'susanadev',
+        profesion: 'Full Stack Developer',
+        img_perfil: 'https://randomuser.me/api/portraits/women/36.jpg',
+        img_post: 'https://picsum.photos/600/600?random=7',
+        descripcion: 'Me encanta construir aplicaciones web completas 💻🌐',
+        likes: 180,
+        comentarios: 10
+    },
+    {
+        id: 8,
+        nombre: 'juancho_loco',
+        profesion: 'Tester de Software',
+        img_perfil: 'https://randomuser.me/api/portraits/men/61.jpg',
+        img_post: 'https://picsum.photos/600/600?random=8',
+        descripcion: 'Encontrando bugs como siempre 🐞💥',
+        likes: 60,
+        comentarios: 4
+    },
+    {
+        id: 9,
+        nombre: 'pedrogaming',
+        profesion: 'Desarrollador de Juegos',
+        img_perfil: 'https://randomuser.me/api/portraits/men/19.jpg',
+        img_post: 'https://picsum.photos/600/600?random=9',
+        descripcion: 'Creando mi próximo juego 🎮👾',
+        likes: 320,
+        comentarios: 8
+    },
+    {
+        id: 10,
+        nombre: 'carla_crea',
+        profesion: 'Web Designer',
+        img_perfil: 'https://randomuser.me/api/portraits/women/56.jpg',
+        img_post: 'https://picsum.photos/600/600?random=10',
+        descripcion: 'Diseñando un nuevo layout para un cliente 💻🎨',
+        likes: 150,
+        comentarios: 5
     },
 ];
+
 
 
 const Home = () => {
@@ -43,41 +118,9 @@ const Home = () => {
             {/* DATA */}
             <FlatList
                 data={posts}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                <View style={styles.contenedor_post}>
-                    {/* FOTO USUARIO */}
-                    <View style={styles.info_usuario}>
-                        <Image source={{ uri: item.profilePic }} style={styles.foto_usuario} />
-                        <View>
-                            <Text style={styles.nombre}>{item.nombre}</Text>
-                            <Text>{item.profesion}</Text>
-                        </View>
-                        
-                    </View>
-
-                    {/* IMAGEN POST */}
-                    <Image source={{ uri: item.image }} style={styles.imagen_post} resizeMode="cover" />
-                    
-                    {/* ICONOS */}
-                    <View style={styles.contenedor_datos_post}>
-                        <View style={styles.dato_post}> 
-                            <FontAwesome name="heart" size={24} color="#8bc34a" />
-                            <Text style={styles.icono}>{item.icono}</Text>
-                        </View>
-
-                        <View style={styles.dato_post}>
-                            <FontAwesome name="comment" size={24} color="#424242" />
-                            <Text style={styles.icono}>{item.icono}</Text>
-                        </View>
-                    </View>
-                    
-                    {/* DESCRIPCION */}
-                    <Text style={styles.descripcion}>
-                        <Text style={styles.nombre}>{item.nombre} </Text>
-                        {item.descripcion}
-                    </Text>
-                </View>
+                <Post datos={item} />
             )}/>
         </SafeAreaView>
     );
