@@ -38,7 +38,7 @@ const Categoria = () => {
                     />
                 </View>
                 <Image
-                    source={require('../assets/images/icons/logo.jpg')} // Ruta del logo de la app
+                    source={require('../../assets/images/icons/logo.jpg')} // Ruta del logo de la app
                     style={styles.logo}
                 />
             </View>

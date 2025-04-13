@@ -49,9 +49,9 @@ export default function Mas() {
                             />
                     </View>
                 </View>
-                <View style={styles.seccionPlan}>
+                <View style={styles.seccionPerfil}>
                     <Text>
-                        PLAN ACTUAL: FREE
+                        PLAN ACTUAL: FREEEEEEEEEEEE
                     </Text>
                 </View>
             </View>

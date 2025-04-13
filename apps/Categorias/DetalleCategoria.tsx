@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
-import HeaderPrincipal from '../components/Header';
+import HeaderPrincipal from '../../components/Header';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import DetalleCategoriaPosts from '../components/detalleCategorias/DetalleCategoriasPost';
-import DetalleCategoriaTrabajadores from '../components/detalleCategorias/detalleCategoriasTrabajadores';
+import DetalleCategoriaPosts from './CategoriaDetalle/CategoriasPost';
+import DetalleCategoriaTrabajadores from './CategoriaDetalle/CategoriasTrabajadores';
 import { NavigationContainer, TabNavigationState } from '@react-navigation/native';
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import BotonAvatar from '../botonAvatar';
+import BotonAvatar from '../../../components/botonAvatar';
 
 
 

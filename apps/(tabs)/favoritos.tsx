@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
 import HeaderPrincipal from '../../components/Header';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import FavoritosPost from '../../components/Favoritos/FavoritosPost';
-import FavoritosTrabajador from '../../components/Favoritos/FavoritosTrabajador';
+import FavoritosPost from '../Favoritos/FavoritosPost';
+import FavoritosTrabajador from '../Favoritos/FavoritosTrabajador';
 import { NavigationContainer, NavigationIndependentTree, TabNavigationState } from '@react-navigation/native';
 
 
