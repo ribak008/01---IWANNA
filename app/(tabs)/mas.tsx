@@ -21,7 +21,7 @@ function handleBotton(){
 export default function Mas() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <HeaderPrincipal/>
+            
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
 

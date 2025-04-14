@@ -5,14 +5,17 @@ import { SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import HeaderPrincipal from '../../components/Header';
 import BotonCategorias from '../../components/BotonCategorias';
-
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export default function Categorias() {
 
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
     
     const [busqueda, setBusqueda] = useState('');
-        const handleBuscar = (text: string) => {
-    setBusqueda(text);
+    const handleBuscar = (text: string) => {
+        setBusqueda(text);
         console.log('Texto buscado:', text);
     };
     const handleBotton = (categoria: any) => {
@@ -21,10 +24,9 @@ export default function Categorias() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-        <HeaderPrincipal titulo='CATEGORIAS' bgColor='#00BCD4'/>
-
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
+
           <View style={styles.searchContainer}>
             <Ionicons name="search" size={20} color="#888" style={styles.icono} />
             <TextInput
@@ -46,10 +48,9 @@ export default function Categorias() {
             colorIconoIzquierda='#8BC34A'
             iconoIzquierda={"hammer"} 
             key={index}
-            onPress={() => handleBotton(categoria)}
+            onPress={() => navigation.navigate('Categorias/DetalleCategoria', { categoria: categoria})}
             
            />
-
           ))}
 
           <StatusBar style="auto" />

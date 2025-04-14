@@ -13,12 +13,13 @@ export default function DetalleCategoriaTrabajadores(){
         textoBoton='Juan Gana'
         textoProfesion='Maestro parrillero'
         colorTextoProfesion='#424242'      
-        avatar={require('../../assets/images/perfil.png')}
+        avatar={require('../../../assets/images/perfil.png')}
         colorTexto='#8BC34A'
         bgColor='#F5F5F5'
         iconoDerecha={"chevron-forward"}
         colorIconoDerecha='#00BCD4'
         onPress={() => console.log('Trabajador 1')}
+        
         />
     </View>
   );

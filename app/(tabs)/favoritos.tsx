@@ -14,7 +14,7 @@ export default function Favoritos(){
     <SafeAreaView style={{ flex: 1 }}>
         <NavigationIndependentTree>       
             <View style={{ flex: 1,}}>
-                <HeaderPrincipal titulo="FAVORITOS" bgColor="#00BCD4" />
+           
 
                 <Tab.Navigator
                     screenOptions={{

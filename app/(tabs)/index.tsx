@@ -113,7 +113,7 @@ const Home = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             {/* CABEZERA */}
-            <HeaderPrincipal/>
+           
             
             {/* DATA */}
             <FlatList
