@@ -7,12 +7,7 @@ export default function Layout() {
       <Stack.Screen name="Account" options={{ headerShown: false }} />
       <Stack.Screen name="Favoritos" options={{ headerShown: false }} />
       <Stack.Screen name="Mi-perfil" options={{ headerShown: false }} />
-      <Stack.Screen 
-        name="Categorias" 
-        options={{ 
-          
-        }} 
-      />
+      <Stack.Screen name="Categorias" options={{ headerShown: false }} />
 
     </Stack>
   );

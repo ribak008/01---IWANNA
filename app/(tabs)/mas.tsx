@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
     },
     cuerpoBotones:{     
     alignItems: 'center',
+    marginTop: 20,
         
     }
   });
