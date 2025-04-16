@@ -4,16 +4,13 @@ import { ScrollView, TextInput, StyleSheet, View} from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BotonCategorias from '../../components/BotonCategorias';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 import { useRouter } from 'expo-router';
 
 export default function Categorias() {
 
   const router = useRouter();
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-    
     const [busqueda, setBusqueda] = useState('');
     const handleBuscar = (text: string) => {
         setBusqueda(text);
@@ -35,8 +32,8 @@ export default function Categorias() {
             />
           </View>
 
+        
           {['CARPINTERIA', 'ELECTRICISTA', 'REPOSTERIA', 'PELUQUERO', 'JARDINERO', 'GASFERIA'].map((categoria, index) => (
-
             <BotonCategorias 
             textoBoton={categoria} 
             colorTexto='#8BC34A'
@@ -52,6 +49,7 @@ export default function Categorias() {
             })}
            />
           ))}
+        
 
           <StatusBar style="auto" />
         </View>
@@ -70,6 +68,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
+
   },
 
   searchContainer: {

@@ -18,14 +18,6 @@ export default function DetalleCategorias() {
   const route = useRoute();
   const { categoria } = route.params as { categoria: string };
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle() {
-        return <HeaderPrincipal titulo={categoria} bgColor="#00BCD4" />;
-      },
-      
-    });
-  }, [navigation]);
 
   return ( 
 

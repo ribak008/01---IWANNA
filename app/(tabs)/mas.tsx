@@ -1,11 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, SafeAreaView, Button } from 'react-native';
 import BotonCategorias from '../../components/BotonCategorias';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../navigation/types';
-import { Link } from 'expo-router';
-import { useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';    
 
 const imgPerfil = require('../../assets/images/perfil.png')
 
@@ -16,7 +12,7 @@ export default function Mas() {
    
     
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1,}}>
             
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -36,14 +32,13 @@ export default function Mas() {
                         }}
                     />
                     <View style={{alignItems: 'flex-start', justifyContent:'center', gap:'10'}}>
-                        <Text style={{fontSize: 25}}>Juan Gana</Text>
-                        <Link href="/mas/mi-perfil" asChild>
+                        <Text style={{fontSize: 25}}>Juan Gana</Text>                       
                             <Button
                                 title="Ver mi perfil"
                                 color="#306A9C"
-                                accessibilityLabel="Learn more about this purple button"
+                                onPress={() => router.push('/(mas)/mi-perfil')}
                                 />
-                        </Link>
+                        
                     </View>
                 </View>
                 <View style={styles.seccionPerfil}>
@@ -160,7 +155,7 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     scrollContainer: {
-        paddingBottom: 20,
+       
       },
     title: {
       fontSize: 22,
@@ -175,6 +170,7 @@ const styles = StyleSheet.create({
     cuerpoBotones:{     
     alignItems: 'center',
     marginTop: 20,
+    padding: 20,
         
     }
   });

@@ -24,11 +24,10 @@ const BotonCategorias: React.FC<Props> = ({
     return (
 
     <TouchableHighlight
-
-    style={[styles.boton, { backgroundColor: bgColor }]}
-    underlayColor={'#ddd'}
-    onPress={onPress}
-    >
+      style={[styles.boton, { backgroundColor: bgColor }]}
+      underlayColor={'#ddd'}
+      onPress={onPress}
+      >
     <View style={styles.contenidoBoton}>
         <View  style={{ flexDirection: 'row', gap:8 }}>
             <Ionicons style={{alignSelf: 'center', display: 'flex', fontWeight: '800'  }} size={30} name={iconoIzquierda} color={colorIconoIzquierda}></Ionicons>
@@ -57,10 +56,11 @@ const BotonCategorias: React.FC<Props> = ({
 
     const styles = StyleSheet.create({
     boton: {
-      justifyContent: 'center',      
+      justifyContent: 'center',  
+      marginHorizontal: 20,
       marginVertical: 10,
       width: '100%',
-      padding: 20,
+      padding: 15,
       borderRadius: 50,
       boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
       },
