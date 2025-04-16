@@ -5,9 +5,9 @@ export default function Layout() {
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="Account" options={{ headerShown: false }} />
-      <Stack.Screen name="Favoritos" options={{ headerShown: false }} />
-      <Stack.Screen name="Mi-perfil" options={{ headerShown: false }} />
-      <Stack.Screen name="Categorias" options={{ headerShown: false }} />
+      <Stack.Screen name="(favoritos)" options={{ headerShown: false }} />
+      <Stack.Screen name="(mas)" options={{ headerShown: false }} />
+      <Stack.Screen name="(categorias)" options={{ headerShown: false }} />
 
     </Stack>
   );

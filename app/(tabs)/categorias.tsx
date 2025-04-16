@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, TextInput, StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
+import { ScrollView, TextInput, StyleSheet, View} from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BotonCategorias from '../../components/BotonCategorias';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useRouter } from 'expo-router';
 
 export default function Categorias() {
 
+  const router = useRouter();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
     
@@ -16,9 +18,6 @@ export default function Categorias() {
     const handleBuscar = (text: string) => {
         setBusqueda(text);
         console.log('Texto buscado:', text);
-    };
-    const handleBotton = (categoria: any) => {
-        console.log('boton apretado:'+ categoria);
     };
 
   return (
@@ -36,7 +35,7 @@ export default function Categorias() {
             />
           </View>
 
-          {['CATEGORÍA 1', 'CATEGORÍA 2', 'CATEGORÍA 3'].map((categoria, index) => (
+          {['CARPINTERIA', 'ELECTRICISTA', 'REPOSTERIA', 'PELUQUERO', 'JARDINERO', 'GASFERIA'].map((categoria, index) => (
 
             <BotonCategorias 
             textoBoton={categoria} 
@@ -47,8 +46,10 @@ export default function Categorias() {
             colorIconoIzquierda='#8BC34A'
             iconoIzquierda={"hammer"} 
             key={index}
-            onPress={() => navigation.navigate('Categorias/DetalleCategoria', { categoria: categoria})}
-            
+            onPress={() => router.push({
+                pathname: '/(categorias)/[detalleCategoria]',
+                params: { categoria: categoria }
+            })}
            />
           ))}
 
