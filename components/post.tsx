@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, Image, StyleSheet, ActivityIndicator, TouchableOpacity, Modal, FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import ComentariosModal from './comentarios';
+
+type Comentario = {
+    id_post: number;
+    id_comentario: number;
+    usuario: string;
+    img_perfil: string;
+    comentario: string;
+    likes: number;
+    fecha: string;
+    hora: string;
+    respuestas: Comentario[];
+};
 
 type Props = {
     datos: {
@@ -11,15 +24,23 @@ type Props = {
         img_post: string,
         descripcion: string,
         likes: number,
-        comentarios: number
-    }
+        cant_comentarios: number,
+        comentarios: Comentario[]
+    },
+
 };
 
-const Post: React.FC<Props> = ({ datos }) => {
+const Post: React.FC<Props> = ({ datos}) => {
+    //CARGA DE IAMGEN
     const [cargando, setCargando] = useState(true);
-
     const manejarCargaImagen = () => {
         setCargando(false); 
+    };
+
+    //MANEJO DE MODAL
+    const [modalVisible, setModalVisible] = useState(false);
+    const toggleModal = () => {
+        setModalVisible(!modalVisible);
     };
 
     return (
@@ -54,10 +75,10 @@ const Post: React.FC<Props> = ({ datos }) => {
                     <Text style={styles.icono}>{datos.likes}</Text>
                 </View>
 
-                <View style={styles.dato_post}>
+                <TouchableOpacity style={styles.dato_post} onPress={toggleModal}>
                     <FontAwesome name="comment" size={24} color="#424242" />
-                    <Text style={styles.icono}>{datos.comentarios}</Text>
-                </View>
+                    <Text style={styles.icono}>{datos.cant_comentarios}</Text>
+                </TouchableOpacity>
             </View>
 
             {/* DESCRIPCION */}
@@ -65,6 +86,12 @@ const Post: React.FC<Props> = ({ datos }) => {
                 <Text style={styles.nombre}>{datos.nombre} </Text>
                 {datos.descripcion}
             </Text>
+
+            <ComentariosModal
+                modalVisible={modalVisible}
+                toggleModal={toggleModal}
+                datos={datos}
+            />
         </View>
     );
 }
@@ -118,5 +145,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 3,
         paddingBottom: 5,
-    }
+    },
 });
+
