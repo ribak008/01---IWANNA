@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
+        backgroundColor: 'white',
     },
     input: {
         width: '100%',
