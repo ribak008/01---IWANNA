@@ -7,6 +7,7 @@
     "icon": "./assets/images/icons/logo.jpg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "scheme": "iwanna",
     "splash": {
       "image": "./assets/images/icons/logo.jpg",
       "resizeMode": "contain",

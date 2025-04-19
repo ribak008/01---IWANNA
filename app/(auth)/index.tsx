@@ -1,13 +1,36 @@
 import React, { useState } from 'react';
 import { Pressable, View, Text, TextInput, StyleSheet, Button, Image } from 'react-native';
+import { useRouter } from 'expo-router';
+import { useEffect } from 'react';
 
 const Login = () => {
     const [usuario, setUsuario] = useState('');
     const [contrasena, setContrasena] = useState('');
+    const router = useRouter();
+    useEffect(() => {
+        console.log('Pantalla de Login (Account/index.tsx) renderizada');
+    }, []);
+
 
     const iniciarSesion = () => {
         alert(`Usuario: ${usuario}\nContraseña: ${contrasena}`);
     };
+
+    const handleLogin = () => {
+        // Aquí iría tu lógica de autenticación (si la tienes)
+        console.log('Botón Entrar presionado');
+
+        // Navega a la ruta principal de las pestañas
+        router.push('(tabs)');
+    };
+    const handleGoToRegister = () => {
+        router.push('Register'); // Navega a la ruta /Account/Register
+    };
+
+    const handleGoToRecover = () => {
+        router.push('Recover'); // Navega a la ruta /Account/Recover
+    };
+
 
     return (
         <View style={styles.container}>
@@ -29,15 +52,15 @@ const Login = () => {
                 onChangeText={setContrasena}
                 secureTextEntry={true}
             />
-            <Pressable onPress={iniciarSesion} style={styles.button}>
+            <Pressable onPress={handleLogin} style={styles.button}>
                 <Text style={styles.buttonText}>Entrar</Text>
             </Pressable>
 
-            <Pressable onPress={iniciarSesion} style={styles.buttonHelp}>
+            <Pressable onPress={handleGoToRecover} style={styles.buttonHelp}>
                 <Text style={styles.buttonText}>He olvidado mi contraseña</Text>
             </Pressable>
 
-            <Pressable onPress={iniciarSesion} style={styles.buttonHelp}>
+            <Pressable onPress={handleGoToRegister} style={styles.buttonHelp}>
                 <Text style={styles.buttonText}>Crear cuenta</Text>
             </Pressable>
 
@@ -52,6 +75,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
+        backgroundColor: 'white',
     },
     input: {
         width: '100%',

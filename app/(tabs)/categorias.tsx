@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, TextInput, StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
+import { ScrollView, TextInput, StyleSheet, View} from 'react-native';
 import { SafeAreaView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; 
-import HeaderPrincipal from '../../components/Header';
+import { Ionicons } from '@expo/vector-icons';
 import BotonCategorias from '../../components/BotonCategorias';
 
+import { useRouter } from 'expo-router';
 
 export default function Categorias() {
 
-    
+  const router = useRouter();
+
     const [busqueda, setBusqueda] = useState('');
-        const handleBuscar = (text: string) => {
-    setBusqueda(text);
+    const handleBuscar = (text: string) => {
+        setBusqueda(text);
         console.log('Texto buscado:', text);
-    };
-    const handleBotton = (categoria: any) => {
-        console.log('boton apretado:'+ categoria);
     };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-        <HeaderPrincipal titulo='CATEGORIAS' bgColor='#00BCD4'/>
-
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
+
           <View style={styles.searchContainer}>
             <Ionicons name="search" size={20} color="#888" style={styles.icono} />
             <TextInput
@@ -35,8 +32,8 @@ export default function Categorias() {
             />
           </View>
 
-          {['CATEGORÍA 1', 'CATEGORÍA 2', 'CATEGORÍA 3'].map((categoria, index) => (
-
+        
+          {['CARPINTERIA', 'ELECTRICISTA', 'REPOSTERIA', 'PELUQUERO', 'JARDINERO', 'GASFERIA'].map((categoria, index) => (
             <BotonCategorias 
             textoBoton={categoria} 
             colorTexto='#8BC34A'
@@ -46,11 +43,13 @@ export default function Categorias() {
             colorIconoIzquierda='#8BC34A'
             iconoIzquierda={"hammer"} 
             key={index}
-            onPress={() => handleBotton(categoria)}
-            
+            onPress={() => router.push({
+                pathname: '/(categorias)/[detalleCategoria]',
+                params: { categoria: categoria }
+            })}
            />
-
           ))}
+        
 
           <StatusBar style="auto" />
         </View>
@@ -69,6 +68,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
+
   },
 
   searchContainer: {

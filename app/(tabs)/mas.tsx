@@ -1,27 +1,19 @@
-
 import React from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, SafeAreaView, Button } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { NavigationContainer, TabNavigationState } from '@react-navigation/native';
 import BotonCategorias from '../../components/BotonCategorias';
-import HeaderPrincipal from '../../components/Header';
-
+import { useRouter } from 'expo-router';    
 
 const imgPerfil = require('../../assets/images/perfil.png')
 
-function btnPerfil(){
-    console.log('se apreto el boton mi perfil')
-}
-
-function handleBotton(){
-    console.log('boton apretado')
-}
 
 
 export default function Mas() {
+    const router = useRouter();
+   
+    
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <HeaderPrincipal/>
+        <SafeAreaView style={{ flex: 1,}}>
+            
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
 
@@ -40,13 +32,13 @@ export default function Mas() {
                         }}
                     />
                     <View style={{alignItems: 'flex-start', justifyContent:'center', gap:'10'}}>
-                        <Text style={{fontSize: 25}}>Juan Gana</Text>
-                        <Button
-                            onPress={() =>{btnPerfil()}}
-                            title="Ver mi perfil"
-                            color="#306A9C"
-                            accessibilityLabel="Learn more about this purple button"
-                            />
+                        <Text style={{fontSize: 25}}>Juan Gana</Text>                       
+                            <Button
+                                title="Ver mi perfil"
+                                color="#306A9C"
+                                onPress={() => router.push('/(mas)/mi-perfil')}
+                                />
+                        
                     </View>
                 </View>
                 <View style={styles.seccionPerfil}>
@@ -69,7 +61,7 @@ export default function Mas() {
                     colorIconoIzquierda='#8BC34A'
                     iconoIzquierda={"chatbubbles"} 
                     key= '1'
-                    onPress={() => handleBotton()}
+                    onPress={() => router.push('/(mas)/mensajes')}
             />
                 <BotonCategorias 
                     textoBoton= 'MI PLAN'
@@ -82,7 +74,8 @@ export default function Mas() {
                     colorIconoIzquierda='#8BC34A'
                     iconoIzquierda={"card"} 
                     key= '2'
-                    onPress={() => handleBotton()}
+                    onPress={() => router.push('/(mas)/planes')}
+
             />
                 <BotonCategorias 
                     textoBoton= 'MIS POSTS'
@@ -95,7 +88,7 @@ export default function Mas() {
                     colorIconoIzquierda='#8BC34A'
                     iconoIzquierda={"image"} 
                     key= '3'
-                    onPress={() => handleBotton()}
+                    onPress={() => router.push('/(mas)/post')}
             />
                 <BotonCategorias 
                     textoBoton= 'MI AGENDA'
@@ -108,7 +101,7 @@ export default function Mas() {
                     colorIconoIzquierda='#8BC34A'
                     iconoIzquierda={"calendar"} 
                     key= '4'
-                    onPress={() => handleBotton()}
+                    onPress={() => router.push('/(mas)/agenda')}
             />
                 <BotonCategorias 
                     textoBoton= 'QUIENES SOMOS'
@@ -121,7 +114,7 @@ export default function Mas() {
                     colorIconoIzquierda='#8BC34A'
                     iconoIzquierda={"briefcase"} 
                     key= '5'
-                    onPress={() => handleBotton()}
+                    onPress={() => router.push('/(mas)/quienes-somos')}
             />
                 <BotonCategorias 
                     textoBoton= 'PREGUNTAS FRECUENTES'
@@ -134,7 +127,7 @@ export default function Mas() {
                     colorIconoIzquierda='#8BC34A'
                     iconoIzquierda={"help"} 
                     key= '6'
-                    onPress={() => handleBotton()}
+                    onPress={() => router.push('/(mas)/preguntas-frecuentes')}
             />
                 <BotonCategorias 
                     textoBoton= 'DENUNCIAS'
@@ -147,7 +140,7 @@ export default function Mas() {
                     colorIconoIzquierda='#8BC34A'
                     iconoIzquierda={"eye"} 
                     key= '7'
-                    onPress={() => handleBotton()}
+                    onPress={() => router.push('/(mas)/denuncias')}
             />
             </View>
             </ScrollView>
@@ -162,7 +155,7 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     scrollContainer: {
-        paddingBottom: 20,
+       
       },
     title: {
       fontSize: 22,
@@ -176,6 +169,8 @@ const styles = StyleSheet.create({
     },
     cuerpoBotones:{     
     alignItems: 'center',
+    marginTop: 20,
+    padding: 20,
         
     }
   });

@@ -24,16 +24,15 @@ const BotonCategorias: React.FC<Props> = ({
     return (
 
     <TouchableHighlight
-
-    style={[styles.boton, { backgroundColor: bgColor }]}
-    underlayColor={'#ddd'}
-    onPress={onPress}
-    >
+      style={[styles.boton, { backgroundColor: bgColor }]}
+      underlayColor={'#ddd'}
+      onPress={onPress}
+      >
     <View style={styles.contenidoBoton}>
-        <View  style={{ flexDirection: 'row', gap:10 }}>
+        <View  style={{ flexDirection: 'row', gap:8 }}>
             <Ionicons style={{alignSelf: 'center', display: 'flex', fontWeight: '800'  }} size={30} name={iconoIzquierda} color={colorIconoIzquierda}></Ionicons>
             
-            <View style={{gap: 5, justifyContent: 'center', maxWidth: '80%'}}>            
+            <View style={{gap: 2, justifyContent: 'center', maxWidth: '75%'}}>            
             <Text style={{  fontWeight: '800', color: colorTexto }}>{textoBoton}</Text>
             {textoBotonSub &&(
               <Text style={{ 
@@ -41,7 +40,7 @@ const BotonCategorias: React.FC<Props> = ({
                 color: colorTextoSub, 
                 flexWrap: 'wrap',
                 overflow: 'hidden',
-                width: '100%', 
+                width: '80%', 
               }}>{textoBotonSub}</Text>
             )}
             
@@ -57,10 +56,11 @@ const BotonCategorias: React.FC<Props> = ({
 
     const styles = StyleSheet.create({
     boton: {
-      justifyContent: 'center',      
+      justifyContent: 'center',  
+      marginHorizontal: 20,
       marginVertical: 10,
-      width: 350,
-      padding: 20,
+      width: '100%',
+      padding: 15,
       borderRadius: 50,
       boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
       },

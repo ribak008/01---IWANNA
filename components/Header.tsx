@@ -13,7 +13,7 @@ const HeaderPrincipal: React.FC<Props> = ({ titulo, bgColor }) => {
     return (
 
     <View style={styles.fixedHeader}>
-    <Image source={imgLogo} style={{ width: 100, height: 100 }} />
+    <Image source={imgLogo} style={{ width: 80, height: 80 }} />
     {titulo && (
       <Text style={[styles.titulo, { backgroundColor: bgColor }]}>{titulo} </Text>    
     )}
@@ -23,10 +23,11 @@ const HeaderPrincipal: React.FC<Props> = ({ titulo, bgColor }) => {
 
 const styles = StyleSheet.create({
   fixedHeader: {
+    display: 'flex',
     alignItems: 'center',
     padding: 5,
     backgroundColor: '#fff',
-    height: 'auto'
+    height: 'auto',
   },
   titulo: {
     fontSize: 20,

@@ -3,8 +3,7 @@ import { FlatList, View, Text, Image, StyleSheet, SafeAreaView } from 'react-nat
 import HeaderPrincipal from '../../components/Header';
 import Post from '../../components/post';
 import { FontAwesome } from '@expo/vector-icons';
-
-
+import { useEffect } from 'react';
 
 const posts = [
     {
@@ -223,11 +222,15 @@ const posts = [
 
 
 const Home = () => {
+    useEffect(() => {
+        console.log('Pantalla de Home (tabs/index.tsx) renderizada');
+    }, []);
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             {/* CABEZERA */}
-            <HeaderPrincipal/>
-            
+
+
             {/* DATA */}
             <FlatList
                 data={posts}
@@ -279,11 +282,12 @@ const styles = StyleSheet.create({
         marginBottom: 4,
     },
 
-    contenedor_datos_post:{ 
+    contenedor_datos_post: {
         flexDirection: 'row',
-        gap:10},
+        gap: 10
+    },
 
-    dato_post:{
+    dato_post: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

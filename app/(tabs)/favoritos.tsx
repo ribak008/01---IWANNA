@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
-import HeaderPrincipal from '../../components/Header';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import FavoritosPost from '../Favoritos/FavoritosPost';
-import FavoritosTrabajador from '../Favoritos/FavoritosTrabajador';
-import { NavigationContainer, NavigationIndependentTree, TabNavigationState } from '@react-navigation/native';
+import FavoritosPost from '../(favoritos)/favoritosPost';
+import FavoritosTrabajador from '../(favoritos)/favoritosTrabajador';
+import { NavigationIndependentTree } from '@react-navigation/native';
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -14,7 +13,7 @@ export default function Favoritos(){
     <SafeAreaView style={{ flex: 1 }}>
         <NavigationIndependentTree>       
             <View style={{ flex: 1,}}>
-                <HeaderPrincipal titulo="FAVORITOS" bgColor="#00BCD4" />
+           
 
                 <Tab.Navigator
                     screenOptions={{
