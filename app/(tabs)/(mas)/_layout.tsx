@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import HeaderPrincipal from '../../components/Header';
+import HeaderPrincipal from '../../../components/Header';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -9,20 +9,19 @@ export default function MasLayout() {
   return (
     <Stack>
       <Stack.Screen
+        name="mas"
+        options={{
+          header: (props) => (
+            <HeaderPrincipal/>
+          ),
+        }}
+      />
+
+      <Stack.Screen
         name="planes"
         options={{
           header: (props) => (
             <HeaderPrincipal titulo= "PLANES" bgColor="#00BCD4"/>
-          ),
-          headerRight: (props) => (
-            <TouchableOpacity >
-              <Ionicons name="person" size={24} color="#00BCD4" />
-            </TouchableOpacity>
-          ),
-          headerLeft: (props) => (
-            <TouchableOpacity >
-              <Ionicons name="person" size={24} color="#00BCD4" />
-            </TouchableOpacity>
           ),
         }}
       />

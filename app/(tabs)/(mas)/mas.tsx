@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, SafeAreaView, Button } from 'react-native';
-import BotonCategorias from '../../components/BotonCategorias';
+import BotonCategorias from '../../../components/BotonCategorias';
 import { useRouter } from 'expo-router';    
 
-const imgPerfil = require('../../assets/images/perfil.png')
+const imgPerfil = require('../../../assets/images/perfil.png')
 
 
 

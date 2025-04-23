@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, TextInput, StyleSheet, View} from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import BotonCategorias from '../../components/BotonCategorias';
+import BotonCategorias from '../../../components/BotonCategorias';
 
 import { useRouter } from 'expo-router';
 

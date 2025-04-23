@@ -1,14 +1,11 @@
-import React, { useLayoutEffect } from 'react';
-import { StyleSheet, View, SafeAreaView, Button } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import HeaderPrincipal from '../../components/Header';
-import DetalleCategoriaPosts from './categoriaDetalle/CategoriasPost';
-import DetalleCategoriaTrabajadores from './categoriaDetalle/CategoriasTrabajadores';
+import DetalleCategoriaPosts from './(categoriaDetalle)/CategoriasPost';
+import DetalleCategoriaTrabajadores from './(categoriaDetalle)/CategoriasTrabajadores';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/types';
-import { Ionicons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { RootStackParamList } from '../../../navigation/types';
 
 const Tab = createMaterialTopTabNavigator();
 

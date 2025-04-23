@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import FavoritosPost from '../(favoritos)/favoritosPost';
-import FavoritosTrabajador from '../(favoritos)/favoritosTrabajador';
+import FavoritosPost from './favoritosPost';
+import FavoritosTrabajador from './favoritosTrabajador';
 import { NavigationIndependentTree } from '@react-navigation/native';
 
 

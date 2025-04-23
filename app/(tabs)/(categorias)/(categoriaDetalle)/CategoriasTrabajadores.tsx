@@ -2,7 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import BotonAvatar from '../../../components/botonAvatar';
+import BotonAvatar from '../../../../components/botonAvatar';
 
 
 
@@ -15,7 +15,7 @@ export default function DetalleCategoriaTrabajadores(){
             textoBoton='Juan Gana'
             textoProfesion='Maestro parrillero'
             colorTextoProfesion='#424242'      
-            avatar={require('../../../assets/images/perfil.png')}
+            avatar={require('../../../../assets/images/perfil.png')}
             colorTexto='#8BC34A'
             bgColor='#F5F5F5'
             iconoDerecha={"chevron-forward"}

@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import HeaderPrincipal from '../../components/Header';
+import HeaderPrincipal from '../../../components/Header';
 
 
-const imgPerfil = require('../../assets/images/perfil.png');
+const imgPerfil = require('../../../assets/images/perfil.png');
 
 
 export default function MiPerfil() {
