@@ -2,6 +2,10 @@ import { Stack } from 'expo-router';
 import HeaderPrincipal from '../../../components/Header';
 import { Ionicons } from '@expo/vector-icons';
 
+interface RouteParams {
+  categoria?: string;
+}
+
 export default function CategoriaLayout() {
   return (
     <Stack>
@@ -18,7 +22,7 @@ export default function CategoriaLayout() {
         options={{
           header: (props) => (
             <HeaderPrincipal
-              titulo={props.route.params?.categoria || 'Categoría'}
+              titulo={(props.route.params as RouteParams)?.categoria || 'Categoría'}
               bgColor="#00BCD4"
             />
           ),

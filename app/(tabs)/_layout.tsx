@@ -1,33 +1,37 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
-import HeaderPrincipal from '../../components/Header';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
 
 export default function TabLayout() {
     return (
         <Tabs screenOptions={{ 
             tabBarActiveTintColor: '#84AE46',
- 
-            tabBarLabelStyle: { fontWeight: 'bold', fontSize: 12 },
+            tabBarInactiveTintColor: '#666',
+            tabBarLabelStyle: { 
+                fontWeight: '600', 
+                fontSize: 12,
+                marginBottom: 5,
+            },
             tabBarStyle: { 
                 backgroundColor: '#fff', 
                 elevation: 0, 
                 shadowOpacity: 0, 
                 borderTopWidth: 1,
-                display: 'flex',
-
+                borderTopColor: '#eee',
+                height: 60,
+                paddingTop: 8,
+                paddingBottom: 5,
+            },
+            tabBarIconStyle: {
+                marginTop: 5,
             },
         }}>
             <Tabs.Screen
                 name="index"
                 options={{
                     title: 'Home',
-                    header() {
-                        return <HeaderPrincipal/>;
-                    },
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+                    headerShown: false,
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="home" color={color} />,
                 }}
             />
 
@@ -36,7 +40,7 @@ export default function TabLayout() {
                 options={{
                     headerShown: false,
                     title: 'Favoritos',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="heart" color={color} />,
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="heart" color={color} />,
                 }}
             />
             <Tabs.Screen
@@ -44,18 +48,17 @@ export default function TabLayout() {
                 options={{
                     headerShown: false,
                     title: 'Categorias',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="list" color={color} />,
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="grid" color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="(mas)"
                 options={{
                     headerShown: false,
-                    title: 'Mas',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="ellipsis-h" color={color} />,
+                    title: 'Más',
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="menu" color={color} />,
                 }}
             />
-      
         </Tabs>
     );
 }

@@ -216,11 +216,6 @@ const posts = [
     // Puedes seguir agregando más posts de la misma manera
 ];
 
-
-
-
-
-
 const Home = () => {
     useEffect(() => {
         console.log('Pantalla de Home (tabs/index.tsx) renderizada');
@@ -228,9 +223,7 @@ const Home = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            {/* CABEZERA */}
-
-
+            <HeaderPrincipal />
             {/* DATA */}
             <FlatList
                 data={posts}
