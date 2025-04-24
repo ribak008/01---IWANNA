@@ -1,25 +1,20 @@
-import { Stack } from 'expo-router/stack';
+import { Stack } from 'expo-router';
 import { useEffect } from 'react';
+import { useRouter } from 'expo-router';
+import { auth } from '../config/firebase';
 
-export default function Layout() {
-  console.log('Layout principal renderizado');
+export default function RootLayout() {
+  const router = useRouter();
 
   useEffect(() => {
-    console.log('initialRouteName en Layout:', 'Account');
+    // Redirigir directamente a la página de tabs
+    router.replace('(tabs)');
   }, []);
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-      initialRouteName='(auth)'
-    >
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+    <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="(favoritos)" options={{ headerShown: false }} />
-      <Stack.Screen name="(mas)" options={{ headerShown: false }} />
-      <Stack.Screen name="(categorias)" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
     </Stack>
   );
 }
