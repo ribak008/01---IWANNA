@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, SafeAreaView, Button } from 'react-native';
 import BotonCategorias from '../../../components/BotonCategorias';
 import { useRouter } from 'expo-router';    
+import { RatingStars } from '../../../components/rating-stars';
 
 const imgPerfil = require('../../../assets/images/perfil.png')
 
@@ -9,7 +10,7 @@ const imgPerfil = require('../../../assets/images/perfil.png')
 
 export default function Mas() {
     const router = useRouter();
-   
+   const averageRating = 4;
     
     return (
         <SafeAreaView style={{ flex: 1,}}>
@@ -46,9 +47,14 @@ export default function Mas() {
                         PLAN ACTUAL: FREEEEEEEEEEEE
                     </Text>
                 </View>
+
             </View>
 
             <View style={styles.cuerpoBotones}>
+
+            <View>
+                <RatingStars rating={Number(averageRating)} showValue />            
+            </View>
             
                 <BotonCategorias 
                     textoBoton= 'MENSAJES'

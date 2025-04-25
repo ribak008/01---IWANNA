@@ -2,6 +2,7 @@
   "extends": "expo/tsconfig.base",
   "jsx": "react-native",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   }
 }
