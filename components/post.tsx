@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, ActivityIndicator, TouchableOpacity, Modal, FlatList } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import ComentariosModal from './comentarios';
 
 type Comentario = {
@@ -33,6 +33,7 @@ type Props = {
 const Post: React.FC<Props> = ({ datos}) => {
     //CARGA DE IAMGEN
     const [cargando, setCargando] = useState(true);
+    const [liked, setLiked] = useState(false);
     const manejarCargaImagen = () => {
         setCargando(false); 
     };
@@ -43,74 +44,67 @@ const Post: React.FC<Props> = ({ datos}) => {
         setModalVisible(!modalVisible);
     };
 
+    const toggleLike = () => {
+        setLiked(!liked);
+    };
+
     return (
-        <View style={styles.contenedor_post}>
-            {/* FOTO USUARIO */}
-            <View style={styles.info_usuario}>
-                <Image source={{ uri: datos.img_perfil }} style={styles.foto_usuario} />
-                <View>
-                    <Text style={styles.nombre}>{datos.nombre}</Text>
-                    <Text>{datos.profesion}</Text>
+        <TouchableOpacity style={styles.container} onPress={toggleModal}>
+            <Image source={{ uri: datos.img_perfil }} style={styles.foto_usuario} />
+            <View style={styles.content}>
+                <Text style={styles.nombre}>{datos.nombre}</Text>
+                <Text>{datos.profesion}</Text>
+                <Image
+                    source={{ uri: datos.img_post }}
+                    style={[styles.imagen_post, cargando && { opacity: 0, height:0}]} 
+                    resizeMode="cover"
+                    onLoad={manejarCargaImagen} 
+                />
+                <View style={styles.contenedor_datos_post}>
+                    <TouchableOpacity style={styles.dato_post} onPress={toggleLike}> 
+                        <Ionicons 
+                            name={liked ? "heart" : "heart-outline"} 
+                            size={24} 
+                            color={liked ? "#8BC34A" : "#424242"} 
+                        />
+                        <Text style={styles.icono}>{datos.likes}</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.dato_post} onPress={toggleModal}>
+                        <Ionicons name="chatbubble-outline" size={24} color="#424242" />
+                        <Text style={styles.icono}>{datos.cant_comentarios}</Text>
+                    </TouchableOpacity>
                 </View>
+                <Text style={styles.descripcion}>
+                    <Text style={styles.nombre}>{datos.nombre} </Text>
+                    {datos.descripcion}
+                </Text>
             </View>
-
-            {/* IMAGEN POST */}
-            {cargando && (
-                <View style={{ height: 300, justifyContent: 'center', alignItems: 'center' }}>
-                    <ActivityIndicator size="large" color="#8BC34A" /> 
-                </View>
-            )}
-
-            <Image
-                source={{ uri: datos.img_post }}
-                style={[styles.imagen_post, cargando && { opacity: 0, height:0}]} 
-                resizeMode="cover"
-                onLoad={manejarCargaImagen} 
-            />
-
-            {/* ICONOS */}
-            <View style={styles.contenedor_datos_post}>
-                <View style={styles.dato_post}> 
-                    <FontAwesome name="heart" size={24} color="#8bc34a" />
-                    <Text style={styles.icono}>{datos.likes}</Text>
-                </View>
-
-                <TouchableOpacity style={styles.dato_post} onPress={toggleModal}>
-                    <FontAwesome name="comment" size={24} color="#424242" />
-                    <Text style={styles.icono}>{datos.cant_comentarios}</Text>
-                </TouchableOpacity>
-            </View>
-
-            {/* DESCRIPCION */}
-            <Text style={styles.descripcion}>
-                <Text style={styles.nombre}>{datos.nombre} </Text>
-                {datos.descripcion}
-            </Text>
-
             <ComentariosModal
                 modalVisible={modalVisible}
                 toggleModal={toggleModal}
                 datos={datos}
             />
-        </View>
+        </TouchableOpacity>
     );
 }
 
 export default Post;
 
 const styles = StyleSheet.create({
-    contenedor_post: {
+    container: {
         backgroundColor: '#fff',
-        marginBottom: 20,
-        paddingVertical: 10,
-        paddingHorizontal: 15,
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#ccc',
-    },
-    info_usuario: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 8,
+        borderRadius: 10,
+        marginBottom: 15,
+        overflow: 'hidden',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+        elevation: 3,
     },
     foto_usuario: {
         width: 40,
@@ -128,23 +122,25 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginVertical: 10,
     },
-    icono: {
-        fontWeight: 'bold',
-        marginBottom: 4,
+    content: {
+        padding: 15,
     },
     descripcion: {
         marginBottom: 4,
     },
-    contenedor_datos_post: { 
+    contenedor_datos_post: {
         flexDirection: 'row',
-        gap: 10,
+        alignItems: 'center',
     },
     dato_post: {
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
-        gap: 3,
-        paddingBottom: 5,
+        marginRight: 15,
+    },
+    icono: {
+        marginLeft: 5,
+        color: '#666',
+        fontSize: 14,
     },
 });
 
