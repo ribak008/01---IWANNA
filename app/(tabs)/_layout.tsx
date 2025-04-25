@@ -1,7 +1,11 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { View, Image, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function TabLayout() {
+    const router = useRouter();
+
     return (
         <Tabs
             screenOptions={{
@@ -18,6 +22,29 @@ export default function TabLayout() {
                     height: 60,
                     paddingBottom: 5,
                 },
+                headerStyle: {
+                    backgroundColor: '#fff',
+                    borderBottomWidth: 1,
+                    borderBottomColor: '#ddd',
+                },
+                headerLeft: () => (
+                    <Image
+                        source={require('../../assets/images/logo.jpg')}
+                        style={{ width: 100, height: 40, marginLeft: 15 }}
+                        resizeMode="contain"
+                    />
+                ),
+                headerRight: () => (
+                    <TouchableOpacity 
+                        onPress={() => router.push('/(auth)')}
+                        style={{ marginRight: 15 }}
+                    >
+                        <Image
+                            source={require('../../assets/images/perfil.png')}
+                            style={{ width: 40, height: 40, borderRadius: 20 }}
+                        />
+                    </TouchableOpacity>
+                ),
             }}
         >
             <Tabs.Screen

@@ -118,7 +118,7 @@ const Register = () => {
                 </TouchableOpacity>
 
                 <Image
-                    source={require('../../assets/images/icons/logo.jpg')}
+                    source={require('../../assets/images/logo.jpg')}
                     style={styles.logo}
                 />
 
