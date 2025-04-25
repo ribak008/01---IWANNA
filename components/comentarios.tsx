@@ -1,51 +1,43 @@
 import React, { useState } from 'react';
 import { Modal, FlatList, View, Text, Image, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+
+type Comentario = {
+    id_post: number;
+    id_comentario: number;
+    usuario: string;
+    img_perfil: string;
+    comentario: string;
+    likes: number;
+    fecha: string;
+    hora: string;
+    respuestas: Comentario[];
+};
 
 interface ComentariosModalProps {
     modalVisible: boolean;
     toggleModal: () => void;
     datos: {
-        comentarios: {
-            id_comentario: number;
-            usuario: string;
-            img_perfil: string;
-            comentario: string;
-            likes: number;
-            fecha: string;
-            hora: string;
-            respuestas: {
-                id_comentario: number;
-                usuario: string;
-                img_perfil: string;
-                comentario: string;
-                likes: number;
-                fecha: string;
-                hora: string;
-            }[]; 
-        }[];
+        id: number;
+        nombre: string;
+        profesion: string;
+        img_perfil: string;
+        img_post: string;
+        descripcion: string;
+        likes: number;
+        cant_comentarios: number;
+        comentarios: Comentario[];
     };
 }
 
 const ComentariosModal: React.FC<ComentariosModalProps> = ({ modalVisible, toggleModal, datos }) => {
-    const [respuesta, setRespuesta] = useState('');
+    const [comentario, setComentario] = useState('');
     const [comentarioSeleccionado, setComentarioSeleccionado] = useState<number | null>(null);
     const [respuestasVisibles, setRespuestasVisibles] = useState<Set<number>>(new Set());
+    const [likedComments, setLikedComments] = useState<number[]>([]);
 
     const handleResponder = (idComentario: number) => {
         setComentarioSeleccionado(idComentario);
-    };
-
-    const handleEnviarRespuesta = () => {
-        if (respuesta.trim() !== '') {
-            console.log('Respuesta enviada:', respuesta);
-        }
-        setRespuesta('');
-        setComentarioSeleccionado(null);
-    };
-
-    const handleCerrarModoRespuesta = () => {
-        setComentarioSeleccionado(null);
     };
 
     const toggleRespuestasVisibles = (idComentario: number) => {
@@ -58,6 +50,81 @@ const ComentariosModal: React.FC<ComentariosModalProps> = ({ modalVisible, toggl
         setRespuestasVisibles(newSet);
     };
 
+    const toggleLike = (idComentario: number) => {
+        setLikedComments(prev => 
+            prev.includes(idComentario) 
+                ? prev.filter(id => id !== idComentario)
+                : [...prev, idComentario]
+        );
+    };
+
+    const renderComentario = ({ item }: { item: Comentario }) => (
+        <View style={styles.comentario}>
+            <Image source={{ uri: item.img_perfil }} style={styles.foto_perfil} />
+            <View style={styles.contenido_comentario}>
+                <Text style={styles.nombre_usuario}>{item.usuario}</Text>
+                <Text style={styles.texto_comentario}>{item.comentario}</Text>
+                <View style={styles.acciones_comentario}>
+                    <TouchableOpacity 
+                        style={styles.accion} 
+                        onPress={() => toggleLike(item.id_comentario)}
+                    >
+                        <Ionicons 
+                            name={likedComments.includes(item.id_comentario) ? "heart" : "heart-outline"} 
+                            size={16} 
+                            color={likedComments.includes(item.id_comentario) ? "#8BC34A" : "#424242"} 
+                        />
+                        <Text style={styles.contador}>{item.likes}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.accion}>
+                        <Ionicons name="chatbubble-outline" size={16} color="#424242" />
+                        <Text style={styles.contador}>{item.respuestas.length}</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.fecha}>{item.fecha} {item.hora}</Text>
+                </View>
+                <View style={styles.botones_respuesta}>
+                    <TouchableOpacity onPress={() => handleResponder(item.id_comentario)}>
+                        <Text style={styles.boton_respuesta}>Responder</Text>
+                    </TouchableOpacity>
+                    {item.respuestas.length > 0 && (
+                        <TouchableOpacity onPress={() => toggleRespuestasVisibles(item.id_comentario)}>
+                            <Text style={styles.boton_respuesta}>
+                                {respuestasVisibles.has(item.id_comentario) ? 'Ocultar respuestas' : 'Ver respuestas'}
+                            </Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
+                {respuestasVisibles.has(item.id_comentario) && item.respuestas.length > 0 && (
+                    <View style={styles.respuestasContainer}>
+                        {item.respuestas.map((resp, index) => (
+                            <View key={index} style={styles.respuesta}>
+                                <Image source={{ uri: resp.img_perfil }} style={styles.foto_perfil_pequena} />
+                                <View style={styles.contenido_comentario}>
+                                    <Text style={styles.nombre_usuario}>{resp.usuario}</Text>
+                                    <Text style={styles.texto_comentario}>{resp.comentario}</Text>
+                                    <View style={styles.acciones_comentario}>
+                                        <TouchableOpacity 
+                                            style={styles.accion} 
+                                            onPress={() => toggleLike(resp.id_comentario)}
+                                        >
+                                            <Ionicons 
+                                                name={likedComments.includes(resp.id_comentario) ? "heart" : "heart-outline"} 
+                                                size={16} 
+                                                color={likedComments.includes(resp.id_comentario) ? "#8BC34A" : "#424242"} 
+                                            />
+                                            <Text style={styles.contador}>{resp.likes}</Text>
+                                        </TouchableOpacity>
+                                        <Text style={styles.fecha}>{resp.fecha} {resp.hora}</Text>
+                                    </View>
+                                </View>
+                            </View>
+                        ))}
+                    </View>
+                )}
+            </View>
+        </View>
+    );
+
     return (
         <Modal
             animationType="slide"
@@ -67,87 +134,30 @@ const ComentariosModal: React.FC<ComentariosModalProps> = ({ modalVisible, toggl
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <View style={styles.modalHeader}>
-                        <Text style={styles.modalTitle}>Comentarios</Text>
-                        <TouchableOpacity onPress={toggleModal} style={styles.btnCerrarModal}>
-                            <FontAwesome name="close" size={24} color="#666" />
+                    <View style={styles.header}>
+                        <Text style={styles.title}>Comentarios</Text>
+                        <TouchableOpacity onPress={toggleModal}>
+                            <Ionicons name="close" size={24} color="#333" />
                         </TouchableOpacity>
                     </View>
-
-                    <FlatList
-                        data={datos.comentarios}
-                        keyExtractor={(item) => item.id_comentario.toString()}
-                        showsVerticalScrollIndicator={false}
-                        contentContainerStyle={styles.comentariosList}
-                        renderItem={({ item }) => (
-                            <View style={styles.comentario}>
-                                <View style={styles.comentarioHeader}>
-                                    <Image source={{ uri: item.img_perfil }} style={styles.imgPerfil} />
-                                    <Text style={styles.usuario}>{item.usuario}</Text>
-                                </View>
-                                <Text style={styles.textoComentario}>{item.comentario}</Text>
-                                <Text style={styles.fecha}>{item.fecha} a las {item.hora}</Text>
-                                <Text style={styles.likes}><FontAwesome name="heart" size={16} color="#666" /> {item.likes}</Text>
-                                <View style={[{flexDirection: "row",gap:"10",alignContent: "center"}, ]}>
-                                    <TouchableOpacity onPress={() => handleResponder(item.id_comentario)}>
-                                        <Text> Responder </Text>
-                                    </TouchableOpacity>
-
-                                    {/* Botón para ver respuestas */}
-                                    {item.respuestas.length > 0 && (
-                                        <TouchableOpacity onPress={() => toggleRespuestasVisibles(item.id_comentario)}>
-                                            <Text>
-                                                {respuestasVisibles.has(item.id_comentario) ? 'Ocultar respuestas' : 'Ver respuestas'}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    )}
-                                </View>
-                                
-
-                                {/* Mostrar respuestas solo si están visibles */}
-                                {respuestasVisibles.has(item.id_comentario) && item.respuestas.length > 0 && (
-                                    <View style={styles.respuestasContainer}>
-                                        {item.respuestas.map((resp, index) => (
-                                            <View key={index} style={styles.respuesta}>
-                                                <View style={styles.comentarioHeader}>
-                                                    <Image source={{ uri: resp.img_perfil }} style={styles.imgPerfilSmall} />
-                                                    <Text style={styles.usuario}>{resp.usuario}</Text>
-                                                </View>
-                                                <Text style={styles.textoComentario}>{resp.comentario}</Text>
-                                                <Text style={styles.fecha}>{resp.fecha} a las {resp.hora}</Text>
-                                                <Text style={styles.likes}><FontAwesome name="heart" size={16} color="#666" /> {resp.likes}</Text>
-                                            </View>
-                                        ))}
-                                    </View>
-                                )}
-                            </View>
-                        )}
-                    />
-                </View>
-
-                {/* Input para escribir comentario o respuesta */}
-                <View style={styles.inputContainer}>
-                    {/* Mostrar el mensaje solo cuando estamos en "Modo Responder" */}
-                    {comentarioSeleccionado && (
-                        <View style={styles.modoContainer}>
-                            <Text style={styles.modoTexto}>Modo Responder</Text>
-                            <TouchableOpacity onPress={handleCerrarModoRespuesta}>
-                                <Text style={styles.closeTexto}>Cancelar</Text>
-                            </TouchableOpacity>
-                        </View>
-                    )}
-
-                    {/* Input y Botón alineados horizontalmente */}
-                    <View style={[{flexDirection: "row"}]}>
-                        <TextInput
-                            style={styles.inputComentario}
-                            value={respuesta}
-                            onChangeText={setRespuesta}
-                            placeholder={comentarioSeleccionado ? "Escribe tu respuesta..." : "Escribe un comentario..."}
-                            placeholderTextColor="#999"
+                    <View style={styles.comentariosContainer}>
+                        <FlatList
+                            data={datos.comentarios}
+                            keyExtractor={(item) => item.id_comentario.toString()}
+                            renderItem={renderComentario}
+                            showsVerticalScrollIndicator={false}
+                            contentContainerStyle={styles.comentariosList}
                         />
-                        <TouchableOpacity onPress={handleEnviarRespuesta} style={styles.botonEnviar}>
-                            <Text style={styles.btnText}>Enviar</Text>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Escribe un comentario..."
+                            value={comentario}
+                            onChangeText={setComentario}
+                        />
+                        <TouchableOpacity style={styles.sendButton}>
+                            <Ionicons name="send" size={20} color="#8BC34A" />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -155,130 +165,122 @@ const ComentariosModal: React.FC<ComentariosModalProps> = ({ modalVisible, toggl
         </Modal>
     );
 };
-export default ComentariosModal;
 
 const styles = StyleSheet.create({
-    modoContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
-    closeTexto: {
-        fontSize: 16,
-        color: '#007bff',
-        marginLeft: 10,
-    },
     modalContainer: {
         flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         justifyContent: 'flex-end',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fondo semitransparente
     },
     modalContent: {
-        width: '100%',
-        maxHeight: '90%',
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        height: '80%',
         padding: 20,
-        backgroundColor: 'white',
-        borderRadius: 10,
-        alignItems: 'flex-start',
-        overflow: 'hidden',
-        flex: 1, // Esto asegura que el contenido use todo el espacio disponible
     },
-    modalHeader: {
-        width: '100%',
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        marginBottom: 10,
+        marginBottom: 20,
     },
-    modalTitle: {
-        fontSize: 18,
+    title: {
+        fontSize: 20,
         fontWeight: 'bold',
-        textAlign: 'center',
     },
-    btnCerrarModal: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
+    comentariosContainer: {
+        flex: 1,
+    },
+    comentariosList: {
+        paddingBottom: 20,
     },
     comentario: {
+        flexDirection: 'row',
         marginBottom: 15,
     },
-    comentarioHeader: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 5,
-    },
-    imgPerfil: {
+    foto_perfil: {
         width: 40,
         height: 40,
         borderRadius: 20,
         marginRight: 10,
     },
-    usuario: {
+    foto_perfil_pequena: {
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        marginRight: 10,
+    },
+    contenido_comentario: {
+        flex: 1,
+    },
+    nombre_usuario: {
         fontWeight: 'bold',
     },
-    textoComentario: {
+    texto_comentario: {
         marginVertical: 5,
         fontSize: 14,
         color: '#333',
+    },
+    acciones_comentario: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 5,
+    },
+    accion: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 10,
+    },
+    contador: {
+        marginLeft: 5,
+        fontSize: 12,
+        color: '#666',
     },
     fecha: {
         fontSize: 12,
         color: '#777',
     },
-    likes: {
+    botones_respuesta: {
+        flexDirection: 'row',
+        gap: 10,
+        marginTop: 5,
+    },
+    boton_respuesta: {
+        color: '#8BC34A',
         fontSize: 12,
     },
     respuestasContainer: {
         marginTop: 10,
-        paddingLeft: 20,
+        marginLeft: 10,
     },
     respuesta: {
+        flexDirection: 'row',
         marginBottom: 10,
     },
-    imgPerfilSmall: {
-        width: 30,
-        height: 30,
-        borderRadius: 15,
-        marginRight: 8,
-    },
-    comentariosList: {
-        flexGrow: 1, // Esto asegura que la lista de comentarios se expanda y utilice el espacio restante
-    },
-    modoTexto: {
-        fontSize: 14,
-        color: '#555',
-        fontStyle: 'italic',
-    },
     inputContainer: {
-        position: 'absolute', // Esto asegura que el input se quede siempre en la parte inferior
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: '#fff',
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'center',
-        padding: 10,
         borderTopWidth: 1,
-        borderColor: '#ddd',
+        borderTopColor: '#eee',
+        paddingTop: 10,
     },
-    inputComentario: {
+    input: {
         flex: 1,
-        borderWidth: 1,
-        borderColor: '#ccc',
+        height: 40,
+        backgroundColor: '#f5f5f5',
         borderRadius: 20,
         paddingHorizontal: 15,
-        paddingVertical: 8,
         marginRight: 10,
     },
-    botonEnviar: {
-        backgroundColor: '#007bff',
-        padding: 10,
+    sendButton: {
+        width: 40,
+        height: 40,
         borderRadius: 20,
-    },
-    btnText: {
-        color: 'white',
-        fontWeight: 'bold',
+        backgroundColor: '#f5f5f5',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
+
+export default ComentariosModal;
