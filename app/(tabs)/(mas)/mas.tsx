@@ -21,7 +21,7 @@ export default function Mas() {
                                 style={styles.perfilImage}
                             />
                             <View style={styles.perfilInfo}>
-                                <Text style={styles.perfilNombre}>Juan Gana</Text>
+                                <Text style={styles.perfilNombre}>Manuel Perez</Text>
                                 <Text style={styles.perfilPlan}>Plan: Free</Text>
                                 <TouchableOpacity 
                                     style={styles.verPerfilButton}
