@@ -6,7 +6,7 @@ export default function TabLayout() {
         <Tabs
             screenOptions={{
                 tabBarActiveTintColor: '#8BC34A',
-                tabBarInactiveTintColor: '#666',
+                tabBarInactiveTintColor: '#666666',
                 tabBarLabelStyle: {
                     fontSize: 12,
                     fontWeight: '500',
@@ -25,28 +25,28 @@ export default function TabLayout() {
                 options={{
                     title: 'Inicio',
                     headerShown: false,
-                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="home-outline" color={color} />,
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="home" color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="(favoritos)"
                 options={{
                     title: 'Favoritos',
-                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="heart-outline" color={color} />,
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="heart" color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="(categorias)"
                 options={{
                     title: 'Categorías',
-                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="grid-outline" color={color} />,
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="grid" color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="(mas)"
                 options={{
                     title: 'Más',
-                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="ellipsis-horizontal-outline" color={color} />,
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="ellipsis-horizontal" color={color} />,
                 }}
             />
         </Tabs>
