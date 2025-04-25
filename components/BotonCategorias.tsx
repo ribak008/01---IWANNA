@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, TouchableHighlight, Text, View, Image, StyleSheet, GestureResponderEvent } from 'react-native';
+import { TouchableOpacity, TouchableHighlight, Text, View, Image, StyleSheet, GestureResponderEvent, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -57,13 +57,23 @@ const BotonCategorias: React.FC<Props> = ({
     const styles = StyleSheet.create({
     boton: {
       justifyContent: 'center',  
-      marginHorizontal: 20,
-      marginVertical: 10,
-      width: '100%',
-      padding: 15,
-      borderRadius: 50,
-      boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
-      },
+      marginHorizontal: 10,
+      marginVertical: 8,
+      width: '95%',
+      padding: 18,
+      borderRadius: 12,
+      ...Platform.select({
+        ios: {
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+        },
+        android: {
+          elevation: 3,
+        },
+      }),
+    },
     contenidoBoton: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -71,8 +81,9 @@ const BotonCategorias: React.FC<Props> = ({
       alignItems: 'center',
     },
     icono: {
-      marginRight: 8,      
-      },
+      marginRight: 8,
+      opacity: 0.8,
+    },
     });
 
 export default BotonCategorias;    

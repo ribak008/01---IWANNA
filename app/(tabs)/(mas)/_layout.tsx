@@ -12,7 +12,7 @@ export default function MasLayout() {
         name="mas"
         options={{
           header: (props) => (
-            <HeaderPrincipal/>
+            <HeaderPrincipal titulo="MÁS" bgColor="#FFFFFF"/>
           ),
         }}
       />
@@ -21,7 +21,7 @@ export default function MasLayout() {
         name="planes"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "PLANES" bgColor="#00BCD4"/>
+            <HeaderPrincipal titulo="PLANES" bgColor="#FFFFFF"/>
           ),
         }}
       />
@@ -29,7 +29,7 @@ export default function MasLayout() {
         name="agenda"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "AGENDA" bgColor="#00BCD4"/>
+            <HeaderPrincipal titulo="AGENDA" bgColor="#FFFFFF"/>
           ),
         }}
       />
@@ -37,7 +37,7 @@ export default function MasLayout() {
         name="mi-perfil"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "MI PERFIL" bgColor="#00BCD4"/>
+            <HeaderPrincipal titulo="MI PERFIL" bgColor="#FFFFFF"/>
           ),
         }}
       />
@@ -45,7 +45,7 @@ export default function MasLayout() {
         name="mensajes"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "MENSAJES" bgColor="#00BCD4"/>
+            <HeaderPrincipal titulo="MENSAJES" bgColor="#FFFFFF"/>
           ),
         }}
       />
@@ -53,7 +53,7 @@ export default function MasLayout() {
         name="preguntas-frecuentes"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "PREGUNTAS FRECUENTES" bgColor="#00BCD4"/>
+            <HeaderPrincipal titulo="PREGUNTAS FRECUENTES" bgColor="#FFFFFF"/>
           ),
         }}
       />
@@ -61,7 +61,7 @@ export default function MasLayout() {
         name="denuncias"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "DENUNCIAS" bgColor="#00BCD4"/>
+            <HeaderPrincipal titulo="DENUNCIAS" bgColor="#FFFFFF"/>
           ),
         }}
       />
@@ -69,7 +69,7 @@ export default function MasLayout() {
         name="post"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "POSTS" bgColor="#00BCD4"/>
+            <HeaderPrincipal titulo="POSTS" bgColor="#FFFFFF"/>
           ),
         }}
       />
@@ -77,7 +77,7 @@ export default function MasLayout() {
         name="quienes-somos"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "QUIENES SOMOS" bgColor="#00BCD4"/>
+            <HeaderPrincipal titulo="QUIENES SOMOS" bgColor="#FFFFFF"/>
           ),
         }}
       />

@@ -1,9 +1,9 @@
 import React from 'react';
 import { FlatList, View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
-import HeaderPrincipal from '../../components/Header';
 import Post from '../../components/post';
 import { FontAwesome } from '@expo/vector-icons';
 import { useEffect } from 'react';
+import HeaderPrincipal from '../../components/Header';
 
 const posts = [
     {
@@ -223,7 +223,7 @@ const Home = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <HeaderPrincipal />
+            <HeaderPrincipal titulo="INICIO" bgColor="#FFFFFF"/>
             {/* DATA */}
             <FlatList
                 data={posts}

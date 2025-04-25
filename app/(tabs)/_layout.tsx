@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { View, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
+import HeaderPrincipal from '../../components/Header';
 
 export default function TabLayout() {
     const router = useRouter();
@@ -22,36 +23,16 @@ export default function TabLayout() {
                     height: 60,
                     paddingBottom: 5,
                 },
-                headerStyle: {
-                    backgroundColor: '#fff',
-                    borderBottomWidth: 1,
-                    borderBottomColor: '#ddd',
-                },
-                headerLeft: () => (
-                    <Image
-                        source={require('../../assets/images/logo.jpg')}
-                        style={{ width: 100, height: 40, marginLeft: 15 }}
-                        resizeMode="contain"
-                    />
-                ),
-                headerRight: () => (
-                    <TouchableOpacity 
-                        onPress={() => router.push('/(auth)')}
-                        style={{ marginRight: 15 }}
-                    >
-                        <Image
-                            source={require('../../assets/images/perfil.png')}
-                            style={{ width: 40, height: 40, borderRadius: 20 }}
-                        />
-                    </TouchableOpacity>
-                ),
+                headerShown: false,
             }}
         >
             <Tabs.Screen
                 name="index"
                 options={{
                     title: 'Inicio',
-                    headerShown: false,
+                    header: (props) => (
+                        <HeaderPrincipal titulo="INICIO" bgColor="#FFFFFF"/>
+                    ),
                     tabBarIcon: ({ color, size }) => <Ionicons size={24} name="home" color={color} />,
                 }}
             />

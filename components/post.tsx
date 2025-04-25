@@ -94,22 +94,14 @@ export default Post;
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        borderRadius: 10,
         marginBottom: 15,
         overflow: 'hidden',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-        elevation: 3,
     },
     foto_usuario: {
         width: 40,
         height: 40,
         borderRadius: 20,
+        marginLeft: 15,
         marginRight: 10,
     },
     nombre: {
@@ -119,11 +111,11 @@ const styles = StyleSheet.create({
     imagen_post: {
         width: '100%',
         height: 300,
-        borderRadius: 10,
         marginVertical: 10,
     },
     content: {
-        padding: 15,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
     },
     descripcion: {
         marginBottom: 4,
@@ -131,6 +123,7 @@ const styles = StyleSheet.create({
     contenedor_datos_post: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginTop: 5,
     },
     dato_post: {
         flexDirection: 'row',
