@@ -32,13 +32,27 @@ interface ComentariosModalProps {
 
 const ComentariosModal: React.FC<ComentariosModalProps> = ({ modalVisible, toggleModal, datos }) => {
     const [comentario, setComentario] = useState('');
-    const [comentarioSeleccionado, setComentarioSeleccionado] = useState<number | null>(null);
+    const [comentarioSeleccionado, setComentarioSeleccionado] = useState<{ id: number, usuario: string } | null>(null);
     const [respuestasVisibles, setRespuestasVisibles] = useState<Set<number>>(new Set());
     const [likedComments, setLikedComments] = useState<number[]>([]);
 
-    const handleResponder = (idComentario: number) => {
-        setComentarioSeleccionado(idComentario);
+    // FUNCIONES
+    const obtenerDatosPorIdComentario = (idComentario: number) => {
+        const comentarioEncontrado = datos.comentarios.find(c => c.id_comentario === idComentario);
+        return comentarioEncontrado ? comentarioEncontrado : null;
     };
+    
+    // HANDLES
+    const handleResponder = (idComentario: number) => {
+        const comentario = obtenerDatosPorIdComentario(idComentario);
+        if(comentario) {
+            setComentarioSeleccionado({ id: comentario.id_comentario, usuario: comentario.usuario });
+        }
+    };
+
+    const handleCerrarModoRespuesta = () => {
+        setComentarioSeleccionado(null);
+    }
 
     const toggleRespuestasVisibles = (idComentario: number) => {
         const newSet = new Set(respuestasVisibles);
@@ -150,15 +164,25 @@ const ComentariosModal: React.FC<ComentariosModalProps> = ({ modalVisible, toggl
                         />
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Escribe un comentario..."
-                            value={comentario}
-                            onChangeText={setComentario}
-                        />
-                        <TouchableOpacity style={styles.sendButton}>
-                            <Ionicons name="send" size={20} color="#8BC34A" />
-                        </TouchableOpacity>
+                        {comentarioSeleccionado && (
+                            <View style={styles.modoRespuestaContainer}>
+                                <Text style={[{color:"#757575"}]}>responder a {comentarioSeleccionado?.usuario}</Text>
+                                <TouchableOpacity onPress={handleCerrarModoRespuesta}>
+                                    <Ionicons name="close" size={24} color="#757575" />
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        <View  style={[{flexDirection: "row"}]}>
+                            <TextInput
+                                style={styles.input}
+                                placeholder={comentarioSeleccionado ? "Responde al comentario..." : "Escribe un comentario..."}
+                                value={comentario}
+                                onChangeText={setComentario}
+                            />
+                            <TouchableOpacity style={styles.sendButton}>
+                                <Ionicons name="send" size={20} color="#8BC34A" />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -259,11 +283,16 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     inputContainer: {
-        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: '#fff',
+        flexDirection: 'column',
         alignItems: 'center',
+        padding: 10,
         borderTopWidth: 1,
-        borderTopColor: '#eee',
-        paddingTop: 10,
+        borderColor: '#ddd',
     },
     input: {
         flex: 1,
@@ -281,6 +310,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    modoRespuestaContainer:{
+        width: "100%",
+        flexDirection: 'row', 
+        justifyContent: "space-between", 
+        alignItems: 'stretch', 
+        marginBottom: 10,
+    }
 });
 
 export default ComentariosModal;
