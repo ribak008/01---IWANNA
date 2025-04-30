@@ -1,7 +1,12 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export const RatingStars = ({ rating, showValue = false }) => {
+interface RatingStarsProps {
+  rating?: any;
+  showValue?: boolean;
+}
+
+export const RatingStars = ({ rating , showValue = false }: RatingStarsProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.stars}>

@@ -1,61 +1,62 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
-import HeaderPrincipal from '../../components/Header';
-import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+import { View, Image, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+import HeaderPrincipal from '../../components/Header';
 
 export default function TabLayout() {
-    return (
-        <Tabs screenOptions={{ 
-            tabBarActiveTintColor: '#84AE46',
- 
-            tabBarLabelStyle: { fontWeight: 'bold', fontSize: 12 },
-            tabBarStyle: { 
-                backgroundColor: '#fff', 
-                elevation: 0, 
-                shadowOpacity: 0, 
-                borderTopWidth: 1,
-                display: 'flex',
+    const router = useRouter();
 
-            },
-        }}>
+    return (
+        <Tabs
+            screenOptions={{
+                tabBarActiveTintColor: '#8BC34A',
+                tabBarInactiveTintColor: '#666666',
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                    fontWeight: '500',
+                },
+                tabBarStyle: {
+                    backgroundColor: '#fff',
+                    borderTopWidth: 1,
+                    borderTopColor: '#ddd',
+                    height: 60,
+                    paddingBottom: 5,
+                },
+                headerShown: false,
+            }}
+        >
             <Tabs.Screen
                 name="index"
                 options={{
-                    title: 'Home',
-                    header() {
-                        return <HeaderPrincipal/>;
-                    },
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+                    title: 'Inicio',
+                    header: (props) => (
+                        <HeaderPrincipal titulo="INICIO" bgColor="#FFFFFF"/>
+                    ),
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="home" color={color} />,
                 }}
             />
-
             <Tabs.Screen
                 name="(favoritos)"
                 options={{
-                    headerShown: false,
                     title: 'Favoritos',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="heart" color={color} />,
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="heart" color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="(categorias)"
                 options={{
-                    headerShown: false,
-                    title: 'Categorias',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="list" color={color} />,
+                    title: 'Categorías',
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="grid" color={color} />,
                 }}
             />
             <Tabs.Screen
                 name="(mas)"
                 options={{
-                    headerShown: false,
-                    title: 'Mas',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="ellipsis-h" color={color} />,
+                    title: 'Más',
+                    tabBarIcon: ({ color, size }) => <Ionicons size={24} name="ellipsis-horizontal" color={color} />,
                 }}
             />
-      
         </Tabs>
     );
 }

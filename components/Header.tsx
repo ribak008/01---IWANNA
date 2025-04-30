@@ -1,42 +1,142 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, Image, StyleSheet, GestureResponderEvent } from 'react-native';
-import { AnimatedImage } from 'react-native-reanimated/lib/typescript/component/Image';
+import { View, Image, TouchableOpacity, StyleSheet, Alert, Text, Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type Props = {
+interface HeaderProps {
     titulo?: string;
     bgColor?: string;
-};
+}
 
-const imgLogo = require('../assets/images/icons/logo-sin-fondo.png');
+export default function Header({ titulo, bgColor = '#fff' }: HeaderProps) {
+    const handleLogout = () => {
+        Alert.alert(
+            'Cerrar sesión',
+            '¿Estás seguro de que quieres cerrar sesión?',
+            [
+                {
+                    text: 'Cancelar',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Cerrar sesión',
+                    style: 'destructive',
+                },
+            ]
+        );
+    };
 
-const HeaderPrincipal: React.FC<Props> = ({ titulo, bgColor }) => {
     return (
+        <View style={[styles.container, { backgroundColor: bgColor }]}>
+            <View style={styles.contentContainer}>
+                <TouchableOpacity 
+                    onPress={handleLogout} 
+                    style={styles.profileContainer}
+                    activeOpacity={0.7}
+                >
+                    <View style={styles.profileImageContainer}>
+                        <Image
+                            source={require('../assets/images/perfil.png')}
+                            style={styles.userImage}
+                        />
+                    </View>
+                </TouchableOpacity>
+                
+                {titulo && (
+                    <View style={styles.titleWrapper}>
+                        <Text style={styles.title}>{titulo}</Text>
+                    </View>
+                )}
 
-    <View style={styles.fixedHeader}>
-    <Image source={imgLogo} style={{ width: 80, height: 80 }} />
-    {titulo && (
-      <Text style={[styles.titulo, { backgroundColor: bgColor }]}>{titulo} </Text>    
-    )}
-      </View>
+                <View style={styles.logoContainer}>
+                    <Image
+                        source={require('../assets/images/logo.jpg')}
+                        style={styles.logo}
+                        resizeMode="contain"
+                    />
+                </View>
+            </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-  fixedHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: 5,
-    backgroundColor: '#fff',
-    height: 'auto',
-  },
-  titulo: {
-    fontSize: 20,
-    // backgroundColor: '#00BCD4',
-    paddingHorizontal: 30,
-    paddingVertical: 10,
-    borderRadius: 40,
-    color: '#F5F5F5',
-  },
-});
-
-export default HeaderPrincipal;
+    container: {
+        height: 60,
+        borderBottomWidth: 1,
+        borderBottomColor: '#E0E0E0',
+        ...Platform.select({
+            ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 3,
+            },
+            android: {
+                elevation: 5,
+            },
+        }),
+    },
+    contentContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+    },
+    profileContainer: {
+        width: 45,
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    profileImageContainer: {
+        width: 45,
+        height: 45,
+        borderRadius: 22.5,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: '#8BC34A',
+        ...Platform.select({
+            ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.2,
+                shadowRadius: 2,
+            },
+            android: {
+                elevation: 3,
+            },
+        }),
+    },
+    userImage: {
+        width: 39,
+        height: 39,
+        borderRadius: 19.5,
+    },
+    titleWrapper: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#8BC34A',
+        letterSpacing: 0.5,
+    },
+    logoContainer: {
+        width: 60,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    logo: {
+        width: 50,
+        height: 50,
+    },
+}); 

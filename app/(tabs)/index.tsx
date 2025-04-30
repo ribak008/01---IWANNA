@@ -1,9 +1,9 @@
 import React from 'react';
 import { FlatList, View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
-import HeaderPrincipal from '../../components/Header';
 import Post from '../../components/post';
 import { FontAwesome } from '@expo/vector-icons';
 import { useEffect } from 'react';
+import HeaderPrincipal from '../../components/Header';
 
 const posts = [
     {
@@ -216,11 +216,6 @@ const posts = [
     // Puedes seguir agregando más posts de la misma manera
 ];
 
-
-
-
-
-
 const Home = () => {
     useEffect(() => {
         console.log('Pantalla de Home (tabs/index.tsx) renderizada');
@@ -228,9 +223,7 @@ const Home = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            {/* CABEZERA */}
-
-
+            <HeaderPrincipal titulo="INICIO" bgColor="#FFFFFF"/>
             {/* DATA */}
             <FlatList
                 data={posts}
