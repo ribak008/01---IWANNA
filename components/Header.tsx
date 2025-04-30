@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Image, TouchableOpacity, StyleSheet, Alert, Text, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Link } from 'expo-router';
+
 
 interface HeaderProps {
     titulo?: string;
@@ -10,37 +12,27 @@ interface HeaderProps {
 
 export default function Header({ titulo, bgColor = '#fff' }: HeaderProps) {
     const handleLogout = () => {
-        Alert.alert(
-            'Cerrar sesión',
-            '¿Estás seguro de que quieres cerrar sesión?',
-            [
-                {
-                    text: 'Cancelar',
-                    style: 'cancel',
-                },
-                {
-                    text: 'Cerrar sesión',
-                    style: 'destructive',
-                },
-            ]
-        );
+        <link rel="stylesheet" href="/Home" />
+        
+        
     };
 
     return (
         <View style={[styles.container, { backgroundColor: bgColor }]}>
             <View style={styles.contentContainer}>
-                <TouchableOpacity 
-                    onPress={handleLogout} 
-                    style={styles.profileContainer}
-                    activeOpacity={0.7}
-                >
-                    <View style={styles.profileImageContainer}>
-                        <Image
-                            source={require('../assets/images/perfil.png')}
-                            style={styles.userImage}
-                        />
-                    </View>
-                </TouchableOpacity>
+                <Link href="/(auth)" asChild>
+                    <TouchableOpacity 
+                        style={styles.profileContainer}
+                        activeOpacity={0.7}
+                    >
+                        <View style={styles.profileImageContainer}>
+                            <Image
+                                source={require('../assets/images/perfil.png')}
+                                style={styles.userImage}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                </Link>
                 
                 {titulo && (
                     <View style={styles.titleWrapper}>

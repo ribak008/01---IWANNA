@@ -31,7 +31,7 @@ export default function MiPerfil() {
         <View style={styles.container}>
           <View style={styles.info}>
             <Text style={{ fontWeight: '800' }}>Datos personales:</Text>
-            <Text>Nombre: Juan Ganadero</Text>
+            <Text>Nombre: Manuel Perez</Text>
             <Text>Edad: 20 años</Text>
             <Text>Profesión: Maestro parrillero</Text>
           </View>
@@ -47,7 +47,7 @@ export default function MiPerfil() {
 
           <View style={styles.info}>
             <Text style={{ fontWeight: '800' }}>Datos de contacto:</Text>
-            <Text>Correo: juan_siempre_gana@gmail.com</Text>
+            <Text>Correo: manuel_perez@gmail.com</Text>
             <Text>Fono: 345252525</Text>
           </View>
 
