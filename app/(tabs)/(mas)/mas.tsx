@@ -17,6 +17,7 @@ export default function Mas() {
                 <View style={styles.container}>
                     {/* Sección de Perfil */}
                     <View style={styles.perfilContainer}>
+
                         <View style={styles.perfilContent}>
                             <Image
                                 source={imgPerfil}
@@ -27,11 +28,12 @@ export default function Mas() {
                                 <Text style={styles.perfilPlan}>Plan: Free</Text>
                                 <TouchableOpacity
                                     style={styles.verPerfilButton}
-                                    onPress={() => router.push('/(mas)/mi-perfil')}
+                                    onPress={() => router.push('/(mas)/mi-perfil-trabajador')}
                                 >
                                     <Text style={styles.verPerfilText}>Ver mi perfil</Text>
                                     <Ionicons name="chevron-forward" size={20} color="#8BC34A" />
                                 </TouchableOpacity>
+
                                 <View>
                                     <RatingStars rating={Number(averageRating)} showValue />
                                 </View>
@@ -165,6 +167,12 @@ const styles = StyleSheet.create({
         }),
     },
     perfilContent: {
+        alignSelf: 'center',
+        width: '90%',
+        marginTop: 10,
+        borderRadius: 10,
+        padding: 15,
+        backgroundColor: '#f1f1f1',
         flexDirection: 'row',
         alignItems: 'center',
     },
