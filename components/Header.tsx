@@ -2,37 +2,47 @@ import React from 'react';
 import { View, Image, TouchableOpacity, StyleSheet, Alert, Text, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Link } from 'expo-router';
-
+import { Link, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 interface HeaderProps {
     titulo?: string;
     bgColor?: string;
+    showBackButton?: boolean;
 }
 
-export default function Header({ titulo, bgColor = '#fff' }: HeaderProps) {
+export default function Header({ titulo, bgColor = '#fff', showBackButton = false }: HeaderProps) {
+    const router = useRouter();
+
     const handleLogout = () => {
         <link rel="stylesheet" href="/Home" />
-        
-        
     };
 
     return (
         <View style={[styles.container, { backgroundColor: bgColor }]}>
             <View style={styles.contentContainer}>
-                <Link href="/(auth)" asChild>
+                {showBackButton ? (
                     <TouchableOpacity 
-                        style={styles.profileContainer}
-                        activeOpacity={0.7}
+                        style={styles.backButton}
+                        onPress={() => router.back()}
                     >
-                        <View style={styles.profileImageContainer}>
-                            <Image
-                                source={require('../assets/images/perfil.png')}
-                                style={styles.userImage}
-                            />
-                        </View>
+                        <Ionicons name="arrow-back" size={24} color="#8BC34A" />
                     </TouchableOpacity>
-                </Link>
+                ) : (
+                    <Link href="/(auth)" asChild>
+                        <TouchableOpacity 
+                            style={styles.profileContainer}
+                            activeOpacity={0.7}
+                        >
+                            <View style={styles.profileImageContainer}>
+                                <Image
+                                    source={require('../assets/images/perfil.png')}
+                                    style={styles.userImage}
+                                />
+                            </View>
+                        </TouchableOpacity>
+                    </Link>
+                )}
                 
                 {titulo && (
                     <View style={styles.titleWrapper}>
@@ -75,6 +85,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 20,
+    },
+    backButton: {
+        width: 45,
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     profileContainer: {
         width: 45,

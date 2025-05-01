@@ -34,6 +34,14 @@ export default function Mas() {
                                     <Ionicons name="chevron-forward" size={20} color="#8BC34A" />
                                 </TouchableOpacity>
 
+                                <TouchableOpacity
+                                    style={styles.verPerfilButton}
+                                    onPress={() => router.push('/(mas)/mi-perfil-cliente')}
+                                >
+                                    <Text style={styles.verPerfilText}>Ver mi perfil cliente (test)</Text>
+                                    <Ionicons name="chevron-forward" size={20} color="#8BC34A" />
+                                </TouchableOpacity>
+
                                 <View>
                                     <RatingStars rating={Number(averageRating)} showValue />
                                 </View>

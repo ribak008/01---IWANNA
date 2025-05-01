@@ -27,10 +27,18 @@ export default function MasLayout() {
         }}
       />
        <Stack.Screen
-        name="mi-perfil"
+        name="mi-perfil-trabajador"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="MI PERFIL" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="PERFIL" bgColor="#FFFFFF" showBackButton={true}/>
+          ),
+        }}
+      />
+       <Stack.Screen
+        name="mi-perfil-cliente"
+        options={{
+          header: (props) => (
+            <HeaderPrincipal titulo="PERFIL" bgColor="#FFFFFF" showBackButton={true}/>
           ),
         }}
       />
