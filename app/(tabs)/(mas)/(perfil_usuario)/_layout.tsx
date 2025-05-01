@@ -14,6 +14,14 @@ export default function PerfilLayout() {
                     ),
                     }}
                 />
+                <Stack.Screen
+                    name="editar-perfil"
+                    options={{
+                    header: (props) => (
+                        <HeaderPrincipal titulo="EDITAR PERFIL" bgColor="#FFFFFF"/>
+                    ),
+                    }}
+                />
             </Stack>
         </SafeAreaView>
     );

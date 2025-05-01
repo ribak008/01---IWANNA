@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native';
 import HeaderPrincipal from '../../../../components/Header';
 import { Ionicons } from '@expo/vector-icons';
 import { RatingStars } from '../../../../components/rating-stars';
+import { router } from 'expo-router';
 
 const imgPerfil = require('../../../../assets/images/perfil.png');
 
@@ -53,7 +54,7 @@ export default function MiPerfil() {
           </View>
 
           {/* Botón de Editar Perfil */}
-          <TouchableOpacity style={styles.editButton}>
+          <TouchableOpacity style={styles.editButton} onPress={() => router.push('/(perfil_usuario)/editar-perfil')}>
             <Ionicons name="create-outline" size={20} color="#fff" />
             <Text style={styles.editButtonText}>Editar Perfil</Text>
           </TouchableOpacity>
