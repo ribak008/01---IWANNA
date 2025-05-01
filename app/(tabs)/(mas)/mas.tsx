@@ -28,7 +28,7 @@ export default function Mas() {
                                 <Text style={styles.perfilPlan}>Plan: Free</Text>
                                 <TouchableOpacity
                                     style={styles.verPerfilButton}
-                                    onPress={() => router.push('/(mas)/mi-perfil-trabajador')}
+                                    onPress={() => router.push('/(mas)/(perfil_usuario)')}
                                 >
                                     <Text style={styles.verPerfilText}>Ver mi perfil</Text>
                                     <Ionicons name="chevron-forward" size={20} color="#8BC34A" />

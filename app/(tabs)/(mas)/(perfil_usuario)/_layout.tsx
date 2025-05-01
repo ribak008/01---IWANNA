@@ -1,0 +1,20 @@
+import { Stack } from 'expo-router';
+import HeaderPrincipal from '../../../../components/Header';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+export default function PerfilLayout() {
+    return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+            <Stack>
+                <Stack.Screen
+                    name="mi-perfil"
+                    options={{
+                    header: (props) => (
+                        <HeaderPrincipal titulo="MI PERFIL" bgColor="#FFFFFF"/>
+                    ),
+                    }}
+                />
+            </Stack>
+        </SafeAreaView>
+    );
+}
