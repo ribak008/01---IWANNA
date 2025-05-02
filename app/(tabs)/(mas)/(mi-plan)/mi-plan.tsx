@@ -14,7 +14,7 @@ export default function MiPlan() {
                 </View>
                 
                 <View style={styles.advantages}>
-                    <Text style={styles.price}>$20.000/mes</Text>
+                    <Text style={styles.price}>$19.990/mes</Text>
                     
                     <Text style={styles.advantage}>• Acceso a contenido premium</Text>
                     <Text style={styles.advantage}>• Sin anuncios</Text> 
