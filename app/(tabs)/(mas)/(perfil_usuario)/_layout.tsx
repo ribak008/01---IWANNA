@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function PerfilLayout() {
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+       
             <Stack>
                 <Stack.Screen
                     name="mi-perfil"
@@ -23,6 +23,6 @@ export default function PerfilLayout() {
                     }}
                 />
             </Stack>
-        </SafeAreaView>
+      
     );
 }
