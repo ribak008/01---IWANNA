@@ -9,87 +9,98 @@ const imgPerfil = require('../../../assets/images/perfil.png');
 
 export default function Mas() {
     const router = useRouter();
-   const averageRating = 4;
-    
+    const averageRating = 4;
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.container}>
                     {/* Sección de Perfil */}
                     <View style={styles.perfilContainer}>
+
                         <View style={styles.perfilContent}>
-                            <Image 
+                            <Image
                                 source={imgPerfil}
                                 style={styles.perfilImage}
                             />
                             <View style={styles.perfilInfo}>
                                 <Text style={styles.perfilNombre}>Manuel Perez</Text>
                                 <Text style={styles.perfilPlan}>Plan: Free</Text>
-                                <TouchableOpacity 
+                                <TouchableOpacity
                                     style={styles.verPerfilButton}
-                                    onPress={() => router.push('/(mas)/mi-perfil')}
+                                    onPress={() => router.push('/(mas)/(perfil_usuario)')}
                                 >
                                     <Text style={styles.verPerfilText}>Ver mi perfil</Text>
                                     <Ionicons name="chevron-forward" size={20} color="#8BC34A" />
                                 </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={styles.verPerfilButton}
+                                    onPress={() => router.push('/(mas)/mi-perfil-cliente')}
+                                >
+                                    <Text style={styles.verPerfilText}>Ver mi perfil cliente (test)</Text>
+                                    <Ionicons name="chevron-forward" size={20} color="#8BC34A" />
+                                </TouchableOpacity>
+
+                                <View>
+                                    <RatingStars rating={Number(averageRating)} showValue />
+                                </View>
                             </View>
                         </View>
                     </View>
 
                     {/* Sección de Opciones */}
 
-                    <View>
-                        <RatingStars rating={Number(averageRating)} showValue />            
-                    </View>
-                    
+
+
                     <View style={styles.opcionesContainer}>
                         <Text style={styles.seccionTitulo}>Mi Cuenta</Text>
-                        <BotonCategorias 
+                        <BotonCategorias
                             textoBoton="MENSAJES"
                             colorTexto="#333"
                             textoBotonSub="Revisa todos tus mensajes aquí"
                             colorTextoSub="#666"
-                            bgColor="#F5F5F5" 
-                            iconoDerecha="chevron-forward" 
+                            bgColor="#F5F5F5"
+                            iconoDerecha="chevron-forward"
                             colorIconoDerecha="#8BC34A"
                             colorIconoIzquierda="#8BC34A"
-                            iconoIzquierda="chatbubbles" 
+                            iconoIzquierda="chatbubbles"
                             onPress={() => router.push('/(mas)/(mensajes)/mensajes')}
                         />
-                        <BotonCategorias 
+                        <BotonCategorias
                             textoBoton="MI PLAN"
                             colorTexto="#333"
                             textoBotonSub="Administra tu plan aquí"
                             colorTextoSub="#666"
-                            bgColor="#F5F5F5" 
-                            iconoDerecha="chevron-forward" 
+                            bgColor="#F5F5F5"
+                            iconoDerecha="chevron-forward"
                             colorIconoDerecha="#8BC34A"
                             colorIconoIzquierda="#8BC34A"
-                            iconoIzquierda="card" 
+                            iconoIzquierda="card"
                             onPress={() => router.push('/(mas)/mi-plan')}
                         />
-                        <BotonCategorias 
+                        <BotonCategorias
                             textoBoton="MIS POSTS"
                             colorTexto="#333"
                             textoBotonSub="Mira, edita y crea tus posts aquí"
                             colorTextoSub="#666"
-                            bgColor="#F5F5F5" 
-                            iconoDerecha="chevron-forward" 
+                            bgColor="#F5F5F5"
+                            iconoDerecha="chevron-forward"
                             colorIconoDerecha="#8BC34A"
                             colorIconoIzquierda="#8BC34A"
-                            iconoIzquierda="image" 
+                            iconoIzquierda="image"
                             onPress={() => router.push('/(mas)/post')}
                         />
-                        <BotonCategorias 
+                        <BotonCategorias
                             textoBoton="MI AGENDA"
                             colorTexto="#333"
                             textoBotonSub="Revisa tu agenda de trabajo aquí"
                             colorTextoSub="#666"
-                            bgColor="#F5F5F5" 
-                            iconoDerecha="chevron-forward" 
+                            bgColor="#F5F5F5"
+                            iconoDerecha="chevron-forward"
                             colorIconoDerecha="#8BC34A"
                             colorIconoIzquierda="#8BC34A"
-                            iconoIzquierda="calendar" 
+                            iconoIzquierda="calendar"
                             onPress={() => router.push('/(mas)/agenda')}
                         />
                     </View>
@@ -97,40 +108,40 @@ export default function Mas() {
                     {/* Sección de Información */}
                     <View style={styles.opcionesContainer}>
                         <Text style={styles.seccionTitulo}>Información</Text>
-                        <BotonCategorias 
+                        <BotonCategorias
                             textoBoton="QUIENES SOMOS"
                             colorTexto="#333"
                             textoBotonSub="Revisa nuestras políticas y condiciones de uso"
                             colorTextoSub="#666"
-                            bgColor="#F5F5F5" 
-                            iconoDerecha="chevron-forward" 
+                            bgColor="#F5F5F5"
+                            iconoDerecha="chevron-forward"
                             colorIconoDerecha="#8BC34A"
                             colorIconoIzquierda="#8BC34A"
-                            iconoIzquierda="briefcase" 
+                            iconoIzquierda="briefcase"
                             onPress={() => router.push('/(mas)/quienes-somos')}
                         />
-                        <BotonCategorias 
+                        <BotonCategorias
                             textoBoton="PREGUNTAS FRECUENTES"
                             colorTexto="#333"
                             textoBotonSub="Encuentra respuestas a tus dudas"
                             colorTextoSub="#666"
-                            bgColor="#F5F5F5" 
-                            iconoDerecha="chevron-forward" 
+                            bgColor="#F5F5F5"
+                            iconoDerecha="chevron-forward"
                             colorIconoDerecha="#8BC34A"
                             colorIconoIzquierda="#8BC34A"
-                            iconoIzquierda="help" 
+                            iconoIzquierda="help"
                             onPress={() => router.push('/(mas)/preguntas-frecuentes')}
                         />
-                        <BotonCategorias 
+                        <BotonCategorias
                             textoBoton="DENUNCIAS"
                             colorTexto="#333"
                             textoBotonSub="Reporta contenidos sospechosos o malintencionados"
                             colorTextoSub="#666"
-                            bgColor="#F5F5F5" 
-                            iconoDerecha="chevron-forward" 
+                            bgColor="#F5F5F5"
+                            iconoDerecha="chevron-forward"
                             colorIconoDerecha="#8BC34A"
                             colorIconoIzquierda="#8BC34A"
-                            iconoIzquierda="eye" 
+                            iconoIzquierda="eye"
                             onPress={() => router.push('/(mas)/denuncias')}
                         />
                     </View>
@@ -164,6 +175,12 @@ const styles = StyleSheet.create({
         }),
     },
     perfilContent: {
+        alignSelf: 'center',
+        width: '90%',
+        marginTop: 10,
+        borderRadius: 10,
+        padding: 15,
+        backgroundColor: '#f1f1f1',
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -215,4 +232,3 @@ const styles = StyleSheet.create({
         marginLeft: 5,
     },
 });
-  

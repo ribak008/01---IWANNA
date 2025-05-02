@@ -1,5 +1,8 @@
 import { Stack } from 'expo-router';
 import HeaderPrincipal from '../../../components/Header';
+import { TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 export default function MasLayout() {
   
@@ -15,8 +18,12 @@ export default function MasLayout() {
       />
 
       <Stack.Screen
-        name="(mi-plan)"
-        options={{ headerShown: false }}
+        name="planes"
+        options={{
+          header: (props) => (
+            <HeaderPrincipal titulo="PLANES" bgColor="#FFFFFF"/>
+          ),
+        }}
       />
        <Stack.Screen
         name="agenda"
@@ -27,16 +34,16 @@ export default function MasLayout() {
         }}
       />
        <Stack.Screen
-        name="mi-perfil"
-        options={{
-          header: (props) => (
-            <HeaderPrincipal titulo="MI PERFIL" bgColor="#FFFFFF"/>
-          ),
-        }}
+        name="(perfil_usuario)"
+        options={{ headerShown: false }}
       />
        <Stack.Screen
-        name="(mensajes)"
-        options={{ headerShown: false }}
+        name="mensajes"
+        options={{
+          header: (props) => (
+            <HeaderPrincipal titulo="MENSAJES" bgColor="#FFFFFF"/>
+          ),
+        }}
       />
       <Stack.Screen
         name="preguntas-frecuentes"

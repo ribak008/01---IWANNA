@@ -6,7 +6,7 @@ interface RatingStarsProps {
   showValue?: boolean;
 }
 
-export const RatingStars = ({ rating , showValue = false }: RatingStarsProps) => {
+export const RatingStars = ({ rating, showValue = false }: RatingStarsProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.stars}>
@@ -27,6 +27,7 @@ export const RatingStars = ({ rating , showValue = false }: RatingStarsProps) =>
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
