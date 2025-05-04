@@ -7,6 +7,7 @@ type Comentario = {
     id_post: number;
     id_comentario: number;
     id_usuario: number;
+    tipo_usuario: number;
     usuario: string;
     img_perfil: string;
     comentario: string;
@@ -23,6 +24,7 @@ interface ComentariosModalProps {
         id: number;
         id_usuario: number,
         nombre: string;
+        tipo_usuario: number;
         profesion: string;
         img_perfil: string;
         img_post: string;
