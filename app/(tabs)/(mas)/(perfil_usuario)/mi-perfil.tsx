@@ -5,143 +5,143 @@ import HeaderPrincipal from '../../../../components/Header';
 import { Ionicons } from '@expo/vector-icons';
 import { RatingStars } from '../../../../components/rating-stars';
 import { router } from 'expo-router';
+import { guardarStorage, recuperarStorage } from '../../../../services/asyncStorage';
+import { useEffect, useState } from 'react';
 
 const imgPerfil = require('../../../../assets/images/perfil.png');
 
 export default function MiPerfil() {
-  const datos = {
-      tipo:"1",
-      nombre: "Manuel Perez",
-      profesion: "Maestro parrillera",
-      edad: "20 años",
-      ubicacion: "Santiago, Chile",
-      descripcion: "Maestro parrillero con más de 5 años de experiencia en eventos y restaurantes. Especializado en carnes premium y técnicas de cocción tradicionales. Comprometido con la calidad y la satisfacción del cliente.",
-      correo: "manuel_perez@gmail.com",
-      telefono: "+56 9 3452 5252",
-      estadisticas: {
-        servicios: "150+",
-        satisfaccion: "98%",
-        experiencia: "5+"
-      },
-      calificacion: 4.5,
-      posts: [
-        { id: 1, url: 'https://picsum.photos/600/600?random=1' },
-        { id: 2, url: 'https://picsum.photos/600/600?random=2' },
-        { id: 3, url: 'https://picsum.photos/600/600?random=3' },
-        { id: 4, url: 'https://picsum.photos/600/600?random=4' },
-        { id: 5, url: 'https://picsum.photos/600/600?random=5' },
-        { id: 6, url: 'https://picsum.photos/600/600?random=6' },
-      ]
-    }
+  const posts = [
+    { id: 1, url: 'https://picsum.photos/600/600?random=1' },
+    { id: 2, url: 'https://picsum.photos/600/600?random=2' },
+    { id: 3, url: 'https://picsum.photos/600/600?random=3' },
+    { id: 4, url: 'https://picsum.photos/600/600?random=4' },
+    { id: 5, url: 'https://picsum.photos/600/600?random=5' },
+    { id: 6, url: 'https://picsum.photos/600/600?random=6' },
+  ]
+  const [usuario, setUsuario] = useState<any>(null);
   
+  useEffect(() => {
+          const cargarUsuario = async () => {
+              const datos = await recuperarStorage('usuario');
+              if (datos) {
+                  setUsuario(datos);
+              }
+          };
+          cargarUsuario();
+  }, []);
+
   return (
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.container}>
-          {/* Sección de Perfil */}
-          <View style={styles.profileHeader}>
+        {usuario && (
+            <View style={styles.container}>
+            {/* Sección de Perfil */}
+            <View style={styles.profileHeader}>
             <Image
-              source={imgPerfil}
-              style={styles.profileImage}
+                source={imgPerfil}
+                style={styles.profileImage}
             />
             <View style={styles.profileInfo}>
-              <Text style={styles.profileName}>{datos.nombre}</Text>
-              <Text style={styles.profileProfession}>{datos.profesion}</Text>
-              <View style={styles.ratingContainer}>
-                <RatingStars rating={datos.calificacion} showValue />
-              </View>
+                <Text style={styles.profileName}>{usuario.nombre}</Text>
+                <Text style={styles.profileProfession}>{usuario.profesion}</Text>
+                <View style={styles.ratingContainer}>
+                <RatingStars rating={usuario.calificacion} showValue />
+                </View>
             </View>
-          </View>
+            </View>
 
-          {/* Botón de Editar Perfil */}
-          <TouchableOpacity style={styles.editButton} onPress={() => router.push('/(perfil_usuario)/editar-perfil')}>
+            {/* Botón de Editar Perfil */}
+            <TouchableOpacity style={styles.editButton} onPress={() => router.push('/(perfil_usuario)/editar-perfil')}>
             <Ionicons name="create-outline" size={20} color="#fff" />
             <Text style={styles.editButtonText}>Editar Perfil</Text>
-          </TouchableOpacity>
+            </TouchableOpacity>
 
-          {/* Sección de Datos Personales */}
-          <View style={styles.section}>
+            {/* Sección de usuario Personales */}
+            <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Ionicons name="person-circle-outline" size={24} color="#8BC34A" />
-              <Text style={styles.sectionTitle}>Datos Personales</Text>
+                <Ionicons name="person-circle-outline" size={24} color="#8BC34A" />
+                <Text style={styles.sectionTitle}>usuario Personales</Text>
             </View>
             <View style={styles.infoItem}>
-              <Text style={styles.infoLabel}>Edad:</Text>
-              <Text style={styles.infoValue}>{datos.edad}</Text>
+                <Text style={styles.infoLabel}>Edad:</Text>
+                <Text style={styles.infoValue}>{usuario.edad}</Text>
             </View>
             <View style={styles.infoItem}>
-              <Text style={styles.infoLabel}>Ubicación:</Text>
-              <Text style={styles.infoValue}>{datos.ubicacion}</Text>
+                <Text style={styles.infoLabel}>Ubicación:</Text>
+                <Text style={styles.infoValue}>{usuario.ubicacion}</Text>
             </View>
-          </View>
+            </View>
 
-          {/* Sección de Descripción */}
-          <View style={styles.section}>
+            {/* Sección de Descripción */}
+            <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Ionicons name="document-text-outline" size={24} color="#8BC34A" />
-              <Text style={styles.sectionTitle}>Sobre Mí</Text>
+                <Ionicons name="document-text-outline" size={24} color="#8BC34A" />
+                <Text style={styles.sectionTitle}>Sobre Mí</Text>
             </View>
             <Text style={styles.description}>
-              {datos.descripcion}
+                {usuario.descripcion}
             </Text>
-          </View>
+            </View>
 
-          {/* Sección de Contacto */}
-          <View style={styles.section}>
+            {/* Sección de Contacto */}
+            <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Ionicons name="call-outline" size={24} color="#8BC34A" />
-              <Text style={styles.sectionTitle}>Contacto</Text>
+                <Ionicons name="call-outline" size={24} color="#8BC34A" />
+                <Text style={styles.sectionTitle}>Contacto</Text>
             </View>
             <View style={styles.infoItem}>
-              <Ionicons name="mail-outline" size={20} color="#666" />
-              <Text style={styles.infoValue}>{datos.correo}</Text>
+                <Ionicons name="mail-outline" size={20} color="#666" />
+                <Text style={styles.infoValue}>{usuario.correo}</Text>
             </View>
             <View style={styles.infoItem}>
-              <Ionicons name="call-outline" size={20} color="#666" />
-              <Text style={styles.infoValue}>{datos.telefono}</Text>
+                <Ionicons name="call-outline" size={20} color="#666" />
+                <Text style={styles.infoValue}>{usuario.telefono}</Text>
             </View>
-          </View>
+            </View>
 
-          {/* Sección de Estadísticas */}
-          <View style={styles.section}>
+            {/* Sección de Estadísticas */}
+            <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Ionicons name="stats-chart-outline" size={24} color="#8BC34A" />
-              <Text style={styles.sectionTitle}>Estadísticas</Text>
+                <Ionicons name="stats-chart-outline" size={24} color="#8BC34A" />
+                <Text style={styles.sectionTitle}>Estadísticas</Text>
             </View>
             <View style={styles.statsContainer}>
-              <View style={styles.statItem}>
-                <Text style={styles.statValue}>{datos.estadisticas.servicios}</Text>
+                <View style={styles.statItem}>
+                <Text style={styles.statValue}>{usuario.estadisticas.servicios}</Text>
                 <Text style={styles.statLabel}>Servicios</Text>
-              </View>
-              <View style={styles.statItem}>
-                <Text style={styles.statValue}>{datos.estadisticas.satisfaccion}</Text>
+                </View>
+                <View style={styles.statItem}>
+                <Text style={styles.statValue}>{usuario.estadisticas.satisfaccion}</Text>
                 <Text style={styles.statLabel}>Satisfacción</Text>
-              </View>
-              <View style={styles.statItem}>
-                <Text style={styles.statValue}>{datos.estadisticas.experiencia}</Text>
+                </View>
+                <View style={styles.statItem}>
+                <Text style={styles.statValue}>{usuario.estadisticas.experiencia}</Text>
                 <Text style={styles.statLabel}>Años Exp.</Text>
-              </View>
+                </View>
             </View>
-          </View>
+            </View>
 
-          {/* POSTS */}
-          <View style={styles.section}>
+            {/* POSTS */}
+            <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Ionicons name="document-text-outline" size={24} color="#8BC34A" />
-              <Text style={styles.sectionTitle}>Publicaciones</Text>
+                <Ionicons name="document-text-outline" size={24} color="#8BC34A" />
+                <Text style={styles.sectionTitle}>Publicaciones</Text>
             </View>
             <View style={styles.postsContainer}>
-            {datos.posts.map(post => (
-              <TouchableOpacity key={post.id} onPress={() => console.log('Post presionado:', post.id)} style={styles.post}>
+            {posts.map(post => (
+                <TouchableOpacity key={post.id} onPress={() => console.log('Post presionado:', post.id)} style={styles.post}>
                 <Image
-                  source={{ uri: post.url }}
-                  style={styles.postImage}
-                  resizeMode="cover"
+                    source={{ uri: post.url }}
+                    style={styles.postImage}
+                    resizeMode="cover"
                 />
-              </TouchableOpacity>
+                </TouchableOpacity>
             ))}
             </View>
-          </View>
+            </View>
         </View>
+        )}
+        
       </ScrollView>
   );
 }
