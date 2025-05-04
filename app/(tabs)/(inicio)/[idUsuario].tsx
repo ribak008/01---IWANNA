@@ -1,33 +1,44 @@
-import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { router, useLocalSearchParams } from "expo-router";
+import React from "react";
+import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet} from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import { RatingStars } from '../../../../components/rating-stars';
-import { router } from 'expo-router';
-import { recuperarStorage } from '../../../../services/asyncStorage';
-import { useEffect, useState } from 'react';
+import { RatingStars } from "../../../components/rating-stars";
 
-export default function MiPerfil() {
-  const posts = [
-    { id: 1, url: 'https://picsum.photos/600/600?random=1' },
-    { id: 2, url: 'https://picsum.photos/600/600?random=2' },
-    { id: 3, url: 'https://picsum.photos/600/600?random=3' },
-    { id: 4, url: 'https://picsum.photos/600/600?random=4' },
-    { id: 5, url: 'https://picsum.photos/600/600?random=5' },
-    { id: 6, url: 'https://picsum.photos/600/600?random=6' },
-  ]
-  const [usuario, setUsuario] = useState<any>(null);
-  
-  useEffect(() => {
-          const cargarUsuario = async () => {
-              const datos = await recuperarStorage('usuario');
-              if (datos) {
-                  setUsuario(datos);
-              }
-          };
-          cargarUsuario();
-  }, []);
 
-  return (
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+export default function PerfilUsuario() {
+    const { idUsuario } = useLocalSearchParams();
+
+    //Aqui deberiamos llamar a la api para recuperar los datos del usuario segun el ID
+    const posts = [
+        { id: 1, url: 'https://picsum.photos/600/600?random=1' },
+        { id: 2, url: 'https://picsum.photos/600/600?random=2' },
+        { id: 3, url: 'https://picsum.photos/600/600?random=3' },
+        { id: 4, url: 'https://picsum.photos/600/600?random=4' },
+        { id: 5, url: 'https://picsum.photos/600/600?random=5' },
+        { id: 6, url: 'https://picsum.photos/600/600?random=6' },
+    ]
+    
+    const usuario = {
+        id: idUsuario,
+        tipo:"1",
+        img_perfil: "https://randomuser.me/api/portraits/men/25.jpg",
+        nombre: "Manuel Perez",
+        profesion: "Maestro parrillera",
+        edad: "20 años",
+        ubicacion: "Santiago, Chile",
+        descripcion: "Maestro parrillero con más de 5 años de experiencia en eventos y restaurantes. Especializado en carnes premium y técnicas de cocción tradicionales. Comprometido con la calidad y la satisfacción del cliente.",
+        correo: "manuel_perez@gmail.com",
+        telefono: "+56 9 3452 5252",
+        estadisticas: {
+            servicios: "150+",
+            satisfaccion: "98%",
+            experiencia: "5+"
+        },
+        calificacion: 4.5,
+    }
+    
+    return (
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
         {usuario && (
             <View style={styles.container}>
             {/* Sección de Perfil */}
@@ -46,10 +57,22 @@ export default function MiPerfil() {
             </View>
 
             {/* Botón de Editar Perfil */}
-            <TouchableOpacity style={styles.editButton} onPress={() => router.push('/(perfil_usuario)/editar-perfil')}>
-            <Ionicons name="create-outline" size={20} color="#fff" />
-            <Text style={styles.editButtonText}>Editar Perfil</Text>
-            </TouchableOpacity>
+            <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: 10,
+                backgroundColor: '#f0f0f0',
+                borderRadius: 8,
+                marginVertical: 10
+            }}>
+                <Text style={{
+                    fontSize: 16,
+                    color: '#333',
+                    fontWeight: 'bold'
+                }}>
+                    ID: {usuario.id}
+                </Text>
+            </View>
 
             {/* Sección de usuario Personales */}
             <View style={styles.section}>
@@ -137,9 +160,9 @@ export default function MiPerfil() {
         </View>
         )}
         
-      </ScrollView>
-  );
-}
+        </ScrollView>
+    );
+};
 
 const styles = StyleSheet.create({
   scrollContainer: {

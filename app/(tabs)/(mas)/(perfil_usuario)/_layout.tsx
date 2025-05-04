@@ -21,6 +21,14 @@ export default function PerfilLayout() {
                 ),
                 }}
             />
+            <Stack.Screen
+                name="[idUsuario]"
+                options={{
+                header: (props) => (
+                    <HeaderPrincipal titulo="ALO" bgColor="#FFFFFF"/>
+                ),
+                }}
+            />
         </Stack>
     );
 }

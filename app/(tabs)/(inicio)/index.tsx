@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { FlatList, View, Text, Image, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import Post from '../../components/post';
+import Post from '../../../components/post';
 import { useEffect } from 'react';
-import HeaderPrincipal from '../../components/Header';
-import { guardarStorage, recuperarStorage } from '../../services/asyncStorage';
+import HeaderPrincipal from '../../../components/Header';
+import { guardarStorage, recuperarStorage } from '../../../services/asyncStorage';
 
 const Home = () => {
     const posts = [
         {
             id: 1,
+            id_usuario: 1,
             nombre: 'juanito_dev',
             profesion: 'Desarrollador Frontend',
             img_perfil: 'https://randomuser.me/api/portraits/men/32.jpg',
@@ -136,6 +137,7 @@ const Home = () => {
         },
         {
             id: 2,
+            id_usuario: 11,
             nombre: 'dev_marta',
             profesion: 'Desarrolladora Backend',
             img_perfil: 'https://randomuser.me/api/portraits/women/36.jpg',
@@ -219,6 +221,7 @@ const Home = () => {
     
     const datosUsuario = {
         tipo:"1",
+        img_perfil: "https://randomuser.me/api/portraits/men/26.jpg",
         nombre: "Manuel Perez",
         profesion: "Maestro parrillera",
         edad: "20 años",
@@ -258,16 +261,6 @@ const Home = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
-            <HeaderPrincipal titulo="INICIO" bgColor="#FFFFFF"/>
-            {usuario && (
-                <View style={{ padding: 20 }}>
-                    <Text>Nombre: {usuario.nombre}</Text>
-                    <Text>Profesión: {usuario.profesion}</Text>
-                    <Text>Edad: {usuario.edad}</Text>
-                    <Text>Ubicación: {usuario.ubicacion}</Text>
-                    <Text>Email: {usuario.correo}</Text>
-                </View>
-            )}
             {/* DATA */}
             <FlatList
                 data={posts}
