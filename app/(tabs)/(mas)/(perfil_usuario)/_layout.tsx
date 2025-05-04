@@ -20,6 +20,7 @@ export default function PerfilLayout() {
                     header: (props) => (
                         <HeaderPrincipal titulo="EDITAR PERFIL" bgColor="#FFFFFF"/>
                     ),
+                    
                     }}
                 />
             </Stack>

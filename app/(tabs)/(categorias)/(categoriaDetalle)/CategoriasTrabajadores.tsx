@@ -3,10 +3,12 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import BotonAvatar from '../../../../components/botonAvatar';
+import { useRouter } from 'expo-router';
 
 
 
 export default function DetalleCategoriaTrabajadores(){
+  const router = useRouter();
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -20,7 +22,7 @@ export default function DetalleCategoriaTrabajadores(){
             bgColor='#F5F5F5'
             iconoDerecha={"chevron-forward"}
             colorIconoDerecha='#00BCD4'
-            onPress={() => console.log('Trabajador 1')}
+            onPress={() => router.push('/(mas)/(perfil_usuario)/mi-perfil')}
             
             />
           </View>

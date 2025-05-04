@@ -5,7 +5,10 @@ export default function Chat() {
   const [messages, setMessages] = useState([
     { id: '1', text: 'Hola, ¿cómo estás?', fromUser: false },
     { id: '2', text: '¡Hola! Todo bien, ¿y tú?', fromUser: true },
-    { id: '3', text: 'como el orto', fromUser: false },
+    { id: '3', text: 'Muy bien, tengo un problema en mi casa me podrias ayudar?', fromUser: false },
+    { id: '4', text: '¡Claro! ¿Qué problema tienes?', fromUser: true },
+    { id: '5', text: 'Tengo un problema con mi computadora', fromUser: false },
+  
   ]);
 
   const [newMessage, setNewMessage] = useState('');
