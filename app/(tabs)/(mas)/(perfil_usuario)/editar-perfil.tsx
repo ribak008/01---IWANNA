@@ -5,7 +5,6 @@ import { router } from 'expo-router';
 
 export default function EditarPerfil() {
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.container}>
             {/* Sección de Foto de Perfil */}
@@ -87,13 +86,13 @@ export default function EditarPerfil() {
             </View>
             </View>
         </ScrollView>
-        </SafeAreaView>
-    );
-    }
+    )
+}
 
-    const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     scrollContainer: {
         paddingBottom: 20,
+        backgroundColor: "#fff"
     },
     container: {
         flex: 1,
@@ -158,7 +157,7 @@ export default function EditarPerfil() {
         color: '#333',
         backgroundColor: '#fff',
     },
-    
+
     textArea: {
         height: 100,
         textAlignVertical: 'top',

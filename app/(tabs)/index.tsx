@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
+import { FlatList, View, Text, Image, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 import Post from '../../components/post';
 import { FontAwesome } from '@expo/vector-icons';
 import { useEffect } from 'react';
@@ -223,6 +223,7 @@ const Home = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
+            <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
             <HeaderPrincipal titulo="INICIO" bgColor="#FFFFFF"/>
             {/* DATA */}
             <FlatList

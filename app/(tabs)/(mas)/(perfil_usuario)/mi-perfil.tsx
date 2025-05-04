@@ -35,7 +35,6 @@ export default function MiPerfil() {
     }
   
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
           {/* Sección de Perfil */}
@@ -144,14 +143,13 @@ export default function MiPerfil() {
           </View>
         </View>
       </ScrollView>
-      <StatusBar style="auto" />
-    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   scrollContainer: {
     paddingBottom: 20,
+    backgroundColor: "#fff"
   },
   container: {
     flex: 1,
