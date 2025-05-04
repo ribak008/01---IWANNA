@@ -1,7 +1,6 @@
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
-import { auth } from '../config/firebase';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function RootLayout() {
@@ -13,11 +12,11 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-    </Stack>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        </Stack>
     </SafeAreaView>
   );
 }

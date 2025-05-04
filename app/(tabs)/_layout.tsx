@@ -1,8 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { View, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import HeaderPrincipal from '../../components/Header';
 
 export default function TabLayout() {
     const router = useRouter();
@@ -27,12 +25,9 @@ export default function TabLayout() {
             }}
         >
             <Tabs.Screen
-                name="index"
+                name="(inicio)"
                 options={{
                     title: 'Inicio',
-                    header: (props) => (
-                        <HeaderPrincipal titulo="INICIO" bgColor="#FFFFFF"/>
-                    ),
                     tabBarIcon: ({ color, size }) => <Ionicons size={24} name="home" color={color} />,
                 }}
             />

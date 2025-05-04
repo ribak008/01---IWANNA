@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Modal, FlatList, View, Text, Image, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 type Comentario = {
     id_post: number;
     id_comentario: number;
+    id_usuario: number;
+    tipo_usuario: number;
     usuario: string;
     img_perfil: string;
     comentario: string;
@@ -19,7 +22,9 @@ interface ComentariosModalProps {
     toggleModal: () => void;
     datos: {
         id: number;
+        id_usuario: number,
         nombre: string;
+        tipo_usuario: number;
         profesion: string;
         img_perfil: string;
         img_post: string;
@@ -74,9 +79,13 @@ const ComentariosModal: React.FC<ComentariosModalProps> = ({ modalVisible, toggl
 
     const renderComentario = ({ item }: { item: Comentario }) => (
         <View style={styles.comentario}>
-            <Image source={{ uri: item.img_perfil }} style={styles.foto_perfil} />
+            <TouchableOpacity onPress={() => router.push(`(tabs)/(inicio)/${item.id_usuario}`)}>
+                <Image source={{ uri: item.img_perfil }} style={styles.foto_perfil} />
+            </TouchableOpacity>
             <View style={styles.contenido_comentario}>
-                <Text style={styles.nombre_usuario}>{item.usuario}</Text>
+                <TouchableOpacity onPress={() => router.push(`(tabs)/(inicio)/${item.id_usuario}`)}>
+                    <Text style={styles.nombre_usuario}>{item.usuario}</Text>
+                </TouchableOpacity>
                 <Text style={styles.texto_comentario}>{item.comentario}</Text>
                 <View style={styles.acciones_comentario}>
                     <TouchableOpacity 
@@ -112,9 +121,13 @@ const ComentariosModal: React.FC<ComentariosModalProps> = ({ modalVisible, toggl
                     <View style={styles.respuestasContainer}>
                         {item.respuestas.map((resp, index) => (
                             <View key={index} style={styles.respuesta}>
-                                <Image source={{ uri: resp.img_perfil }} style={styles.foto_perfil_pequena} />
+                                <TouchableOpacity onPress={() => router.push(`(tabs)/(inicio)/${item.id_usuario}`)}>
+                                    <Image source={{ uri: resp.img_perfil }} style={styles.foto_perfil_pequena} />
+                                </TouchableOpacity>
                                 <View style={styles.contenido_comentario}>
-                                    <Text style={styles.nombre_usuario}>{resp.usuario}</Text>
+                                    <TouchableOpacity onPress={() => router.push(`(tabs)/(inicio)/${item.id_usuario}`)}>
+                                        <Text style={styles.nombre_usuario}>{resp.usuario}</Text>
+                                    </TouchableOpacity>
                                     <Text style={styles.texto_comentario}>{resp.comentario}</Text>
                                     <View style={styles.acciones_comentario}>
                                         <TouchableOpacity 

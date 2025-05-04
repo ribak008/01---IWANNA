@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ActivityIndicator, TouchableOpacity, Modal, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ComentariosModal from './comentarios';
+import { router, useFocusEffect } from 'expo-router';
 
 type Comentario = {
     id_post: number;
     id_comentario: number;
+    id_usuario: number;
+    tipo_usuario:number;
     usuario: string;
     img_perfil: string;
     comentario: string;
@@ -18,7 +21,9 @@ type Comentario = {
 type Props = {
     datos: {
         id: number,
+        id_usuario: number,
         nombre: string,
+        tipo_usuario:number,
         profesion: string,
         img_perfil: string,
         img_post: string,
@@ -30,8 +35,9 @@ type Props = {
 
 };
 
-const Post: React.FC<Props> = ({ datos}) => {
-    //CARGA DE IAMGEN
+const Post: React.FC<Props> = ({datos}) => {
+    
+    //CARGA DE IMAGEN
     const [cargando, setCargando] = useState(true);
     const [liked, setLiked] = useState(false);
     const manejarCargaImagen = () => {
@@ -47,13 +53,23 @@ const Post: React.FC<Props> = ({ datos}) => {
     const toggleLike = () => {
         setLiked(!liked);
     };
+    
+    useFocusEffect(
+        useCallback(() => {
+          setModalVisible(false); // Al volver a Home, asegúrate de que el modal esté cerrado
+        }, [])
+    );
 
     return (
-        <TouchableOpacity style={styles.container} onPress={toggleModal}>
-            <Image source={{ uri: datos.img_perfil }} style={styles.foto_usuario} />
+        <View style={styles.container}>
+            <TouchableOpacity style={styles.header} onPress={() => router.push(`/(tabs)/(inicio)/${datos.id_usuario}`)}>
+                    <Image source={{ uri: datos.img_perfil }} style={styles.foto_usuario} />
+                    <View>
+                        <Text style={styles.nombre}>{datos.nombre}</Text>
+                        <Text>{datos.profesion}</Text>
+                    </View>
+            </TouchableOpacity>
             <View style={styles.content}>
-                <Text style={styles.nombre}>{datos.nombre}</Text>
-                <Text>{datos.profesion}</Text>
                 <Image
                     source={{ uri: datos.img_post }}
                     style={[styles.imagen_post, cargando && { opacity: 0, height:0}]} 
@@ -85,7 +101,7 @@ const Post: React.FC<Props> = ({ datos}) => {
                 toggleModal={toggleModal}
                 datos={datos}
             />
-        </TouchableOpacity>
+        </View>
     );
 }
 
@@ -101,7 +117,6 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 20,
-        marginLeft: 15,
         marginRight: 10,
     },
     nombre: {
@@ -113,9 +128,14 @@ const styles = StyleSheet.create({
         height: 300,
         marginVertical: 10,
     },
+    header: {
+        flexDirection: 'row',
+        paddingHorizontal: 15,
+        paddingTop: 10,
+    },
     content: {
         paddingHorizontal: 15,
-        paddingVertical: 10,
+        paddingBottom: 10,
     },
     descripcion: {
         marginBottom: 4,
