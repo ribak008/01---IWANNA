@@ -199,7 +199,7 @@ const Home = () => {
     ]
     
     const datosUsuario = {
-        tipo:"1",
+        tipo_usuario:1,
         img_perfil: "https://randomuser.me/api/portraits/men/26.jpg",
         nombre: "Manuel Perez",
         profesion: "Maestro parrillera",
