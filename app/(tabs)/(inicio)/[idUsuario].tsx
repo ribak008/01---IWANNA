@@ -41,22 +41,25 @@ export default function PerfilUsuario() {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
         {usuario && (
             <View style={styles.container}>
-            {/* Sección de Perfil */}
-            <View style={styles.profileHeader}>
-            <Image
-                source={{ uri: usuario.img_perfil }}
-                style={styles.profileImage}
-            />
-            <View style={styles.profileInfo}>
-                <Text style={styles.profileName}>{usuario.nombre}</Text>
-                <Text style={styles.profileProfession}>{usuario.profesion}</Text>
-                <View style={styles.ratingContainer}>
-                <RatingStars rating={usuario.calificacion} showValue />
-                </View>
+              {/* Sección de Perfil */}
+              <View style={styles.profileHeader}>
+              <Image
+                  source={{ uri: usuario.img_perfil }}
+                  style={styles.profileImage}
+              />
+              <View style={styles.profileInfo}>
+                  <Text style={styles.profileName}>{usuario.nombre}</Text>
+                  <Text style={styles.profileProfession}>{usuario.profesion}</Text>
+                  <View style={styles.ratingContainer}>
+                    <RatingStars rating={usuario.calificacion} showValue />
+                  </View>
+              </View>
             </View>
-            </View>
-
-            {/* Botón de Editar Perfil */}
+            {/* Boton de Cotizar */}
+            <TouchableOpacity style={styles.cotizacionButton}>
+              <Text style={styles.cotizacionButtonText}>Cotizar</Text>
+            </TouchableOpacity>
+            {/* SOLO MUESTRA LA ID DEL USUARIO */}
             <View style={{
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -290,7 +293,7 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
-  editButton: {
+  cotizacionButton: {
     backgroundColor: '#8BC34A',
     flexDirection: 'row',
     alignItems: 'center',
@@ -298,12 +301,11 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginBottom: 20,
-
   },
-  editButtonText: {
+  cotizacionButtonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 10,
-  },
+  }
 });

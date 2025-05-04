@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ActivityIndicator, TouchableOpacity, Modal, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ComentariosModal from './comentarios';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 
 type Comentario = {
     id_post: number;
     id_comentario: number;
+    id_usuario: number;
     usuario: string;
     img_perfil: string;
     comentario: string;
@@ -33,6 +34,7 @@ type Props = {
 };
 
 const Post: React.FC<Props> = ({datos}) => {
+    
     //CARGA DE IMAGEN
     const [cargando, setCargando] = useState(true);
     const [liked, setLiked] = useState(false);
@@ -49,6 +51,12 @@ const Post: React.FC<Props> = ({datos}) => {
     const toggleLike = () => {
         setLiked(!liked);
     };
+    
+    useFocusEffect(
+        useCallback(() => {
+          setModalVisible(false); // Al volver a Home, asegúrate de que el modal esté cerrado
+        }, [])
+    );
 
     return (
         <View style={styles.container}>
