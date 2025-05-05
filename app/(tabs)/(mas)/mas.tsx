@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Text, Image, SafeAreaView, TouchableOpacity, Platform } from 'react-native';
+import { StyleSheet, View, ScrollView, Text, Image, SafeAreaView, TouchableOpacity, Platform, Button } from 'react-native';
 import BotonCategorias from '../../../components/BotonCategorias';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -47,11 +47,27 @@ export default function Mas() {
                                 </View>
                             </View>
                         </View>
+                        {/* Sección boton autenticación */}
+                        <View style={styles.authSection}>
+                            <View>
+                                <Text style={{ color: 'red' }}>No estas autentificado</Text>
+                                <Text>Inicia el proceso y accede a los beneficios</Text>
+                            </View>
+                            <View style={styles.authButton}>
+                                <Button 
+                                title="IR"
+                                color="#8BC34A"
+                                onPress={() => router.push('/(mas)/(auth2)/auth2-info')}
+                                />
+                            </View>
+                        </View>
                     </View>
 
+                    
+                    
+                    
+
                     {/* Sección de Opciones */}
-
-
 
                     <View style={styles.opcionesContainer}>
                         <Text style={styles.seccionTitulo}>Mi Cuenta</Text>
@@ -230,5 +246,17 @@ const styles = StyleSheet.create({
         color: '#333',
         marginBottom: 15,
         marginLeft: 5,
+    },
+    authSection: {
+        justifyContent: 'center',
+        gap: 20,
+        flexDirection: 'row',
+        marginVertical: 20,      
+    },
+    authButton: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
     },
 });

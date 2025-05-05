@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~4.0.1",
+    "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/checkbox": "^0.5.17",
     "@react-native-firebase/app": "^21.14.0",
     "@react-native-firebase/auth": "^21.14.0",
@@ -31,6 +32,7 @@
     "react": "18.3.1",
     "react-native": "0.76.9",
     "react-native-gesture-handler": "~2.20.2",
+    "react-native-image-picker": "^8.2.1",
     "react-native-pager-view": "6.5.1",
     "react-native-paper": "^5.13.2",
     "react-native-picker": "^4.3.7",
@@ -43,7 +45,7 @@
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.19.13",
     "react-star-ratings": "^2.3.0",
-    "@react-native-async-storage/async-storage": "1.23.1"
+    "expo-image-picker": "~16.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -17,12 +17,8 @@ export default function MasLayout() {
       />
 
       <Stack.Screen
-        name="planes"
-        options={{
-          header: (props) => (
-            <HeaderPrincipal titulo="PLANES" bgColor="#FFFFFF"/>
-          ),
-        }}
+        name="(mi-plan)"
+        options={{ headerShown: false }}
       />
        <Stack.Screen
         name="agenda"
@@ -34,6 +30,10 @@ export default function MasLayout() {
       />
        <Stack.Screen
         name="(perfil_usuario)"
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="(auth2)"
         options={{ headerShown: false }}
       />
        <Stack.Screen
