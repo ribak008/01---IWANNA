@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { auth } from '../../config/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
+// LOGIN 
 const Login = () => {
     const [usuario, setUsuario] = useState('');
     const [contrasena, setContrasena] = useState('');
@@ -83,7 +84,7 @@ const Login = () => {
     };
 
     const handleGoToRegister = () => {
-        router.push('Register');
+        router.push('Register_one');
     };
 
     const handleGoToRecover = () => {
@@ -190,6 +191,13 @@ const Login = () => {
                         <Text style={styles.registerLink}>Regístrate</Text>
                     </TouchableOpacity>
                 </View>
+
+                <TouchableOpacity 
+                    style={styles.skipButton}
+                    onPress={() => router.push('(tabs)/(inicio)')}
+                >
+                    <Text style={styles.skipButtonText}>Continuar sin registrarme</Text>
+                </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     );
@@ -294,6 +302,16 @@ const styles = StyleSheet.create({
     registerLink: {
         color: '#8BC34A',
         fontWeight: 'bold',
+    },
+    skipButton: {
+        marginTop: 20,
+        padding: 10,
+    },
+    skipButtonText: {
+        color: '#666',
+        fontSize: 14,
+        textAlign: 'center',
+        textDecorationLine: 'underline',
     },
 });
 
