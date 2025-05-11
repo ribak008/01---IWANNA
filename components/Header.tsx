@@ -21,7 +21,6 @@ export default function Header({
 
     return (
         <View style={styles.container}>
-            <StatusBar barStyle="light-content" />
             <LinearGradient
                 colors={['#8BC34A', '#4CAF50']}
                 start={{ x: 0, y: 0 }}
