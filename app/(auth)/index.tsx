@@ -5,10 +5,14 @@ import { useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { auth } from '../../config/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { guardarStorage} from '../../services/asyncStorage';
+import { Usuario } from '../../types/usuario'
+
+import { API_URL } from '@env';
 
 // LOGIN 
 const Login = () => {
-    const [usuario, setUsuario] = useState('');
+    const [email, setUsuario] = useState('');
     const [contrasena, setContrasena] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [isValidEmail, setIsValidEmail] = useState(true);
@@ -22,7 +26,7 @@ const Login = () => {
     useEffect(() => {
         console.log('Pantalla de Login renderizada');
     }, []);
-
+ 
     const validateEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         setIsValidEmail(emailRegex.test(email));
@@ -52,7 +56,7 @@ const Login = () => {
     };
 
     const handleLogin = async () => {
-        if (!usuario || !contrasena) {
+        if (!email || !contrasena) {
             shake();
             Alert.alert('Error', 'Por favor, completa todos los campos');
             return;
@@ -66,7 +70,15 @@ const Login = () => {
 
         setIsLoading(true);
         try {
-            await signInWithEmailAndPassword(auth, usuario, contrasena);
+            //INGRESA AL HOME
+            await signInWithEmailAndPassword(auth, email, contrasena);
+            const usuarioDatos = await obtenerUsuario(email);
+            if(!usuarioDatos){
+                shake();
+                Alert.alert('Error', 'No se encontro datos en la base de datos');
+                return;
+            }
+            guardarStorage("usuario",usuarioDatos);
             router.push('(tabs)');
         } catch (error: any) {
             let errorMessage = 'Error al iniciar sesión';
@@ -91,6 +103,24 @@ const Login = () => {
         router.push('Recover');
     };
 
+    const obtenerUsuario = async (email: string): Promise<Usuario | null> => {
+        const urlApi = `${API_URL}/usuarios/${email}`;
+
+        try {
+            const res = await fetch(urlApi);
+
+            if (!res.ok) {
+                throw new Error(`Error al consultar la API. Status: ${res.status}`);
+            }
+
+            const data: Usuario = await res.json();
+            return data;
+            } catch (error) {
+                console.error('Error al obtener usuario:', error);
+                return null;
+            }
+    };
+    
     return (
         <KeyboardAvoidingView 
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -108,20 +138,20 @@ const Login = () => {
                 <Animated.View 
                     style={[
                         styles.inputContainer,
-                        !isValidEmail && usuario.length > 0 && styles.inputError,
+                        !isValidEmail && email.length > 0 && styles.inputError,
                         { transform: [{ translateX: shakeAnim }] }
                     ]}
                 >
                     <Ionicons 
                         name="mail-outline" 
                         size={20} 
-                        color={!isValidEmail && usuario.length > 0 ? '#FF3B30' : '#666'} 
+                        color={!isValidEmail && email.length > 0 ? '#FF3B30' : '#666'} 
                         style={styles.inputIcon} 
                     />
                     <TextInput
                         style={styles.input}
                         placeholder="Correo electrónico"
-                        value={usuario}
+                        value={email}
                         onChangeText={(text) => {
                             setUsuario(text);
                             validateEmail(text);
@@ -132,7 +162,7 @@ const Login = () => {
                         accessibilityHint="Ingresa tu correo electrónico"
                     />
                 </Animated.View>
-                {!isValidEmail && usuario.length > 0 && (
+                {!isValidEmail && email.length > 0 && (
                     <Text style={styles.errorText}>Por favor, ingresa un correo válido</Text>
                 )}
 
