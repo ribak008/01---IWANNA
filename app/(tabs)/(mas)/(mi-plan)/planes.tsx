@@ -1,144 +1,165 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { Checkbox } from 'react-native-paper'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { ScrollView } from 'react-native'
-import { useRouter } from 'expo-router';
-
-
-const planDetails = [
-  {
-    id: 'free',
-    name: 'FREE',
-    advantages: ['Acceso limitado a funciones', 'Anuncios en la app'],
-    price: 'Gratuito'
-  },
-  {
-    id: 'plata',
-    name: 'PLATA',
-    advantages: [
-      'Acceso a contenido premium',
-      'Sin anuncios',
-      'Soporte prioritario'
-    ],
-    price: '$9.990/mes'
-  },
-  {
-    id: 'oro',
-    name: 'ORO',
-    advantages: [
-      'Todas las funciones premium',
-      'Sin anuncios',
-      'Soporte 24/7',
-      'Acceso anticipado a nuevas funciones'
-    ],
-    price: '$19.990/mes'
-  }
-]
+import React, { useState, useEffect } from 'react';
+import { View, TouchableOpacity, StyleSheet, ActivityIndicator, Text } from 'react-native';
+import { WebView } from 'react-native-webview';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../../navigation/types';
+import { fetchProducts, iniciarCheckout, Product } from '../../../../services/paymentService';
 
 export default function Planes() {
-    const router = useRouter();
-  const [selectedPlan, setSelectedPlan] = useState(null)
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  const selectPlan = (planId: any) => {
-    setSelectedPlan(planId)
+  const handleCheckout = async (priceId: string) => {
+    try {
+      const url = await iniciarCheckout(priceId, setLoading);
+      setCheckoutUrl(url);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Error al iniciar el pago');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+  const handleWebViewNavigation = (event: any) => {
+    const { url } = event.nativeEvent;
+    // Verifica si es una URL de éxito o cancelación
+    if (url.includes('success') || url.includes('cancel')) {
+      setCheckoutUrl(null);
+    }
+  };
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        const products = await fetchProducts();
+        setProducts(products);
+      } catch (error) {
+        alert(error instanceof Error ? error.message : 'Error al cargar los productos');
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
+
+  if (checkoutUrl) {
+    return (
+      <WebView
+        source={{ uri: checkoutUrl }}
+        onNavigationStateChange={handleWebViewNavigation}
+        
+      />
+    );
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.title}>Revisa nuestros planes</Text>
-        {planDetails.map(plan => (
-            <TouchableOpacity key={plan.id} onPress={() => selectPlan(plan.id)}>
-            <View style={[styles.card, selectedPlan === plan.id && styles.cardSelected]}>
-                <View style={styles.cardHeader}>
-                <Text style={styles.planName}>{plan.name}</Text>
-                <Checkbox
-                    status={selectedPlan === plan.id ? 'checked' : 'unchecked'}
-                    onPress={() => selectPlan(plan.id)}
-                />
+    <View style={styles.container}>
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <>
+          {products.length > 0 ? (
+            products.map((product, index) => (
+              <View key={index} style={styles.productCard}>
+                <View style={styles.productHeader}>
+                  <Text style={styles.productName}>{product.name}</Text>
+                  <Text style={styles.productPrice}>{product.price}</Text>
                 </View>
-                <Text style={styles.price}>{plan.price}</Text>
-                <View style={styles.advantages}>
-                {plan.advantages.map((advantage, index) => (
-                    <Text key={index} style={styles.advantage}>
-                    • {advantage}
-                    </Text>
-                ))}
+                <View style={styles.productDetails}>
+                  <Text style={styles.productDescription}>{product.description}</Text>
+                  <Text style={styles.productInfo}>
+                    Tipo: {product.type}
+                  </Text>
                 </View>
-            </View>
-            </TouchableOpacity>
-        ))}
-        <TouchableOpacity style={styles.button} 
-            onPress={() => router.push('/(mas)/(mi-plan)/mi-plan')}>
-            <Text style={styles.buttonText}>Seleccionar plan</Text>
-        </TouchableOpacity>
-        </ScrollView>
-    </SafeAreaView>
-  )
+                <TouchableOpacity 
+                  style={styles.selectButton} 
+                  onPress={() => handleCheckout(product.priceId)}
+                  disabled={loading}
+                >
+                  <Text style={styles.buttonText}>
+                    {loading ? "Procesando..." : "Seleccionar plan"}
+                  </Text>
+                </TouchableOpacity>
+
+              </View>
+            ))
+          ) : (
+            <Text style={styles.noProducts}>No hay planes disponibles</Text>
+          )}
+        </>
+      )}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    scrollContainer: {
-        padding: 20,
-        paddingBottom: 30,
+
+
+    container: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#f5f5f5',
     },
-  
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center'
-  },
-  card: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 15,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 }
-  },
-  cardSelected: {
-    borderWidth: 2,
-    borderColor: '#007AFF'
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10
-  },
-  planName: {
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-  price: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 10
-  },
-  advantages: {
-    marginLeft: 10
-  },
-  advantage: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 3
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    padding: 10,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 20
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold'
-  }
-})
+    productCard: {
+      backgroundColor: '#fff',
+      borderRadius: 8,
+      padding: 20,
+      marginBottom: 20,
+      elevation: 3,
+      shadowColor: '#000',
+      shadowOpacity: 0.1,
+      shadowRadius: 5,
+      shadowOffset: { width: 0, height: 2 },
+    },
+    productHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 15,
+    },
+    productName: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#333',
+    },
+    productPrice: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: '#007AFF',
+    },
+    productDetails: {
+      marginBottom: 20,
+    },
+    productDescription: {
+      fontSize: 16,
+      color: '#666',
+      marginBottom: 10,
+    },
+    productInfo: {
+      fontSize: 14,
+      color: '#666',
+      marginBottom: 5,
+    },
+    selectButton: {
+      backgroundColor: '#007AFF',
+      padding: 15,
+      borderRadius: 5,
+      alignItems: 'center',
+    },
+    buttonText: {
+      color: 'white',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    noProducts: {
+      fontSize: 16,
+      color: '#666',
+      textAlign: 'center',
+    },
+  });
