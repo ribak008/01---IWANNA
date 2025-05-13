@@ -11,7 +11,7 @@ export default function MasLayout() {
         name="mas"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="MÁS" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="MÁS"/>
           ),
         }}
       />
@@ -24,7 +24,7 @@ export default function MasLayout() {
         name="agenda"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="AGENDA" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="AGENDA"/>
           ),
         }}
       />
@@ -41,10 +41,14 @@ export default function MasLayout() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="(cotizacion)"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="preguntas-frecuentes"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="PREGUNTAS FRECUENTES" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="PREGUNTAS FRECUENTES"/>
           ),
         }}
       />
@@ -52,7 +56,7 @@ export default function MasLayout() {
         name="denuncias"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="DENUNCIAS" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="DENUNCIAS"/>
           ),
         }}
       />
@@ -60,7 +64,7 @@ export default function MasLayout() {
         name="post"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="POSTS" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="POSTS"/>
           ),
         }}
       />
@@ -68,7 +72,7 @@ export default function MasLayout() {
         name="quienes-somos"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="QUIENES SOMOS" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="QUIENES SOMOS"/>
           ),
         }}
       />

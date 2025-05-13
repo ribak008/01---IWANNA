@@ -108,6 +108,18 @@ export default function Mas() {
                             onPress={() => router.push('/(mas)/post')}
                         />
                         <BotonCategorias
+                            textoBoton="COTIZACIONES"
+                            colorTexto="#333"
+                            textoBotonSub="Revisa tus cotizaciones aquí"
+                            colorTextoSub="#666"
+                            bgColor="#F5F5F5"
+                            iconoDerecha="chevron-forward"
+                            colorIconoDerecha="#8BC34A"
+                            colorIconoIzquierda="#8BC34A"
+                            iconoIzquierda="cart"
+                            onPress={() => router.push('/(mas)/(cotizacion)/cotizacion')}
+                        />
+                        <BotonCategorias
                             textoBoton="MI AGENDA"
                             colorTexto="#333"
                             textoBotonSub="Revisa tu agenda de trabajo aquí"

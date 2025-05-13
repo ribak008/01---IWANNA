@@ -13,9 +13,9 @@ export default function Planes() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  const handleCheckout = async (priceId: string) => {
+  const handleCheckout = async (priceId: string, userId: string) => {
     try {
-      const url = await iniciarCheckout(priceId, setLoading);
+      const url = await iniciarCheckout(priceId, userId, setLoading);
       setCheckoutUrl(url);
     } catch (error) {
       alert(error instanceof Error ? error.message : 'Error al iniciar el pago');
@@ -80,7 +80,7 @@ export default function Planes() {
                 </View>
                 <TouchableOpacity 
                   style={styles.selectButton} 
-                  onPress={() => handleCheckout(product.priceId)}
+                  onPress={() => handleCheckout(product.priceId, User.id)}
                   disabled={loading}
                 >
                   <Text style={styles.buttonText}>

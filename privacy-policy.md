@@ -29,8 +29,7 @@ Solo se transmite periódicamente **información agregada y anonimizada** a serv
 
 Ten en cuenta que la Aplicación utiliza servicios de terceros que tienen sus propias políticas de privacidad sobre el manejo de datos. A continuación, los enlaces a las políticas de privacidad de estos servicios:
 
-*   [Google Play Services](https://www.google.com/policies/privacy/)
-*   [RevenueCat](https://www.revenuecat.com/privacy)
+*   [stripe](https://stripe.com/privacy)
 
 El Proveedor del Servicio podrá divulgar información proporcionada por el usuario o recopilada automáticamente:
 

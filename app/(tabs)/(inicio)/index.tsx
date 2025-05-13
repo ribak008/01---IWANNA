@@ -197,45 +197,19 @@ const Home = () => {
             ]
         }
     ]
-    
-    const datosUsuario = {
-        tipo_usuario:1,
-        img_perfil: "https://randomuser.me/api/portraits/men/26.jpg",
-        nombre: "Manuel Perez",
-        profesion: "Maestro parrillera",
-        edad: "20 años",
-        ubicacion: "Santiago, Chile",
-        descripcion: "Maestro parrillero con más de 5 años de experiencia en eventos y restaurantes. Especializado en carnes premium y técnicas de cocción tradicionales. Comprometido con la calidad y la satisfacción del cliente.",
-        correo: "manuel_perez@gmail.com",
-        telefono: "+56 9 3452 5252",
-        estadisticas: {
-            servicios: "150+",
-            satisfaccion: "98%",
-            experiencia: "5+"
-        },
-        calificacion: 4.5,
-    }
 
     const [usuario, setUsuario] = useState<any>(null);
 
     useEffect(() => {
         const cargarUsuario = async () => {
             const datos = await recuperarStorage('usuario');
+            console.log(datos);
             if (datos) {
                 setUsuario(datos);
             }
         };
         cargarUsuario();
     }, []);
-
-    useEffect(() => {
-        const guardarUsuario = async () => {
-            await guardarStorage('usuario', datosUsuario);
-            setUsuario(datosUsuario);
-        };
-        guardarUsuario();
-    }, []);
-
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

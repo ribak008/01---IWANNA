@@ -20,9 +20,14 @@ export default function MiPerfil() {
     
     useEffect(() => {
         const cargarUsuario = async () => {
-            const datos = await recuperarStorage('usuario');
-            if (datos) {
-                setUsuario(datos);
+            try {
+                const datos = await recuperarStorage('usuario');
+                console.log("datos: ", datos);
+                if (datos) {
+                    setUsuario(datos); // Solo actualizamos si los datos están disponibles
+                }
+            } catch (error) {
+                console.error('Error al cargar usuario:', error);
             }
         };
         cargarUsuario();
@@ -47,7 +52,7 @@ export default function MiPerfil() {
                                 <Text style={styles.profileProfession}>Cliente</Text>
                             )}
                             <View style={styles.ratingContainer}>
-                            <RatingStars rating={usuario.calificacion} showValue />
+                            {/* <RatingStars rating={usuario.calificacion} showValue /> */}
                             </View>
                         </View>
                     </View>

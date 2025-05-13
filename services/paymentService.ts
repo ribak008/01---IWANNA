@@ -20,12 +20,12 @@ export interface CheckoutSession {
   url: string;
 }
 
-export const BASE_URL = 'http://192.168.1.103:4242'; //URL del backend con la ip local
+
 
 //traer los productos (suscripciones)
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/products`, {
+    const response = await fetch(`${process.env.BASE_URL}/products`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
 //traer los precios
 export const fetchPrices = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/prices`, {
+    const response = await fetch(`${process.env.BASE_URL}/prices`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -91,18 +91,18 @@ export const fetchPrices = async (): Promise<Product[]> => {
 };
 
 //crear la sesión de pago
-export const iniciarCheckout = async (priceId: string, setLoading: (loading: boolean) => void) => {
+export const iniciarCheckout = async (priceId: string, userId: string, setLoading: (loading: boolean) => void) => {
   setLoading(true);
   try {
-    console.log('Iniciando checkout con priceId:', priceId);
+    console.log('Iniciando checkout con priceId:', priceId , 'userId:', userId);
 
-    const response = await fetch(`${BASE_URL}/create-checkout-session`, {
+    const response = await fetch(`${process.env.BASE_URL}/create-checkout-session`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({ priceId }),
+      body: JSON.stringify({ priceId, userId }),
     });
 
     // Read the response only once
@@ -127,3 +127,8 @@ export const iniciarCheckout = async (priceId: string, setLoading: (loading: boo
     setLoading(false);
   }
 };
+
+
+
+
+
