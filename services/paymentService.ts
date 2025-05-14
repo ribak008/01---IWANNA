@@ -25,7 +25,7 @@ export interface CheckoutSession {
 //traer los productos (suscripciones)
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/products`, {
+    const response = await fetch(`${process.env.BASE_URL}/payment/products`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
 //traer los precios
 export const fetchPrices = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/prices`, {
+    const response = await fetch(`${process.env.BASE_URL}payment/prices`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ export const iniciarCheckout = async (priceId: string, userId: string, setLoadin
   try {
     console.log('Iniciando checkout con priceId:', priceId , 'userId:', userId);
 
-    const response = await fetch(`${process.env.BASE_URL}/create-checkout-session`, {
+    const response = await fetch(`${process.env.BASE_URL}payment/create-checkout-session`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',

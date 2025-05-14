@@ -24,7 +24,7 @@ export default function MiPerfil() {
                 const datos = await recuperarStorage('usuario');
                 console.log("datos: ", datos);
                 if (datos) {
-                    setUsuario(datos); // Solo actualizamos si los datos están disponibles
+                    setUsuario(datos);
                 }
             } catch (error) {
                 console.error('Error al cargar usuario:', error);
@@ -40,27 +40,27 @@ export default function MiPerfil() {
                     {/* Sección de Perfil */}
                     <View style={styles.profileHeader}>
                         <Image
-                            source={{ uri: usuario.img_perfil }}
+                            source={usuario.foto ? { uri: usuario.foto } : imgPerfil}
                             style={styles.profileImage}
                         />
                         <View style={styles.profileInfo}>
                             <Text style={styles.profileName}>{usuario.nombre}</Text>
-                            {usuario.tipo_usuario === 1 ? (
+                            {usuario.tipo === 1 ? (
                                 <Text style={styles.profileProfession}>{usuario.profesion}</Text>
                             ):
                             (
                                 <Text style={styles.profileProfession}>Cliente</Text>
                             )}
                             <View style={styles.ratingContainer}>
-                            {/* <RatingStars rating={usuario.calificacion} showValue /> */}
+                            {/* {<RatingStars rating={usuario.calificacion} showValue />} */}
                             </View>
                         </View>
                     </View>
 
                     {/* Botón de Editar Perfil */}
                     <TouchableOpacity style={styles.editButton} onPress={() => router.push('/(perfil_usuario)/editar-perfil')}>
-                    <Ionicons name="create-outline" size={20} color="#fff" />
-                    <Text style={styles.editButtonText}>Editar Perfil</Text>
+                        <Ionicons name="create-outline" size={20} color="#fff" />
+                        <Text style={styles.editButtonText}>Editar Perfil</Text>
                     </TouchableOpacity>
 
                     {/* Sección de usuario Personales */}
@@ -75,7 +75,7 @@ export default function MiPerfil() {
                         </View>
                         <View style={styles.infoItem}>
                             <Text style={styles.infoLabel}>Ubicación:</Text>
-                            <Text style={styles.infoValue}>{usuario.ubicacion}</Text>
+                            <Text style={styles.infoValue}>{usuario.direccion}</Text>
                         </View>
                     </View>
 
@@ -98,12 +98,14 @@ export default function MiPerfil() {
                         </View>
                         <View style={styles.infoItem}>
                             <Ionicons name="mail-outline" size={20} color="#666" />
-                            <Text style={styles.infoValue}>{usuario.correo}</Text>
+                            <Text style={styles.infoValue}>{usuario.email}</Text>
                         </View>
+                        {usuario.telefono && (
                         <View style={styles.infoItem}>
                             <Ionicons name="call-outline" size={20} color="#666" />
                             <Text style={styles.infoValue}>{usuario.telefono}</Text>
                         </View>
+                        )}
                     </View>
 
                     {/* Sección de Estadísticas */}
