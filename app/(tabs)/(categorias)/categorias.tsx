@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BotonCategorias from '../../../components/BotonCategorias';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function Categorias() {
   const router = useRouter();
@@ -16,46 +15,46 @@ export default function Categorias() {
     console.log('Texto buscado:', text);
   };
 
-    return (
-        <SafeAreaView style={styles.container}>
-            {/* Header fijo */}
-            <View style={styles.headerContainer}>
-                <Text style={styles.titulo}>Categorías</Text>
-                <View style={styles.searchContainer}>
-                    <Ionicons name="search" size={20} color="#64748B" style={styles.searchIcon} />
-                    <TextInput
-                        style={styles.searchInput}
-                        placeholder="Buscar categoría..."
-                        value={searchQuery}
-                        onChangeText={setSearchQuery}
-                        placeholderTextColor="#64748B"
-                    />
-                </View>
-            </View>
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.container}>
+          <Text style={styles.titulo}>Categorías</Text>
+          
+          <View style={styles.searchContainer}>
+            <Ionicons name="search" size={20} color="#888" style={styles.icono} />
+            <TextInput
+              placeholder="Buscar categoría..."
+              placeholderTextColor="#888"
+              value={busqueda}
+              onChangeText={handleBuscar}
+              style={styles.input}
+            />
+          </View>
 
           {[
-            { nombre: 'CARPINTERIA', icono: 'hammer' },
+            { nombre: 'CARPINTERÍA', icono: 'hammer' },
             { nombre: 'ELECTRICISTA', icono: 'flash' },
             { nombre: 'PELUQUERO', icono: 'cut' },
             { nombre: 'JARDINERO', icono: 'leaf' },
-            { nombre: 'GASFERIA', icono: 'flame' },
+            { nombre: 'GASFITERÍA', icono: 'flame' },
             { nombre: 'MECÁNICO', icono: 'car' },
             { nombre: 'PINTOR', icono: 'brush' },
             { nombre: 'ALBAÑIL', icono: 'construct' },
             { nombre: 'CERRAJERO', icono: 'key' },
             { nombre: 'FONTANERO', icono: 'water' },
-            { nombre: 'TÉCNICO EN AIRE ACONDICIONADO', icono: 'snow' },
+            { nombre: 'AIRE ACONDICIONADO', icono: 'snow' },
             { nombre: 'INSTALADOR DE PISOS', icono: 'square' },
-            { nombre: 'TÉCNICO EN ELECTRODOMÉSTICOS', icono: 'tv' },
+            { nombre: 'ELECTRODOMÉSTICOS', icono: 'tv' },
             { nombre: 'MONTADOR DE MUEBLES', icono: 'cube' }
           ].map((categoria, index) => (
             <BotonCategorias 
               textoBoton={categoria.nombre} 
-              colorTexto='#8BC34A'
-              bgColor='#F5F5F5' 
+              colorTexto='#1E293B'
+              bgColor='#FFFFFF' 
               iconoDerecha={"chevron-forward"} 
-              colorIconoDerecha='#00BCD4'
-              colorIconoIzquierda='#8BC34A'
+              colorIconoDerecha='#3B82F6'
+              colorIconoIzquierda='#3B82F6'
               iconoIzquierda={categoria.icono} 
               key={index}
               onPress={() => router.push({
