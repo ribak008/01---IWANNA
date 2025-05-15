@@ -73,61 +73,61 @@ export default function Mas() {
                         <Text style={styles.seccionTitulo}>Mi Cuenta</Text>
                         <BotonCategorias
                             textoBoton="MENSAJES"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Revisa todos tus mensajes aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="chatbubbles"
                             onPress={() => router.push('/(mas)/(mensajes)/mensajes')}
                         />
                         <BotonCategorias
                             textoBoton="MI PLAN"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Administra tu plan aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="card"
                             onPress={() => router.push('/(mas)/mi-plan')}
                         />
                         <BotonCategorias
                             textoBoton="MIS POSTS"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Mira, edita y crea tus posts aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="image"
                             onPress={() => router.push('/(mas)/post')}
                         />
                         <BotonCategorias
                             textoBoton="COTIZACIONES"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Revisa tus cotizaciones entrantes aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="cart"
                             onPress={() => router.push('/(mas)/(cotizacion)/cotizacion')}
                         />
                         <BotonCategorias
                             textoBoton="MI AGENDA"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Revisa tu agenda de trabajo aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="calendar"
                             onPress={() => router.push('/(mas)/agenda')}
                         />
@@ -138,37 +138,37 @@ export default function Mas() {
                         <Text style={styles.seccionTitulo}>Información</Text>
                         <BotonCategorias
                             textoBoton="QUIENES SOMOS"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Revisa nuestras políticas y condiciones de uso"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="briefcase"
                             onPress={() => router.push('/(mas)/quienes-somos')}
                         />
                         <BotonCategorias
                             textoBoton="PREGUNTAS FRECUENTES"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Encuentra respuestas a tus dudas"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="help"
                             onPress={() => router.push('/(mas)/preguntas-frecuentes')}
                         />
                         <BotonCategorias
                             textoBoton="DENUNCIAS"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Reporta contenidos sospechosos o malintencionados"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="eye"
                             onPress={() => router.push('/(mas)/denuncias')}
                         />

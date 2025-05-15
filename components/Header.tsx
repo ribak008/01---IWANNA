@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, Text, Platform, StatusBar } from 'react-native';
+import { View, Image, StyleSheet, Platform, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Appbar, IconButton, Text, useTheme, Surface } from 'react-native-paper';
 
 interface HeaderProps {
     titulo?: string;
@@ -18,85 +18,85 @@ export default function Header({
     showProfile = true 
 }: HeaderProps) {
     const router = useRouter();
+    const theme = useTheme();
 
     return (
-        <View style={styles.container}>
+        <Surface style={styles.container} elevation={4}>
             <LinearGradient
-                colors={['#8BC34A', '#4CAF50']}
+                colors={['#4C1D95', '#7C3AED']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
             >
-                <View style={styles.contentContainer}>
-                    <View style={styles.leftContainer}>
-                        {showBackButton ? (
-                            <TouchableOpacity 
-                                style={styles.backButton}
-                                onPress={() => router.back()}
-                            >
-                                <Ionicons name="arrow-back" size={24} color="#fff" />
-                            </TouchableOpacity>
-                        ) : titulo && (
-                            <View style={styles.titleWrapper}>
-                                <Text style={styles.title}>{titulo}</Text>
-                            </View>
-                        )}
-                    </View>
-
-                    <View style={styles.centerContainer}>
-                        {showLogo && (
-                            <View style={styles.logoContainer}>
-                                <Image
-                                    source={require('../assets/images/icons/logo-sin-fondo.png')}
-                                    style={styles.logo}
-                                    resizeMode="contain"
+                <Appbar.Header style={styles.appbar}>
+                    <View style={styles.contentContainer}>
+                        <View style={styles.leftContainer}>
+                            {showBackButton ? (
+                                <IconButton
+                                    icon="arrow-left"
+                                    iconColor="#FFFFFF"
+                                    size={24}
+                                    onPress={() => router.back()}
+                                    style={styles.backButton}
                                 />
-                            </View>
-                        )}
-                    </View>
+                            ) : titulo && (
+                                <View style={styles.titleWrapper}>
+                                    <Text variant="titleLarge" style={styles.title}>
+                                        {titulo}
+                                    </Text>
+                                </View>
+                            )}
+                        </View>
 
-                    <View style={styles.rightContainer}>
-                        {showProfile && !showBackButton && (
-                            <TouchableOpacity 
-                                style={styles.profileContainer}
-                                onPress={() => router.push('/(auth)')}
-                                activeOpacity={0.7}
-                            >
-                                <View style={styles.profileImageContainer}>
+                        <View style={styles.centerContainer}>
+                            {showLogo && (
+                                <View style={styles.logoContainer}>
                                     <Image
-                                        source={require('../assets/images/perfil.png')}
-                                        style={styles.userImage}
+                                        source={require('../assets/images/icons/logo-sin-fondo-texto.png')}
+                                        style={styles.logo}
+                                        resizeMode="contain"
                                     />
                                 </View>
-                            </TouchableOpacity>
-                        )}
+                            )}
+                        </View>
+
+                        <View style={styles.rightContainer}>
+                            {showProfile && !showBackButton && (
+                                <IconButton
+                                    icon={() => (
+                                        <View style={styles.profileImageContainer}>
+                                            <Image
+                                                source={require('../assets/images/perfil.png')}
+                                                style={styles.userImage}
+                                            />
+                                        </View>
+                                    )}
+                                    size={40}
+                                    onPress={() => router.push('/(auth)')}
+                                    style={styles.profileButton}
+                                />
+                            )}
+                        </View>
                     </View>
-                </View>
+                </Appbar.Header>
             </LinearGradient>
-        </View>
+        </Surface>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        height: Platform.OS === 'ios' ? 90 : 70,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         overflow: 'hidden',
-        ...Platform.select({
-            ios: {
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.2,
-                shadowRadius: 4,
-            },
-            android: {
-                elevation: 8,
-            },
-        }),
     },
     gradient: {
         flex: 1,
+    },
+    appbar: {
+        backgroundColor: 'transparent',
+        elevation: 0,
+        height: Platform.OS === 'ios' ? 90 : 70,
         paddingTop: Platform.OS === 'ios' ? 30 : 10,
     },
     contentContainer: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 16,
+        paddingHorizontal: 8,
     },
     leftContainer: {
         width: 100,
@@ -120,18 +120,11 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     backButton: {
-        width: 40,
-        height: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 20,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        margin: 0,
     },
-    profileContainer: {
-        width: 40,
-        height: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
+    profileButton: {
+        margin: 0,
     },
     profileImageContainer: {
         width: 40,
@@ -164,27 +157,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     title: {
-        fontSize: 20,
-        fontWeight: '600',
-        color: '#fff',
-        letterSpacing: 0.3,
-        textTransform: 'capitalize',
+        color: '#FFFFFF',
+        letterSpacing: 1,
+        textTransform: 'uppercase',
+        fontWeight: '700',
+        fontSize: 18,
         fontFamily: Platform.select({
-            ios: 'System',
+            ios: 'Helvetica Neue',
             android: 'Roboto',
         }),
-        textShadowColor: 'rgba(0, 0, 0, 0.15)',
-        textShadowOffset: { width: 0, height: 1 },
-        textShadowRadius: 1,
+        textShadowColor: 'rgba(0, 0, 0, 0.4)',
+        textShadowOffset: { width: 0, height: 2 },
+        textShadowRadius: 3,
+        opacity: 0.95,
     },
     logoContainer: {
-        width: 100,
-        height: 100,
+        width: 80,
+        height: 80,
         justifyContent: 'center',
         alignItems: 'center',
     },
     logo: {
-        width: 95,
-        height: 95,
+        width: 75,
+        height: 75,
     },
 }); 
