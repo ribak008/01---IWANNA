@@ -110,7 +110,7 @@ export default function Mas() {
                         <BotonCategorias
                             textoBoton="COTIZACIONES"
                             colorTexto="#333"
-                            textoBotonSub="Revisa tus cotizaciones aquí"
+                            textoBotonSub="Revisa tus cotizaciones entrantes aquí"
                             colorTextoSub="#666"
                             bgColor="#F5F5F5"
                             iconoDerecha="chevron-forward"

@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet} from "reac
 import { Ionicons } from '@expo/vector-icons';
 import { RatingStars } from "../../../components/rating-stars";
 
-const imgPerfil = require('../../../assets/images/perfil.png');
+
 
 export default function PerfilUsuario() {
     const { idUsuario } = useLocalSearchParams();
@@ -21,7 +21,7 @@ export default function PerfilUsuario() {
     
     const usuario = {
         id: idUsuario,
-        tipo_usuario: 2,
+        tipo_usuario: 1,
         img_perfil: "https://randomuser.me/api/portraits/men/25.jpg",
         nombre: "Manuel Perez",
         profesion: "Maestro parrillera",

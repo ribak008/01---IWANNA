@@ -9,8 +9,6 @@ import { guardarStorage} from '../../services/asyncStorage';
 import { Usuario } from '../../types/usuario'
 
 
-import { API_URL } from '@env';
-
 // LOGIN 
 const Login = () => {
     const [email, setUsuario] = useState('');
@@ -80,6 +78,8 @@ const Login = () => {
                 return;
             }
             guardarStorage("usuario",usuarioDatos);
+
+            
             router.push('(tabs)');
         } catch (error: any) {
             let errorMessage = 'Error al iniciar sesión';
@@ -105,7 +105,7 @@ const Login = () => {
     };
 
     const obtenerUsuario = async (email: string): Promise<Usuario | null> => {
-        const urlApi = `${API_URL}/usuarios/${email}`;
+        const urlApi = `${process.env.API_URL}/usuarios/${email}`;
 
         try {
             const res = await fetch(urlApi);

@@ -25,7 +25,7 @@ export interface CheckoutSession {
 //traer los productos (suscripciones)
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/products`, {
+    const response = await fetch(`${process.env.BASE_URL}/payment/products`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
 //traer los precios
 export const fetchPrices = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/prices`, {
+    const response = await fetch(`${process.env.BASE_URL}/payment/prices`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -90,13 +90,39 @@ export const fetchPrices = async (): Promise<Product[]> => {
   }
 };
 
+
+//crear usuario en strape
+export const crearUsuarioStripe = async (userId: string, email: string, nombre: string) => {
+  try {
+    const response = await fetch(`${process.env.BASE_URL}/payment/create-user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, email, nombre }),
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Error al crear el usuario');
+    }
+    
+    const user = await response.json();
+    console.log('Usuario creado:', user);
+    return user;
+  } catch (error) {
+    console.error('Error en crearUsuarioStripe:', error);
+    throw error;
+  }
+};
+
 //crear la sesión de pago
 export const iniciarCheckout = async (priceId: string, userId: string, setLoading: (loading: boolean) => void) => {
   setLoading(true);
   try {
     console.log('Iniciando checkout con priceId:', priceId , 'userId:', userId);
 
-    const response = await fetch(`${process.env.BASE_URL}/create-checkout-session`, {
+    const response = await fetch(`${process.env.BASE_URL}/payment/create-checkout-session`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',

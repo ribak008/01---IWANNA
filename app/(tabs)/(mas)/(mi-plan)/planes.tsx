@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, StyleSheet, ActivityIndicator, Text } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, ActivityIndicator, Text, ScrollView } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../../navigation/types';
 import { fetchProducts, iniciarCheckout, Product } from '../../../../services/paymentService';
+import { recuperarStorage } from '../../../../services/asyncStorage';
 
 export default function Planes() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -12,6 +13,7 @@ export default function Planes() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [usuario, setUsuario] = useState<any>(null);
 
   const handleCheckout = async (priceId: string, userId: string) => {
     try {
@@ -46,6 +48,19 @@ export default function Planes() {
         setLoading(false);
       }
     };
+
+    const cargarUsuario = async () => {
+      try {
+        setLoading(true);
+        const usuario = await recuperarStorage('usuario');
+        setUsuario(usuario);
+      } catch (error) {
+        alert(error instanceof Error ? error.message : 'Error al cargar el usuario');
+      } finally {
+        setLoading(false);
+      }
+    };
+    cargarUsuario();
     loadProducts();
   }, []);
 
@@ -61,6 +76,7 @@ export default function Planes() {
 
   return (
     <View style={styles.container}>
+      <ScrollView>
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
@@ -80,7 +96,7 @@ export default function Planes() {
                 </View>
                 <TouchableOpacity 
                   style={styles.selectButton} 
-                  onPress={() => handleCheckout(product.priceId, User.id)}
+                  onPress={() => handleCheckout(product.priceId, usuario.id)}
                   disabled={loading}
                 >
                   <Text style={styles.buttonText}>
@@ -95,6 +111,7 @@ export default function Planes() {
           )}
         </>
       )}
+      </ScrollView>
     </View>
   );
 }

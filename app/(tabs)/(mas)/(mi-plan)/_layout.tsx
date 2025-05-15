@@ -9,7 +9,7 @@ export default function PlanesLayout() {
         name="mi-plan"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="MI PLAN" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="MI PLAN"/>
           ),
         }}
       />
@@ -18,7 +18,7 @@ export default function PlanesLayout() {
         name="planes"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="PLANES" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="PLANES"/>
           ),
         }}
       />

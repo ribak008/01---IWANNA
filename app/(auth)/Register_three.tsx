@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { crearUsuarioStripe } from '../../services/paymentService';
 
 const Register_three = () => {
+    
     const router = useRouter();
     const [correo, setCorreo] = useState('');
     const [contrasena, setContrasena] = useState('');
@@ -38,8 +40,12 @@ const Register_three = () => {
             return;
         }
 
+
+
         // Aquí iría la lógica de registro con Firebase
         // Por ahora solo redirigimos al login
+
+        
         router.push('/');
     };
 
