@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import DetalleCategoriaPosts from './(categoriaDetalle)/CategoriasPost';
@@ -13,15 +13,17 @@ export default function DetalleCategorias() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, '[detalleCategoria]'>>();
 
   const route = useRoute();
-  const { categoria } = route.params as { categoria: string };
+  const { categoria, id } = route.params as { categoria: string, id: string };
 
 
   return ( 
 
         
     <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{categoria}</Text>
+      </View>
 
-        
       <View style={{ flex: 1 }}>
         
         <Tab.Navigator
@@ -51,10 +53,16 @@ export default function DetalleCategorias() {
 
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    padding: 15,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
   title: {
-    fontSize: 22,
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
     textAlign: 'center',
-    fontWeight: '600',
-    marginBottom: 10,
   },
 });

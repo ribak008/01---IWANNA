@@ -13,7 +13,7 @@ export default function CategoriaLayout() {
         name="categorias"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo="CATEGORIAS" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo="CATEGORIAS"/>
           ),
         }}
       />
@@ -22,8 +22,7 @@ export default function CategoriaLayout() {
         options={{
           header: (props) => (
             <HeaderPrincipal
-              titulo={(props.route.params as RouteParams)?.categoria || 'Categoría'}
-              bgColor="#FFFFFF"
+              titulo="CATEGORIAS"
             />
           ),
         }}

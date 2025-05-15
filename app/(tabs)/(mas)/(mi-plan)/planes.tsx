@@ -53,7 +53,7 @@ export default function Planes() {
       try {
         setLoading(true);
         const usuario = await recuperarStorage('usuario');
-        setUsuario(usuario);
+        setUsuario(usuario) ;
       } catch (error) {
         alert(error instanceof Error ? error.message : 'Error al cargar el usuario');
       } finally {
@@ -96,7 +96,7 @@ export default function Planes() {
                 </View>
                 <TouchableOpacity 
                   style={styles.selectButton} 
-                  onPress={() => handleCheckout(product.priceId, usuario.id)}
+                  onPress={() => handleCheckout(product.priceId, usuario?.id)}
                   disabled={loading}
                 >
                   <Text style={styles.buttonText}>
