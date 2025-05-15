@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, TextInput, StyleSheet, View, Text, Platform } from 'react-native';
+import { ScrollView, TextInput, StyleSheet, View, Text, Platform, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BotonCategorias from '../../../components/BotonCategorias';
@@ -9,11 +9,33 @@ import { useRouter } from 'expo-router';
 export default function Categorias() {
   const router = useRouter();
   const [busqueda, setBusqueda] = useState('');
+  const [categorias, setCategorias] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const handleBuscar = (text: string) => {
     setBusqueda(text);
     console.log('Texto buscado:', text);
   };
+
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const response = await fetch(`${process.env.API_URL}/category`); 
+        const data = await response.json();
+        console.log('Categorias recibidas:', data);
+        setCategorias(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching categorias:', err);
+        setError('Error al cargar las categorías');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategorias();
+  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -32,37 +54,33 @@ export default function Categorias() {
             />
           </View>
 
-          {[
-            { nombre: 'CARPINTERIA', icono: 'hammer' },
-            { nombre: 'ELECTRICISTA', icono: 'flash' },
-            { nombre: 'PELUQUERO', icono: 'cut' },
-            { nombre: 'JARDINERO', icono: 'leaf' },
-            { nombre: 'GASFERIA', icono: 'flame' },
-            { nombre: 'MECÁNICO', icono: 'car' },
-            { nombre: 'PINTOR', icono: 'brush' },
-            { nombre: 'ALBAÑIL', icono: 'construct' },
-            { nombre: 'CERRAJERO', icono: 'key' },
-            { nombre: 'FONTANERO', icono: 'water' },
-            { nombre: 'TÉCNICO EN AIRE ACONDICIONADO', icono: 'snow' },
-            { nombre: 'INSTALADOR DE PISOS', icono: 'square' },
-            { nombre: 'TÉCNICO EN ELECTRODOMÉSTICOS', icono: 'tv' },
-            { nombre: 'MONTADOR DE MUEBLES', icono: 'cube' }
-          ].map((categoria, index) => (
-            <BotonCategorias 
-              textoBoton={categoria.nombre} 
-              colorTexto='#8BC34A'
-              bgColor='#F5F5F5' 
-              iconoDerecha={"chevron-forward"} 
-              colorIconoDerecha='#00BCD4'
-              colorIconoIzquierda='#8BC34A'
-              iconoIzquierda={categoria.icono} 
-              key={index}
-              onPress={() => router.push({
-                pathname: '/(categorias)/[detalleCategoria]',
-                params: { categoria: categoria.nombre }
-              })}
-            />
-          ))}
+          {loading ? (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#8BC34A" />
+              <Text style={styles.loadingText}>Cargando categorías...</Text>
+            </View>
+          ) : error ? (
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>{error}</Text>
+            </View>
+          ) : (
+            categorias.map((categoria, index) => (
+              <BotonCategorias 
+                textoBoton={categoria.descripcion} 
+                colorTexto='#8BC34A'
+                bgColor='#F5F5F5' 
+                iconoDerecha={"chevron-forward"} 
+                colorIconoDerecha='#00BCD4'
+                colorIconoIzquierda='#8BC34A'
+                iconoIzquierda={categoria.icono || 'cube'} 
+                key={index}
+                onPress={() => router.push({
+                  pathname: '/(categorias)/[detalleCategoria]',
+                  params: { categoria: categoria.descripcion, id: categoria.id }
+                })}
+              />
+            ))
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -84,6 +102,26 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 20,
     marginTop: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  loadingText: {
+    marginTop: 10,
+    color: '#666',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  errorText: {
+    color: '#e74c3c',
+    textAlign: 'center',
   },
   searchContainer: {
     flexDirection: 'row',
