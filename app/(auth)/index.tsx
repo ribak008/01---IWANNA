@@ -8,7 +8,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { guardarStorage} from '../../services/asyncStorage';
 import { Usuario } from '../../types/usuario'
 
-
 // LOGIN 
 const Login = () => {
     const [email, setUsuario] = useState('');
@@ -25,7 +24,7 @@ const Login = () => {
     useEffect(() => {
         console.log('Pantalla de Login renderizada');
     }, []);
- 
+
     const validateEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         setIsValidEmail(emailRegex.test(email));
@@ -79,7 +78,7 @@ const Login = () => {
             }
             guardarStorage("usuario",usuarioDatos);
 
-            
+
             router.push('(tabs)');
         } catch (error: any) {
             let errorMessage = 'Error al iniciar sesión';

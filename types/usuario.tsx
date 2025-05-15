@@ -11,5 +11,5 @@ export interface Usuario {
     id_estado: number;
     id_tipo: number;
     foto?: string;
-    comuna: string;
+    direccion: string;
 }

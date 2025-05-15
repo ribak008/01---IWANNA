@@ -59,7 +59,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
 //traer los precios
 export const fetchPrices = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${process.env.BASE_URL}/payment/prices`, {
+    const response = await fetch(`${process.env.BASE_URL}payment/prices`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export const iniciarCheckout = async (priceId: string, userId: string, setLoadin
   try {
     console.log('Iniciando checkout con priceId:', priceId , 'userId:', userId);
 
-    const response = await fetch(`${process.env.BASE_URL}/payment/create-checkout-session`, {
+    const response = await fetch(`${process.env.BASE_URL}payment/create-checkout-session`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
