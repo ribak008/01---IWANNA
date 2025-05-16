@@ -1,33 +1,65 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native'
 import { useState } from 'react'
-import BotonCategorias from '../../../../components/BotonCategorias';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function MiPlan() {
     const router = useRouter();
 
     return (
         <View style={styles.container}>
-            <View style={[styles.card]}>
-                <View style={styles.cardHeader}>
-                    <Text style={styles.planName}>Nivel ORO</Text>
-                </View>
+            <View style={styles.card}>
+                <LinearGradient
+                    colors={['#2563EB', '#1E40AF']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.cardHeader}
+                >
+                    <View style={styles.planInfo}>
+                        <Text style={styles.planName}>Plan Premium</Text>
+                        <Text style={styles.planStatus}>Activo</Text>
+                    </View>
+                    <View style={styles.planIcon}>
+                        <Ionicons name="diamond" size={32} color="#FFFFFF" />
+                    </View>
+                </LinearGradient>
                 
                 <View style={styles.advantages}>
-                    <Text style={styles.price}>$19.990/mes</Text>
+                    <View style={styles.priceContainer}>
+                        <Text style={styles.currency}>$</Text>
+                        <Text style={styles.price}>19.990</Text>
+                        <Text style={styles.period}>/mes</Text>
+                    </View>
                     
-                    <Text style={styles.advantage}>• Acceso a contenido premium</Text>
-                    <Text style={styles.advantage}>• Sin anuncios</Text> 
-                    <Text style={styles.advantage}>• Soporte 24/7</Text>
-                    <Text style={styles.advantage}>• Acceso anticipado a nuevas funciones</Text>
-                       
-                   
+                    <View style={styles.featuresList}>
+                        <View style={styles.featureItem}>
+                            <Ionicons name="checkmark-circle" size={20} color="#2563EB" />
+                            <Text style={styles.featureText}>Acceso a contenido premium</Text>
+                        </View>
+                        <View style={styles.featureItem}>
+                            <Ionicons name="checkmark-circle" size={20} color="#2563EB" />
+                            <Text style={styles.featureText}>Sin anuncios</Text>
+                        </View>
+                        <View style={styles.featureItem}>
+                            <Ionicons name="checkmark-circle" size={20} color="#2563EB" />
+                            <Text style={styles.featureText}>Soporte 24/7</Text>
+                        </View>
+                        <View style={styles.featureItem}>
+                            <Ionicons name="checkmark-circle" size={20} color="#2563EB" />
+                            <Text style={styles.featureText}>Acceso anticipado a nuevas funciones</Text>
+                        </View>
+                    </View>
                 </View>
             </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => router.push('/(mas)/(mi-plan)/planes')}>
-            <Text style={styles.buttonText}>Cambiar de plan</Text>
-        </TouchableOpacity>
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => router.push('/(mas)/(mi-plan)/planes')}
+            >
+                <Text style={styles.buttonText}>Cambiar de plan</Text>
+                <Ionicons name="arrow-forward" size={20} color="#FFFFFF" />
+            </TouchableOpacity>
         </View>
     )
 }
@@ -35,61 +67,114 @@ export default function MiPlan() {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#F8FAFC',
         flex: 1
     },
     card: {
         backgroundColor: '#fff',
-        borderRadius: 8,
-        borderColor: 'black',
-        borderWidth: 1,
-        elevation: 3,
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-        shadowOffset: { width: 0, height: 2 }
+        borderRadius: 16,
+        overflow: 'hidden',
+        ...Platform.select({
+            ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.1,
+                shadowRadius: 12,
+            },
+            android: {
+                elevation: 8,
+            },
+        }),
     },
     cardHeader: {
+        padding: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10,
-        borderTopStartRadius: 8,
-        borderTopEndRadius: 8,
-        backgroundColor: 'yellow',
-        borderBottomWidth: 4,
-        borderColor: 'black',
-        padding: 15,
+    },
+    planInfo: {
+        flex: 1,
     },
     planName: {
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: 'bold',
+        color: '#FFFFFF',
+        marginBottom: 4,
     },
-    price: {
-        fontSize: 16,
-        fontWeight: '600',
-        marginBottom: 15,
+    planStatus: {
+        fontSize: 14,
+        color: '#E2E8F0',
+        fontWeight: '500',
+    },
+    planIcon: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     advantages: {
-        padding: 15,
+        padding: 20,
     },
-    advantage: {
-        fontSize: 14,
-        color: '#333',
-        marginBottom: 5,
+    priceContainer: {
+        flexDirection: 'row',
+        alignItems: 'baseline',
+        marginBottom: 24,
+    },
+    currency: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: '#1E293B',
+        marginRight: 4,
+    },
+    price: {
+        fontSize: 36,
+        fontWeight: 'bold',
+        color: '#1E293B',
+    },
+    period: {
+        fontSize: 16,
+        color: '#64748B',
+        marginLeft: 4,
+    },
+    featuresList: {
+        gap: 16,
+    },
+    featureItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+    },
+    featureText: {
+        fontSize: 16,
+        color: '#1E293B',
+        flex: 1,
     },
     button: {
-        backgroundColor: '#007AFF',
-        padding: 10,
-        borderRadius: 8,
+        backgroundColor: '#2563EB',
+        padding: 16,
+        borderRadius: 12,
+        flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 20,
-        marginTop: 20
+        justifyContent: 'center',
+        marginTop: 24,
+        gap: 8,
+        ...Platform.select({
+            ios: {
+                shadowColor: '#2563EB',
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 8,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
     },
     buttonText: {
-        color: '#fff',
+        color: '#FFFFFF',
         fontSize: 16,
-        fontWeight: 'bold',
-        
-    }
+        fontWeight: '600',
+    },
 });

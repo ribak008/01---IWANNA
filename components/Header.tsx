@@ -178,21 +178,6 @@ const styles = StyleSheet.create({
         height: 30,
         borderRadius: 15,
     },
-    titleWrapper: {
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-    },
-    title: {
-        color: '#FFFFFF',
-        letterSpacing: 0.3,
-        textTransform: 'uppercase',
-        fontWeight: '600',
-        fontSize: 16,
-        fontFamily: Platform.select({
-            ios: 'Helvetica Neue',
-            android: 'Roboto',
-        }),
-    },
     logoContainer: {
         width: 160,
         height: 160,
