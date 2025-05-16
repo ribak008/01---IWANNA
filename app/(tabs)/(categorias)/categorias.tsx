@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BotonCategorias from '../../../components/BotonCategorias';
 import { useRouter } from 'expo-router';
-import { BASE_URL } from '@env';
+import { URL_API } from '@env';
 
 
 export default function Categorias() {
@@ -23,7 +23,7 @@ export default function Categorias() {
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const response = await fetch(`http://192.168.1.103:3000/category`); 
+        const response = await fetch(`${URL_API}/category`); 
         const data = await response.json();
         console.log('Categorias recibidas:', data);
         setCategorias(data);
@@ -69,6 +69,7 @@ export default function Categorias() {
           ) : (
             categorias.map((categoria) => (
               <BotonCategorias 
+                key={`categoria-${categoria.id}`}
                 textoBoton={categoria.descripcion	} 
                 colorTexto='#8BC34A'
                 bgColor='#F5F5F5' 
