@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Image, StyleSheet, Platform, StatusBar } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useNavigation } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Appbar, IconButton, Text, useTheme, Surface } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface HeaderProps {
     titulo?: string;
@@ -21,12 +21,23 @@ export default function Header({
     bgColor = '#FFFFFF'
 }: HeaderProps) {
     const router = useRouter();
+    const navigation = useNavigation();
     const theme = useTheme();
+    const insets = useSafeAreaInsets();
+
+    const handleBack = () => {
+        if (navigation.canGoBack()) {
+            router.back();
+        } else {
+            // Si no hay pantalla anterior, redirigir a la pantalla principal
+            router.push('/(tabs)/(inicio)');
+        }
+    };
 
     return (
-        <SafeAreaView style={[styles.safeArea, { backgroundColor: bgColor }]}>
+        <SafeAreaView style={[styles.safeArea, { backgroundColor: bgColor }]} edges={['top']}>
             <StatusBar barStyle="dark-content" backgroundColor={bgColor} />
-            <Surface style={styles.container} elevation={4}>
+            <Surface style={[styles.container, { paddingTop: insets.top }]} elevation={4}>
                 <LinearGradient
                     colors={['#2563EB', '#1E40AF']}
                     start={{ x: 0, y: 0 }}
@@ -42,7 +53,7 @@ export default function Header({
                                             icon="arrow-left"
                                             iconColor="#CBD5E1"
                                             size={32}
-                                            onPress={() => router.back()}
+                                            onPress={handleBack}
                                             style={styles.backButton}
                                         />
                                     </View>
@@ -52,7 +63,7 @@ export default function Header({
                                             icon="arrow-left"
                                             iconColor="#CBD5E1"
                                             size={32}
-                                            onPress={() => router.back()}
+                                            onPress={handleBack}
                                             style={styles.backButton}
                                         />
                                     </View>
@@ -109,8 +120,7 @@ const styles = StyleSheet.create({
     appbar: {
         backgroundColor: 'transparent',
         elevation: 0,
-        height: Platform.OS === 'ios' ? 85 : 65,
-        paddingTop: Platform.OS === 'ios' ? 25 : StatusBar.currentHeight || 10,
+        height: Platform.OS === 'ios' ? 60 : 50,
     },
     contentContainer: {
         flex: 1,
@@ -122,11 +132,6 @@ const styles = StyleSheet.create({
     leftContainer: {
         width: 90,
         alignItems: 'flex-start',
-    },
-    centerContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     rightContainer: {
         width: 90,
