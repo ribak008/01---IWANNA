@@ -23,7 +23,7 @@ export default function Header({
     return (
         <Surface style={styles.container} elevation={4}>
             <LinearGradient
-                colors={['#4C1D95', '#7C3AED']}
+                colors={['#2D3748', '#4A5568']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
@@ -35,7 +35,7 @@ export default function Header({
                                 <IconButton
                                     icon="arrow-left"
                                     iconColor="#FFFFFF"
-                                    size={24}
+                                    size={22}
                                     onPress={() => router.back()}
                                     style={styles.backButton}
                                 />
@@ -71,7 +71,7 @@ export default function Header({
                                             />
                                         </View>
                                     )}
-                                    size={40}
+                                    size={36}
                                     onPress={() => router.push('/(auth)')}
                                     style={styles.profileButton}
                                 />
@@ -86,8 +86,8 @@ export default function Header({
 
 const styles = StyleSheet.create({
     container: {
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        borderBottomLeftRadius: 16,
+        borderBottomRightRadius: 16,
         overflow: 'hidden',
     },
     gradient: {
@@ -96,18 +96,18 @@ const styles = StyleSheet.create({
     appbar: {
         backgroundColor: 'transparent',
         elevation: 0,
-        height: Platform.OS === 'ios' ? 90 : 70,
-        paddingTop: Platform.OS === 'ios' ? 30 : 10,
+        height: Platform.OS === 'ios' ? 85 : 65,
+        paddingTop: Platform.OS === 'ios' ? 25 : 10,
     },
     contentContainer: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 8,
+        paddingHorizontal: 12,
     },
     leftContainer: {
-        width: 100,
+        width: 90,
         alignItems: 'flex-start',
     },
     centerContainer: {
@@ -116,41 +116,42 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     rightContainer: {
-        width: 100,
+        width: 90,
         alignItems: 'flex-end',
     },
     backButton: {
-        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
         margin: 0,
+        borderRadius: 12,
     },
     profileButton: {
         margin: 0,
     },
     profileImageContainer: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
+        width: 36,
+        height: 36,
+        borderRadius: 18,
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 2,
-        borderColor: '#fff',
+        borderColor: 'rgba(255, 255, 255, 0.2)',
         ...Platform.select({
             ios: {
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.2,
+                shadowOpacity: 0.1,
                 shadowRadius: 3,
             },
             android: {
-                elevation: 4,
+                elevation: 2,
             },
         }),
     },
     userImage: {
-        width: 34,
-        height: 34,
-        borderRadius: 17,
+        width: 30,
+        height: 30,
+        borderRadius: 15,
     },
     titleWrapper: {
         alignItems: 'flex-start',
@@ -158,27 +159,26 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#FFFFFF',
-        letterSpacing: 1,
+        letterSpacing: 0.5,
         textTransform: 'uppercase',
-        fontWeight: '700',
-        fontSize: 18,
+        fontWeight: '600',
+        fontSize: 16,
         fontFamily: Platform.select({
             ios: 'Helvetica Neue',
             android: 'Roboto',
         }),
-        textShadowColor: 'rgba(0, 0, 0, 0.4)',
-        textShadowOffset: { width: 0, height: 2 },
-        textShadowRadius: 3,
-        opacity: 0.95,
+        textShadowColor: 'rgba(0, 0, 0, 0.2)',
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 2,
     },
     logoContainer: {
-        width: 80,
-        height: 80,
+        width: 70,
+        height: 70,
         justifyContent: 'center',
         alignItems: 'center',
     },
     logo: {
-        width: 75,
-        height: 75,
+        width: 65,
+        height: 65,
     },
 }); 
