@@ -23,7 +23,7 @@ export default function Header({
     return (
         <Surface style={styles.container} elevation={4}>
             <LinearGradient
-                colors={['#3B82F6', '#2563EB']}
+                colors={['#2563EB', '#1E40AF']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
@@ -32,18 +32,24 @@ export default function Header({
                     <View style={styles.contentContainer}>
                         <View style={styles.leftContainer}>
                             {showBackButton ? (
-                                <IconButton
-                                    icon="arrow-left"
-                                    iconColor="#FFFFFF"
-                                    size={22}
-                                    onPress={() => router.back()}
-                                    style={styles.backButton}
-                                />
-                            ) : titulo && (
-                                <View style={styles.titleWrapper}>
-                                    <Text variant="titleLarge" style={styles.title}>
-                                        {titulo}
-                                    </Text>
+                                <View style={styles.backButtonContainer}>
+                                    <IconButton
+                                        icon="arrow-left"
+                                        iconColor="#CBD5E1"
+                                        size={32}
+                                        onPress={() => router.back()}
+                                        style={styles.backButton}
+                                    />
+                                </View>
+                            ) : (
+                                <View style={styles.backButtonContainer}>
+                                    <IconButton
+                                        icon="arrow-left"
+                                        iconColor="#CBD5E1"
+                                        size={32}
+                                        onPress={() => router.back()}
+                                        style={styles.backButton}
+                                    />
                                 </View>
                             )}
                         </View>
@@ -119,10 +125,29 @@ const styles = StyleSheet.create({
         width: 90,
         alignItems: 'flex-end',
     },
+    backButtonContainer: {
+        width: 60,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+    },
     backButton: {
-        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        width: 50,
+        height: 50,
         margin: 0,
-        borderRadius: 8,
+        backgroundColor: 'transparent',
+        ...Platform.select({
+            ios: {
+                shadowColor: '#3B82F6',
+                shadowOffset: { width: 0, height: 3 },
+                shadowOpacity: 0.7,
+                shadowRadius: 12,
+            },
+            android: {
+                elevation: 12,
+            },
+        }),
     },
     profileButton: {
         margin: 0,
@@ -169,25 +194,26 @@ const styles = StyleSheet.create({
         }),
     },
     logoContainer: {
-        width: 110,
-        height: 110,
+        width: 160,
+        height: 160,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'transparent',
     },
     logo: {
-        width: 100,
-        height: 100,
+        width: 150,
+        height: 150,
         opacity: 1,
+        tintColor: '#CBD5E1',
         ...Platform.select({
             ios: {
                 shadowColor: '#3B82F6',
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.3,
-                shadowRadius: 8,
+                shadowOffset: { width: 0, height: 3 },
+                shadowOpacity: 0.7,
+                shadowRadius: 12,
             },
             android: {
-                elevation: 5,
+                elevation: 12,
             },
         }),
     },
