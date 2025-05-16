@@ -17,49 +17,56 @@ export default function Mas() {
                 <View style={styles.container}>
                     {/* Sección de Perfil */}
                     <View style={styles.perfilContainer}>
-
                         <View style={styles.perfilContent}>
-                            <Image
-                                source={imgPerfil}
-                                style={styles.perfilImage}
-                            />
+                            <View style={styles.perfilImageContainer}>
+                                <Image
+                                    source={imgPerfil}
+                                    style={styles.perfilImage}
+                                />
+                            </View>
                             <View style={styles.perfilInfo}>
-                                <Text style={styles.perfilNombre}>Manuel Perez</Text>
-                                <Text style={styles.perfilPlan}>Plan: Free</Text>
-                                <TouchableOpacity
-                                    style={styles.verPerfilButton}
-                                    onPress={() => router.push('/(mas)/(perfil_usuario)')}
-                                >
-                                    <Text style={styles.verPerfilText}>Ver mi perfil</Text>
-                                    <Ionicons name="chevron-forward" size={20} color="#8BC34A" />
-                                </TouchableOpacity>
-
-                                <TouchableOpacity
-                                    style={styles.verPerfilButton}
-                                    onPress={() => router.push('/(mas)/mi-perfil-cliente')}
-                                >
-                                    <Text style={styles.verPerfilText}>Ver mi perfil cliente (test)</Text>
-                                    <Ionicons name="chevron-forward" size={20} color="#8BC34A" />
-                                </TouchableOpacity>
-
-                                <View>
-                                    <RatingStars rating={Number(averageRating)} showValue />
+                                <View style={styles.nombreContainer}>
+                                    <Text style={styles.perfilNombre}>Manuel Perez</Text>
+                                </View>
+                                <View style={styles.planRatingContainer}>
+                                    <View style={styles.planContainer}>
+                                        <Ionicons name="star" size={14} color="#3B82F6" />
+                                        <Text style={styles.perfilPlan}>Plan Free</Text>
+                                    </View>
+                                    <View style={styles.ratingContainer}>
+                                        <RatingStars rating={Number(averageRating)} showValue />
+                                    </View>
+                                </View>
+                                <View style={styles.botonesContainer}>
+                                    <TouchableOpacity
+                                        style={[styles.perfilButton, styles.perfilButtonLeft]}
+                                        onPress={() => router.push('/(mas)/(perfil_usuario)')}
+                                    >
+                                        <Ionicons name="person" size={16} color="#3B82F6" />
+                                        <Text style={styles.perfilButtonText}>Mi Perfil</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={[styles.perfilButton, styles.perfilButtonRight]}
+                                        onPress={() => router.push('/(mas)/mi-perfil-cliente')}
+                                    >
+                                        <Ionicons name="person-circle" size={16} color="#3B82F6" />
+                                        <Text style={styles.perfilButtonText}>Perfil Cliente</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
-                        {/* Sección boton autenticación */}
                         <View style={styles.authSection}>
-                            <View>
-                                <Text style={{ color: 'red' }}>No estas autentificado</Text>
-                                <Text>Inicia el proceso y accede a los beneficios</Text>
+                            <View style={styles.authInfo}>
+                                <Ionicons name="warning" size={18} color="#EF4444" />
+                                <Text style={styles.authText}>No estás autenticado</Text>
                             </View>
-                            <View style={styles.authButton}>
-                                <Button 
-                                title="IR"
-                                color="#8BC34A"
+                            <TouchableOpacity 
+                                style={styles.authButton}
                                 onPress={() => router.push('/(mas)/(auth2)/auth2-info')}
-                                />
-                            </View>
+                            >
+                                <Text style={styles.authButtonText}>Iniciar Autenticación</Text>
+                                <Ionicons name="arrow-forward" size={16} color="#FFFFFF" />
+                            </TouchableOpacity>
                         </View>
                     </View>
 
@@ -73,61 +80,61 @@ export default function Mas() {
                         <Text style={styles.seccionTitulo}>Mi Cuenta</Text>
                         <BotonCategorias
                             textoBoton="MENSAJES"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Revisa todos tus mensajes aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="chatbubbles"
                             onPress={() => router.push('/(mas)/(mensajes)/mensajes')}
                         />
                         <BotonCategorias
                             textoBoton="MI PLAN"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Administra tu plan aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="card"
                             onPress={() => router.push('/(mas)/mi-plan')}
                         />
                         <BotonCategorias
                             textoBoton="MIS POSTS"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Mira, edita y crea tus posts aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="image"
                             onPress={() => router.push('/(mas)/post')}
                         />
                         <BotonCategorias
                             textoBoton="COTIZACIONES"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Revisa tus cotizaciones entrantes aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="cart"
                             onPress={() => router.push('/(mas)/(cotizacion)/cotizacion')}
                         />
                         <BotonCategorias
                             textoBoton="MI AGENDA"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Revisa tu agenda de trabajo aquí"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="calendar"
                             onPress={() => router.push('/(mas)/agenda')}
                         />
@@ -138,37 +145,37 @@ export default function Mas() {
                         <Text style={styles.seccionTitulo}>Información</Text>
                         <BotonCategorias
                             textoBoton="QUIENES SOMOS"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Revisa nuestras políticas y condiciones de uso"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="briefcase"
                             onPress={() => router.push('/(mas)/quienes-somos')}
                         />
                         <BotonCategorias
                             textoBoton="PREGUNTAS FRECUENTES"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Encuentra respuestas a tus dudas"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="help"
                             onPress={() => router.push('/(mas)/preguntas-frecuentes')}
                         />
                         <BotonCategorias
                             textoBoton="DENUNCIAS"
-                            colorTexto="#333"
+                            colorTexto="#1E293B"
                             textoBotonSub="Reporta contenidos sospechosos o malintencionados"
-                            colorTextoSub="#666"
-                            bgColor="#F5F5F5"
+                            colorTextoSub="#64748B"
+                            bgColor="#FFFFFF"
                             iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#8BC34A"
-                            colorIconoIzquierda="#8BC34A"
+                            colorIconoDerecha="#3B82F6"
+                            colorIconoIzquierda="#3B82F6"
                             iconoIzquierda="eye"
                             onPress={() => router.push('/(mas)/denuncias')}
                         />
@@ -188,7 +195,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     perfilContainer: {
-        padding: 20,
+        padding: 16,
         backgroundColor: '#fff',
         ...Platform.select({
             ios: {
@@ -198,55 +205,143 @@ const styles = StyleSheet.create({
                 shadowRadius: 4,
             },
             android: {
-                elevation: 2,
+                elevation: 4,
             },
         }),
     },
     perfilContent: {
-        alignSelf: 'center',
-        width: '90%',
-        marginTop: 10,
-        borderRadius: 10,
-        padding: 15,
-        backgroundColor: '#f1f1f1',
+        backgroundColor: '#F8FAFC',
+        borderRadius: 16,
+        padding: 16,
         flexDirection: 'row',
+        alignItems: 'flex-start',
+    },
+    perfilImageContainer: {
         alignItems: 'center',
+        marginRight: 16,
+        width: 80,
     },
     perfilImage: {
         width: 80,
         height: 80,
         borderRadius: 40,
         borderWidth: 3,
-        borderColor: '#8BC34A',
+        borderColor: '#3B82F6',
     },
     perfilInfo: {
-        marginLeft: 15,
         flex: 1,
+        justifyContent: 'space-between',
+        height: 85,
+    },
+    nombreContainer: {
+        marginBottom: 4,
     },
     perfilNombre: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        color: '#333',
-        marginBottom: 5,
-    },
-    perfilPlan: {
         fontSize: 16,
-        color: '#666',
-        marginBottom: 10,
+        fontWeight: 'bold',
+        color: '#1E293B',
     },
-    verPerfilButton: {
+    planRatingContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#F5F5F5',
-        paddingVertical: 8,
-        paddingHorizontal: 15,
-        borderRadius: 20,
-        alignSelf: 'flex-start',
+        marginBottom: 8,
+        gap: 8,
     },
-    verPerfilText: {
-        color: '#8BC34A',
+    planContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#EFF6FF',
+        paddingHorizontal: 8,
+        paddingVertical: 3,
+        borderRadius: 16,
+    },
+    perfilPlan: {
+        fontSize: 12,
         fontWeight: '600',
-        marginRight: 5,
+        color: '#3B82F6',
+        marginLeft: 4,
+    },
+    ratingContainer: {
+        backgroundColor: '#FFFFFF',
+        paddingHorizontal: 4,
+        paddingVertical: 1,
+        borderRadius: 8,
+        transform: [{ scale: 0.8 }],
+        ...Platform.select({
+            ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.1,
+                shadowRadius: 2,
+            },
+            android: {
+                elevation: 2,
+            },
+        }),
+    },
+    botonesContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        gap: 6,
+        marginTop: 4,
+    },
+    perfilButton: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
+        paddingVertical: 6,
+        paddingHorizontal: 8,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
+    },
+    perfilButtonLeft: {
+        marginRight: 3,
+    },
+    perfilButtonRight: {
+        marginLeft: 3,
+    },
+    perfilButtonText: {
+        color: '#3B82F6',
+        fontWeight: '600',
+        marginLeft: 4,
+        fontSize: 12,
+    },
+    authSection: {
+        marginTop: 16,
+        backgroundColor: '#FEF2F2',
+        borderRadius: 12,
+        padding: 12,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    authInfo: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
+        flex: 1,
+    },
+    authText: {
+        color: '#EF4444',
+        fontWeight: '600',
+        fontSize: 13,
+    },
+    authButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#EF4444',
+        paddingVertical: 6,
+        paddingHorizontal: 12,
+        borderRadius: 8,
+        gap: 6,
+    },
+    authButtonText: {
+        color: '#FFFFFF',
+        fontWeight: '600',
+        fontSize: 13,
     },
     opcionesContainer: {
         padding: 20,
@@ -258,17 +353,5 @@ const styles = StyleSheet.create({
         color: '#333',
         marginBottom: 15,
         marginLeft: 5,
-    },
-    authSection: {
-        justifyContent: 'center',
-        gap: 20,
-        flexDirection: 'row',
-        marginVertical: 20,      
-    },
-    authButton: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end',
     },
 });

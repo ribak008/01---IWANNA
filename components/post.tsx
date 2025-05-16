@@ -110,8 +110,9 @@ export default Post;
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        marginBottom: 15,
+        marginBottom: 1,
         overflow: 'hidden',
+        width: '100%',
     },
     foto_usuario: {
         width: 40,
@@ -126,12 +127,13 @@ const styles = StyleSheet.create({
     imagen_post: {
         width: '100%',
         height: 300,
-        marginVertical: 10,
+        marginVertical: 5,
     },
     header: {
         flexDirection: 'row',
         paddingHorizontal: 15,
         paddingTop: 10,
+        paddingBottom: 5,
     },
     content: {
         paddingHorizontal: 15,
@@ -139,11 +141,13 @@ const styles = StyleSheet.create({
     },
     descripcion: {
         marginBottom: 4,
+        paddingHorizontal: 15,
     },
     contenedor_datos_post: {
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 5,
+        paddingHorizontal: 15,
     },
     dato_post: {
         flexDirection: 'row',

@@ -1,154 +1,226 @@
-import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { ScrollView, TextInput, StyleSheet, View, Text, Platform, ActivityIndicator } from 'react-native';
-import { SafeAreaView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { StyleSheet, View, ScrollView, Text, SafeAreaView, TextInput, TouchableOpacity, Platform } from 'react-native';
 import BotonCategorias from '../../../components/BotonCategorias';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Categorias() {
-  const router = useRouter();
-  const [busqueda, setBusqueda] = useState('');
-  const [categorias, setCategorias] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
+    const [searchQuery, setSearchQuery] = useState('');
 
-  const handleBuscar = (text: string) => {
-    setBusqueda(text);
-    console.log('Texto buscado:', text);
-  };
+    const categorias = [
+        {
+            textoBoton: "CARPINTERÍA",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra carpinteros profesionales",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "hammer",
+            onPress: () => router.push('/(categorias)/carpinteria')
+        },
+        {
+            textoBoton: "GASFITERÍA",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra gasfiteros profesionales",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "water",
+            onPress: () => router.push('/(categorias)/gasfiteria')
+        },
+        {
+            textoBoton: "AIRE ACONDICIONADO",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra técnicos en aire acondicionado",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "snow",
+            onPress: () => router.push('/(categorias)/aire-acondicionado')
+        },
+        {
+            textoBoton: "ELECTRODOMÉSTICOS",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra técnicos en electrodomésticos",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "tv",
+            onPress: () => router.push('/(categorias)/electrodomesticos')
+        },
+        {
+            textoBoton: "ELECTRICIDAD",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra electricistas profesionales",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "flash",
+            onPress: () => router.push('/(categorias)/electricidad')
+        },
+        {
+            textoBoton: "PINTURA",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra pintores profesionales",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "color-palette",
+            onPress: () => router.push('/(categorias)/pintura')
+        },
+        {
+            textoBoton: "JARDINERÍA",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra jardineros profesionales",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "leaf",
+            onPress: () => router.push('/(categorias)/jardineria')
+        },
+        {
+            textoBoton: "LIMPIEZA",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra servicios de limpieza",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "water",
+            onPress: () => router.push('/(categorias)/limpieza')
+        },
+        {
+            textoBoton: "CERRAJERÍA",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra cerrajeros profesionales",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "key",
+            onPress: () => router.push('/(categorias)/cerrajeria')
+        },
+        {
+            textoBoton: "ALBAÑILERÍA",
+            colorTexto: "#1E293B",
+            textoBotonSub: "Encuentra albañiles profesionales",
+            colorTextoSub: "#64748B",
+            bgColor: "#FFFFFF",
+            iconoDerecha: "chevron-forward",
+            colorIconoDerecha: "#3B82F6",
+            colorIconoIzquierda: "#3B82F6",
+            iconoIzquierda: "construct",
+            onPress: () => router.push('/(categorias)/albanileria')
+        }
+    ];
 
-  useEffect(() => {
-    const fetchCategorias = async () => {
-      try {
-        const response = await fetch(`${process.env.API_URL}/category`); 
-        const data = await response.json();
-        console.log('Categorias recibidas:', data);
-        setCategorias(data);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching categorias:', err);
-        setError('Error al cargar las categorías');
-      } finally {
-        setLoading(false);
-      }
-    };
+    const filteredCategorias = categorias.filter(categoria =>
+        categoria.textoBoton.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
-    fetchCategorias();
-  }, []);
-
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.container}>
-          <Text style={styles.titulo}>Categorías</Text>
-          
-          <View style={styles.searchContainer}>
-            <Ionicons name="search" size={20} color="#888" style={styles.icono} />
-            <TextInput
-              placeholder="Buscar categoría..."
-              placeholderTextColor="#888"
-              value={busqueda}
-              onChangeText={handleBuscar}
-              style={styles.input}
-            />
-          </View>
-
-          {loading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color="#8BC34A" />
-              <Text style={styles.loadingText}>Cargando categorías...</Text>
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.headerContainer}>
+                <Text style={styles.titulo}>Categorías</Text>
+                <View style={styles.searchContainer}>
+                    <Ionicons name="search" size={20} color="#64748B" style={styles.searchIcon} />
+                    <TextInput
+                        style={styles.searchInput}
+                        placeholder="Buscar categoría..."
+                        value={searchQuery}
+                        onChangeText={setSearchQuery}
+                        placeholderTextColor="#64748B"
+                    />
+                    {searchQuery.length > 0 && (
+                        <TouchableOpacity onPress={() => setSearchQuery('')}>
+                            <Ionicons name="close-circle" size={20} color="#64748B" />
+                        </TouchableOpacity>
+                    )}
+                </View>
             </View>
-          ) : error ? (
-            <View style={styles.errorContainer}>
-              <Text style={styles.errorText}>{error}</Text>
-            </View>
-          ) : (
-            categorias.map((categoria, index) => (
-              <BotonCategorias 
-                textoBoton={categoria.descripcion} 
-                colorTexto='#8BC34A'
-                bgColor='#F5F5F5' 
-                iconoDerecha={"chevron-forward"} 
-                colorIconoDerecha='#00BCD4'
-                colorIconoIzquierda='#8BC34A'
-                iconoIzquierda={categoria.icono || 'cube'} 
-                key={index}
-                onPress={() => router.push({
-                  pathname: '/(categorias)/[detalleCategoria]',
-                  params: { categoria: categoria.descripcion, id: categoria.id }
-                })}
-              />
-            ))
-          )}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+            <ScrollView 
+                style={styles.scrollView}
+                contentContainerStyle={styles.scrollContent}
+                showsVerticalScrollIndicator={false}
+            >
+                {filteredCategorias.map((categoria, index) => (
+                    <BotonCategorias
+                        key={index}
+                        {...categoria}
+                    />
+                ))}
+            </ScrollView>
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    paddingBottom: 20,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-  },
-  titulo: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 20,
-    marginTop: 10,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  loadingText: {
-    marginTop: 10,
-    color: '#666',
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  errorText: {
-    color: '#e74c3c',
-    textAlign: 'center',
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f2f2f2',
-    borderRadius: 12,
-    paddingHorizontal: 15,
-    marginBottom: 20,
-    ...Platform.select({
-      ios: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
-  },
-  icono: {
-    marginRight: 8,
-  },
-  input: {
-    flex: 1,
-    height: 45,
-    fontSize: 16,
-    color: '#333',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
+    headerContainer: {
+        backgroundColor: '#fff',
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        paddingBottom: 10,
+        ...Platform.select({
+            ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
+    },
+    titulo: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: '#1E293B',
+        marginBottom: 15,
+    },
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#F8FAFC',
+        borderRadius: 12,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        marginBottom: 10,
+    },
+    searchIcon: {
+        marginRight: 10,
+    },
+    searchInput: {
+        flex: 1,
+        fontSize: 16,
+        color: '#1E293B',
+        padding: 0,
+    },
+    scrollView: {
+        flex: 1,
+    },
+    scrollContent: {
+        padding: 20,
+    },
 });
