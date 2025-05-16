@@ -51,6 +51,11 @@ export default function TabLayout() {
                     title: 'Más',
                     tabBarIcon: ({ color, size }) => <Ionicons size={24} name="ellipsis-horizontal" color={color} />,
                 }}
+                listeners={{
+                    tabPress: () => {
+                        router.replace('/(tabs)/(mas)/mas');
+                    },
+                }}
             />
         </Tabs>
     );

@@ -1,8 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, TouchableHighlight, Text, View, Image, StyleSheet, GestureResponderEvent } from 'react-native';
+import { TouchableOpacity, Text, View, Image, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
-
+import { LinearGradient } from 'expo-linear-gradient';
 
 type Props = {
     textoBoton?: string;
@@ -11,72 +10,127 @@ type Props = {
     colorTextoProfesion?: string;
     bgColor?: string;
     numeroMensaje?: number;
- 
     onPress: () => void;
     avatar?: any;
 };
 
-const BotonAvatar: React.FC<Props> = ({ textoBoton, colorTexto, onPress,
-                                            bgColor, numeroMensaje, 
-                                            avatar, textoProfesion, colorTextoProfesion 
-    }) => {
+const BotonMensaje: React.FC<Props> = ({ 
+    textoBoton, 
+    colorTexto, 
+    onPress,
+    bgColor, 
+    numeroMensaje, 
+    avatar, 
+    textoProfesion, 
+    colorTextoProfesion 
+}) => {
     return (
-
-    <TouchableHighlight
-      style={[styles.boton, { backgroundColor: bgColor }]}
-      underlayColor={'#ddd'}
-      onPress={onPress}
-    >
-      <View style={styles.contenidoBoton}>
-          <View  style={{ flexDirection: 'row', gap:10 }}>
-          <Image
-              source={avatar}
-              style={{
-                width: 60,
-                height: 60,
-                borderRadius: 80,
-                marginVertical: 5,
-                borderColor: '#00BCD4',
-                borderWidth: 5,                
-              }}
-            />
-            <View style={{ marginLeft: 10, justifyContent: 'center', gap: 5}}>
-              <Text style={{ fontWeight: '800', color: colorTexto }}>{textoBoton}</Text>
-              <Text style={{ fontWeight: '300', color: colorTextoProfesion }}>{textoProfesion}</Text>
+        <TouchableOpacity
+            style={[styles.container, { backgroundColor: bgColor }]}
+            onPress={onPress}
+            activeOpacity={0.7}
+        >
+            <View style={styles.content}>
+                <View style={styles.leftContent}>
+                    <View style={styles.avatarContainer}>
+                        <Image
+                            source={avatar}
+                            style={styles.avatar}
+                        />
+                        {numeroMensaje && numeroMensaje > 0 && (
+                            <View style={styles.badgeContainer}>
+                                <Text style={styles.badgeText}>{numeroMensaje}</Text>
+                            </View>
+                        )}
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={[styles.name, { color: colorTexto }]}>{textoBoton}</Text>
+                        <Text style={[styles.profession, { color: colorTextoProfesion }]}>{textoProfesion}</Text>
+                    </View>
+                </View>
+                <View style={styles.rightContent}>
+                    <Ionicons name="chevron-forward" size={20} color="#94A3B8" />
+                </View>
             </View>
-          </View>
-          <Text style={styles.numeroMensaje}>{numeroMensaje}</Text>
-      </View>
-    </TouchableHighlight>
-        );
-    }
+        </TouchableOpacity>
+    );
+};
 
-
-    const styles = StyleSheet.create({
-    boton: {
-        marginVertical: 10,
-        marginHorizontal: 10,
-        padding: 20,
-        borderRadius: 50,
-        boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
-        
-        
-      },
-      contenidoBoton: {
+const styles = StyleSheet.create({
+    container: {
+        marginVertical: 4,
+        marginHorizontal: 16,
+        borderRadius: 16,
+        overflow: 'hidden',
+        ...Platform.select({
+            ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.05,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 2,
+            },
+        }),
+    },
+    content: {
         flexDirection: 'row',
+        alignItems: 'center',
         justifyContent: 'space-between',
-      },
-      numeroMensaje: {
-        marginRight: 8,
-        alignSelf: 'center',
+        padding: 12,
+    },
+    leftContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flex: 1,
+    },
+    avatarContainer: {
+        position: 'relative',
+        marginRight: 12,
+    },
+    avatar: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        borderWidth: 2,
+        borderColor: '#E2E8F0',
+    },
+    badgeContainer: {
+        position: 'absolute',
+        top: -4,
+        right: -4,
+        backgroundColor: '#3B82F6',
+        borderRadius: 12,
+        minWidth: 24,
+        height: 24,
         justifyContent: 'center',
-        fontSize: 20,
-        backgroundColor: '#84AE46',
-        borderRadius: 50,
-        paddingHorizontal: 15,
-        paddingVertical: 5,
-        
-      },
-    });
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: '#FFFFFF',
+    },
+    badgeText: {
+        color: '#FFFFFF',
+        fontSize: 12,
+        fontWeight: '600',
+        paddingHorizontal: 4,
+    },
+    textContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    name: {
+        fontSize: 16,
+        fontWeight: '600',
+        marginBottom: 2,
+    },
+    profession: {
+        fontSize: 14,
+        opacity: 0.8,
+    },
+    rightContent: {
+        marginLeft: 8,
+    },
+});
 
-export default BotonAvatar;    
+export default BotonMensaje;    

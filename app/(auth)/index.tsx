@@ -7,7 +7,7 @@ import { auth } from '../../config/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { guardarStorage} from '../../services/asyncStorage';
 import { Usuario } from '../../types/usuario'
-
+import { API_URL } from '@env';
 // LOGIN 
 const Login = () => {
     const [email, setUsuario] = useState('');
@@ -104,7 +104,7 @@ const Login = () => {
     };
 
     const obtenerUsuario = async (email: string): Promise<Usuario | null> => {
-        const urlApi = `${process.env.API_URL}/usuarios/${email}`;
+        const urlApi = `${API_URL}/usuarios/${email}`;
 
         try {
             const res = await fetch(urlApi);
