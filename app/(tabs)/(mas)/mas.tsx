@@ -13,69 +13,69 @@ export default function Mas() {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-            <ScrollView contentContainerStyle={styles.scrollContainer}>
-                <View style={styles.container}>
-                    {/* Sección de Perfil */}
-                    <View style={styles.perfilContainer}>
-                        <View style={styles.perfilContent}>
-                            <View style={styles.perfilImageContainer}>
-                                <Image
-                                    source={imgPerfil}
-                                    style={styles.perfilImage}
-                                />
-                            </View>
-                            <View style={styles.perfilInfo}>
-                                <View style={styles.nombreContainer}>
-                                    <Text style={styles.perfilNombre}>Manuel Perez</Text>
-                                </View>
-                                <View style={styles.planRatingContainer}>
-                                    <View style={styles.planContainer}>
-                                        <Ionicons name="star" size={14} color="#3B82F6" />
-                                        <Text style={styles.perfilPlan}>Plan Free</Text>
-                                    </View>
-                                    <View style={styles.ratingContainer}>
-                                        <RatingStars rating={Number(averageRating)} showValue />
-                                    </View>
-                                </View>
-                                <View style={styles.botonesContainer}>
-                                    <TouchableOpacity
-                                        style={[styles.perfilButton, styles.perfilButtonLeft]}
-                                        onPress={() => router.push('/(mas)/(perfil_usuario)')}
-                                    >
-                                        <Ionicons name="person" size={16} color="#3B82F6" />
-                                        <Text style={styles.perfilButtonText}>Mi Perfil</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity
-                                        style={[styles.perfilButton, styles.perfilButtonRight]}
-                                        onPress={() => router.push('/(mas)/mi-perfil-cliente')}
-                                    >
-                                        <Ionicons name="person-circle" size={16} color="#3B82F6" />
-                                        <Text style={styles.perfilButtonText}>Perfil Cliente</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
+            <View style={styles.container}>
+                {/* Sección de Perfil - Fija */}
+                <View style={styles.perfilContainer}>
+                    <View style={styles.perfilContent}>
+                        <View style={styles.perfilImageContainer}>
+                            <Image
+                                source={imgPerfil}
+                                style={styles.perfilImage}
+                            />
                         </View>
-                        <View style={styles.authSection}>
-                            <View style={styles.authInfo}>
-                                <Ionicons name="warning" size={18} color="#EF4444" />
-                                <Text style={styles.authText}>No estás autenticado</Text>
+                        <View style={styles.perfilInfo}>
+                            <View style={styles.nombreContainer}>
+                                <Text style={styles.perfilNombre}>Manuel Perez</Text>
                             </View>
-                            <TouchableOpacity 
-                                style={styles.authButton}
-                                onPress={() => router.push('/(mas)/(auth2)/auth2-info')}
-                            >
-                                <Text style={styles.authButtonText}>Iniciar Autenticación</Text>
-                                <Ionicons name="arrow-forward" size={16} color="#FFFFFF" />
-                            </TouchableOpacity>
+                            <View style={styles.planRatingContainer}>
+                                <View style={styles.planContainer}>
+                                    <Ionicons name="star" size={14} color="#3B82F6" />
+                                    <Text style={styles.perfilPlan}>Plan Free</Text>
+                                </View>
+                                <View style={styles.ratingContainer}>
+                                    <RatingStars rating={Number(averageRating)} showValue />
+                                </View>
+                            </View>
+                            <View style={styles.botonesContainer}>
+                                <TouchableOpacity
+                                    style={[styles.perfilButton, styles.perfilButtonLeft]}
+                                    onPress={() => router.push('/(mas)/(perfil_usuario)')}
+                                >
+                                    <Ionicons name="person" size={16} color="#3B82F6" />
+                                    <Text style={styles.perfilButtonText}>Mi Perfil</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={[styles.perfilButton, styles.perfilButtonRight]}
+                                    onPress={() => router.push('/(mas)/mi-perfil-cliente')}
+                                >
+                                    <Ionicons name="person-circle" size={16} color="#3B82F6" />
+                                    <Text style={styles.perfilButtonText}>Perfil Cliente</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
 
-                    
-                    
-                    
+                    <View style={styles.authSection}>
+                        <View style={styles.authInfo}>
+                            <Ionicons name="warning" size={18} color="#EF4444" />
+                            <Text style={styles.authText}>No estás autenticado</Text>
+                        </View>
+                        <TouchableOpacity 
+                            style={styles.authButton}
+                            onPress={() => router.push('/(mas)/(auth2)/auth2-info')}
+                        >
+                            <Text style={styles.authButtonText}>Iniciar Autenticación</Text>
+                            <Ionicons name="arrow-forward" size={16} color="#FFFFFF" />
+                        </TouchableOpacity>
+                    </View>
+                </View>
 
-                    {/* Sección de Opciones */}
-
+                {/* Sección de Botones - Scrolleable */}
+                <ScrollView 
+                    style={styles.scrollView}
+                    contentContainerStyle={styles.scrollContainer}
+                    showsVerticalScrollIndicator={false}
+                >
                     <View style={styles.opcionesContainer}>
                         <Text style={styles.seccionTitulo}>Mi Cuenta</Text>
                         <BotonCategorias
@@ -102,45 +102,8 @@ export default function Mas() {
                             iconoIzquierda="card"
                             onPress={() => router.push('/(mas)/mi-plan')}
                         />
-                        <BotonCategorias
-                            textoBoton="MIS POSTS"
-                            colorTexto="#1E293B"
-                            textoBotonSub="Mira, edita y crea tus posts aquí"
-                            colorTextoSub="#64748B"
-                            bgColor="#FFFFFF"
-                            iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#3B82F6"
-                            colorIconoIzquierda="#3B82F6"
-                            iconoIzquierda="image"
-                            onPress={() => router.push('/(mas)/post')}
-                        />
-                        <BotonCategorias
-                            textoBoton="COTIZACIONES"
-                            colorTexto="#1E293B"
-                            textoBotonSub="Revisa tus cotizaciones entrantes aquí"
-                            colorTextoSub="#64748B"
-                            bgColor="#FFFFFF"
-                            iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#3B82F6"
-                            colorIconoIzquierda="#3B82F6"
-                            iconoIzquierda="cart"
-                            onPress={() => router.push('/(mas)/(cotizacion)/cotizacion')}
-                        />
-                        <BotonCategorias
-                            textoBoton="MI AGENDA"
-                            colorTexto="#1E293B"
-                            textoBotonSub="Revisa tu agenda de trabajo aquí"
-                            colorTextoSub="#64748B"
-                            bgColor="#FFFFFF"
-                            iconoDerecha="chevron-forward"
-                            colorIconoDerecha="#3B82F6"
-                            colorIconoIzquierda="#3B82F6"
-                            iconoIzquierda="calendar"
-                            onPress={() => router.push('/(mas)/agenda')}
-                        />
                     </View>
 
-                    {/* Sección de Información */}
                     <View style={styles.opcionesContainer}>
                         <Text style={styles.seccionTitulo}>Información</Text>
                         <BotonCategorias
@@ -180,23 +143,28 @@ export default function Mas() {
                             onPress={() => router.push('/(mas)/denuncias')}
                         />
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    scrollContainer: {
-        paddingBottom: 30,
-    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
     },
+    scrollView: {
+        flex: 1,
+    },
+    scrollContainer: {
+        paddingBottom: 30,
+    },
     perfilContainer: {
         padding: 16,
         backgroundColor: '#fff',
+        borderBottomWidth: 1,
+        borderBottomColor: '#E2E8F0',
         ...Platform.select({
             ios: {
                 shadowColor: '#000',
@@ -279,36 +247,6 @@ const styles = StyleSheet.create({
             },
         }),
     },
-    botonesContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        gap: 6,
-        marginTop: 4,
-    },
-    perfilButton: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#FFFFFF',
-        paddingVertical: 6,
-        paddingHorizontal: 8,
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: '#E2E8F0',
-    },
-    perfilButtonLeft: {
-        marginRight: 3,
-    },
-    perfilButtonRight: {
-        marginLeft: 3,
-    },
-    perfilButtonText: {
-        color: '#3B82F6',
-        fontWeight: '600',
-        marginLeft: 4,
-        fontSize: 12,
-    },
     authSection: {
         marginTop: 16,
         backgroundColor: '#FEF2F2',
@@ -353,5 +291,35 @@ const styles = StyleSheet.create({
         color: '#333',
         marginBottom: 15,
         marginLeft: 5,
+    },
+    botonesContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        gap: 6,
+        marginTop: 4,
+    },
+    perfilButton: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
+        paddingVertical: 6,
+        paddingHorizontal: 8,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
+    },
+    perfilButtonLeft: {
+        marginRight: 3,
+    },
+    perfilButtonRight: {
+        marginLeft: 3,
+    },
+    perfilButtonText: {
+        color: '#3B82F6',
+        fontWeight: '600',
+        marginLeft: 4,
+        fontSize: 12,
     },
 });
