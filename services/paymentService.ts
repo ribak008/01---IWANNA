@@ -27,7 +27,7 @@ export interface CheckoutSession {
 //traer los productos (suscripciones)
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/payment/products`, {
+    const response = await fetch(`${BASE_URL}payment/products`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ export const fetchPrices = async (): Promise<Product[]> => {
 //crear usuario en strape
 export const crearUsuarioStripe = async (userId: string, email: string, nombre: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/payment/create-user`, {
+    const response = await fetch(`${BASE_URL}payment/create-user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ export const iniciarCheckout = async (priceId: string, userId: string, setLoadin
   try {
     console.log('Iniciando checkout con priceId:', priceId , 'userId:', userId);
 
-    const response = await fetch(`${BASE_URL}/payment/create-checkout-session`, {
+    const response = await fetch(`${BASE_URL}payment/create-checkout-session`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
