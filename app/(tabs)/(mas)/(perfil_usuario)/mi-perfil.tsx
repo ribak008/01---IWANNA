@@ -45,8 +45,8 @@ export default function MiPerfil() {
                         />
                         <View style={styles.profileInfo}>
                             <Text style={styles.profileName}>{usuario.nombre}</Text>
-                            {usuario.tipo === 1 ? (
-                                <Text style={styles.profileProfession}>{usuario.profesion}</Text>
+                            {usuario.id_tipo === 1 ? (
+                                <Text style={styles.profileProfession}>Profesor</Text>
                             ):
                             (
                                 <Text style={styles.profileProfession}>Cliente</Text>
@@ -109,7 +109,7 @@ export default function MiPerfil() {
                     </View>
 
                     {/* Sección de Estadísticas */}
-                    {usuario.tipo_usuario === 1 && (
+                    {usuario.id_tipo === 1 && (
                         <View style={styles.section}>
                             <View style={styles.sectionHeader}>
                                 <Ionicons name="stats-chart-outline" size={24} color="#8BC34A" />
@@ -117,15 +117,15 @@ export default function MiPerfil() {
                             </View>
                             <View style={styles.statsContainer}>
                                 <View style={styles.statItem}>
-                                <Text style={styles.statValue}>{usuario.estadisticas.servicios}</Text>
+                                <Text style={styles.statValue}>00</Text>
                                 <Text style={styles.statLabel}>Servicios</Text>
                                 </View>
                                 <View style={styles.statItem}>
-                                <Text style={styles.statValue}>{usuario.estadisticas.satisfaccion}</Text>
+                                <Text style={styles.statValue}>00</Text>
                                 <Text style={styles.statLabel}>Satisfacción</Text>
                                 </View>
                                 <View style={styles.statItem}>
-                                <Text style={styles.statValue}>{usuario.estadisticas.experiencia}</Text>
+                                <Text style={styles.statValue}>00</Text>
                                 <Text style={styles.statLabel}>Años Exp.</Text>
                                 </View>
                             </View>
@@ -133,7 +133,7 @@ export default function MiPerfil() {
                     )}
                     
                     {/* POSTS */}
-                    {usuario.tipo_usuario === 1 && (
+                    {usuario.id_tipo === 1 && (
                         <View style={styles.section}>
                             <View style={styles.sectionHeader}>
                                 <Ionicons name="document-text-outline" size={24} color="#8BC34A" />

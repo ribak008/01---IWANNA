@@ -65,7 +65,7 @@ export default function EditarPerfil() {
                     </View>
                     <View style={styles.inputGroup}>
                         <Text style={styles.label}>Profesión</Text>
-                        <TextInput style={styles.input} placeholder={usuario.id_profesion ? (usuario.id_profesion) : ("Ingresa tu profesion")} />
+                        <TextInput style={styles.input} placeholder={usuario.id_profesion ? (usuario.id_profesion.toString()) : ("Ingresa tu profesion")} />
                     </View>
                     <View style={styles.inputGroup}>
                         <Text style={styles.label}>Edad</Text>
