@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BotonCategorias from '../../../components/BotonCategorias';
 import { useRouter } from 'expo-router';
+import { BASE_URL } from '@env';
+
 
 export default function Categorias() {
   const router = useRouter();
@@ -21,7 +23,7 @@ export default function Categorias() {
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
-        const response = await fetch(`${process.env.API_URL}/category`); 
+        const response = await fetch(`http://192.168.1.103:3000/category`); 
         const data = await response.json();
         console.log('Categorias recibidas:', data);
         setCategorias(data);
@@ -33,6 +35,7 @@ export default function Categorias() {
         setLoading(false);
       }
     };
+
 
     fetchCategorias();
   }, []);
@@ -64,16 +67,15 @@ export default function Categorias() {
               <Text style={styles.errorText}>{error}</Text>
             </View>
           ) : (
-            categorias.map((categoria, index) => (
+            categorias.map((categoria) => (
               <BotonCategorias 
-                textoBoton={categoria.descripcion} 
+                textoBoton={categoria.descripcion	} 
                 colorTexto='#8BC34A'
                 bgColor='#F5F5F5' 
                 iconoDerecha={"chevron-forward"} 
                 colorIconoDerecha='#00BCD4'
                 colorIconoIzquierda='#8BC34A'
-                iconoIzquierda={categoria.icono || 'cube'} 
-                key={index}
+                iconoIzquierda={categoria.icono	 || 'cube'} 
                 onPress={() => router.push({
                   pathname: '/(categorias)/[detalleCategoria]',
                   params: { categoria: categoria.descripcion, id: categoria.id }
