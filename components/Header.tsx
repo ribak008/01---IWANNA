@@ -3,58 +3,62 @@ import { View, Image, StyleSheet, Platform, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Appbar, IconButton, Text, useTheme, Surface } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface HeaderProps {
     titulo?: string;
     showBackButton?: boolean;
     showLogo?: boolean;
     showProfile?: boolean;
+    bgColor?: string;
 }
 
 export default function Header({ 
     titulo, 
     showBackButton = false, 
     showLogo = true,
-    showProfile = true 
+    showProfile = true,
+    bgColor = '#FFFFFF'
 }: HeaderProps) {
     const router = useRouter();
     const theme = useTheme();
 
     return (
-        <Surface style={styles.container} elevation={4}>
-            <LinearGradient
-                colors={['#2563EB', '#1E40AF']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.gradient}
-            >
-                <Appbar.Header style={styles.appbar}>
-                    <View style={styles.contentContainer}>
-                        <View style={styles.leftContainer}>
-                            {showBackButton ? (
-                                <View style={styles.backButtonContainer}>
-                                    <IconButton
-                                        icon="arrow-left"
-                                        iconColor="#CBD5E1"
-                                        size={32}
-                                        onPress={() => router.back()}
-                                        style={styles.backButton}
-                                    />
-                                </View>
-                            ) : (
-                                <View style={styles.backButtonContainer}>
-                                    <IconButton
-                                        icon="arrow-left"
-                                        iconColor="#CBD5E1"
-                                        size={32}
-                                        onPress={() => router.back()}
-                                        style={styles.backButton}
-                                    />
-                                </View>
-                            )}
-                        </View>
+        <SafeAreaView style={[styles.safeArea, { backgroundColor: bgColor }]}>
+            <StatusBar barStyle="dark-content" backgroundColor={bgColor} />
+            <Surface style={styles.container} elevation={4}>
+                <LinearGradient
+                    colors={['#2563EB', '#1E40AF']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.gradient}
+                >
+                    <Appbar.Header style={styles.appbar}>
+                        <View style={styles.contentContainer}>
+                            <View style={styles.leftContainer}>
+                                {showBackButton ? (
+                                    <View style={styles.backButtonContainer}>
+                                        <IconButton
+                                            icon="arrow-left"
+                                            iconColor="#CBD5E1"
+                                            size={32}
+                                            onPress={() => router.back()}
+                                            style={styles.backButton}
+                                        />
+                                    </View>
+                                ) : (
+                                    <View style={styles.backButtonContainer}>
+                                        <IconButton
+                                            icon="arrow-left"
+                                            iconColor="#CBD5E1"
+                                            size={32}
+                                            onPress={() => router.back()}
+                                            style={styles.backButton}
+                                        />
+                                    </View>
+                                )}
+                            </View>
 
-                        <View style={styles.centerContainer}>
                             {showLogo && (
                                 <View style={styles.logoContainer}>
                                     <Image
@@ -64,33 +68,36 @@ export default function Header({
                                     />
                                 </View>
                             )}
-                        </View>
 
-                        <View style={styles.rightContainer}>
-                            {showProfile && !showBackButton && (
-                                <IconButton
-                                    icon={() => (
-                                        <View style={styles.profileImageContainer}>
-                                            <Image
-                                                source={require('../assets/images/perfil.png')}
-                                                style={styles.userImage}
-                                            />
-                                        </View>
-                                    )}
-                                    size={36}
-                                    onPress={() => router.push('/(auth)')}
-                                    style={styles.profileButton}
-                                />
-                            )}
+                            <View style={styles.rightContainer}>
+                                {showProfile && !showBackButton && (
+                                    <IconButton
+                                        icon={() => (
+                                            <View style={styles.profileImageContainer}>
+                                                <Image
+                                                    source={require('../assets/images/perfil.png')}
+                                                    style={styles.userImage}
+                                                />
+                                            </View>
+                                        )}
+                                        size={36}
+                                        onPress={() => router.push('/(auth)')}
+                                        style={styles.profileButton}
+                                    />
+                                )}
+                            </View>
                         </View>
-                    </View>
-                </Appbar.Header>
-            </LinearGradient>
-        </Surface>
+                    </Appbar.Header>
+                </LinearGradient>
+            </Surface>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    safeArea: {
+        width: '100%',
+    },
     container: {
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(255, 255, 255, 0.15)',
@@ -103,7 +110,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         elevation: 0,
         height: Platform.OS === 'ios' ? 85 : 65,
-        paddingTop: Platform.OS === 'ios' ? 25 : 10,
+        paddingTop: Platform.OS === 'ios' ? 25 : StatusBar.currentHeight || 10,
     },
     contentContainer: {
         flex: 1,
