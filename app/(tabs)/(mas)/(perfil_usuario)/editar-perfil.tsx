@@ -1,91 +1,136 @@
-import { ScrollView, StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useEffect, useState } from 'react';
+import { recuperarStorage } from '../../../../services/asyncStorage';
+
+const imgPerfil = require('../../../../assets/images/perfil.png');
 
 export default function EditarPerfil() {
+    const manejarDireccion = (direccion: {
+    descripcion: string;
+    latitud: number;
+    longitud: number;
+    }) => {
+        console.log('Dirección seleccionada:', direccion);
+    };
+    const [usuario, setUsuario] = useState<any>(null);
+        
+    useEffect(() => {
+        const cargarUsuario = async () => {
+            try {
+                const datos = await recuperarStorage('usuario');
+                console.log("datos: ", datos);
+                if (datos) {
+                    setUsuario(datos);
+                }
+            } catch (error) {
+                console.error('Error al cargar usuario:', error);
+            }
+        };
+        cargarUsuario();
+    }, []);
+
     return (
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <KeyboardAwareScrollView
+        contentContainerStyle={styles.scrollContainer}
+        enableOnAndroid={true}
+        extraScrollHeight={100}
+        >
             <View style={styles.container}>
-            {/* Sección de Foto de Perfil */}
-
-            <TouchableOpacity style={styles.avatarContainer} onPress={() => console.log('Cambiar foto')}>
-                <Image
-                    source={{ uri: 'https://i.pravatar.cc/300'}}
-                    style={styles.avatar}
-                />
-                <View style={styles.avatarOverlay}>
-                    <Ionicons name="camera-outline" size={24} color="#fff" />
-                </View>
-            </TouchableOpacity>
-
-            {/* Sección de Datos Personales */}
-            <View style={styles.section}>
-                <View style={styles.sectionHeader}>
-                    <Ionicons name="person-circle-outline" size={24} color="#8BC34A" />
-                    <Text style={styles.sectionTitle}>Datos Personales</Text>
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Nombre</Text>
-                    <TextInput style={styles.input} placeholder="Manuel Perez" />
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Profesión</Text>
-                    <TextInput style={styles.input} placeholder="Maestro parrillero" />
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Edad</Text>
-                    <TextInput style={styles.input} placeholder="20 años" keyboardType="numeric" />
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Ubicación</Text>
-                    <TextInput style={styles.input} placeholder="Santiago, Chile" />
-                </View>
-            </View>
-
-            {/* Sección de Descripción */}
-            <View style={styles.section}>
-                <View style={styles.sectionHeader}>
-                <Ionicons name="document-text-outline" size={24} color="#8BC34A" />
-                <Text style={styles.sectionTitle}>Sobre Mí</Text>
-                </View>
-                <TextInput
-                style={[styles.input, styles.textArea]}
-                placeholder="Escribe una breve descripción..."
-                multiline
-                numberOfLines={4}
-                />
-            </View>
-
-            {/* Sección de Contacto */}
-            <View style={styles.section}>
-                <View style={styles.sectionHeader}>
-                <Ionicons name="call-outline" size={24} color="#8BC34A" />
-                <Text style={styles.sectionTitle}>Contacto</Text>
-                </View>
-                <View style={styles.inputGroup}>
-                <Text style={styles.label}>Correo</Text>
-                <TextInput style={styles.input} placeholder="manuel_perez@gmail.com" keyboardType="email-address" />
-                </View>
-                <View style={styles.inputGroup}>
-                <Text style={styles.label}>Teléfono</Text>
-                <TextInput style={styles.input} placeholder="+56 9 3452 5252" keyboardType="phone-pad" />
-                </View>
-            </View>
-
-            {/* Botones de Guardar y Cancelar */}
-            <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={styles.cancelButton} onPress={() => router.push('/(perfil_usuario)/mi-perfil')}>
-                <Ionicons name="close-circle-outline" size={20} color="#fff" />
-                <Text style={styles.buttonText}>Cancelar</Text>
+                {/* Sección de Foto de Perfil */}
+                {usuario && (
+                <TouchableOpacity style={styles.avatarContainer} onPress={() => console.log('Cambiar foto')}>
+                    <Image
+                        source={usuario.foto ? { uri: usuario.foto } : imgPerfil}
+                        style={styles.avatar}
+                    />
+                    <View style={styles.avatarOverlay}>
+                        <Ionicons name="camera-outline" size={24} color="#fff" />
+                    </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.saveButton}>
-                <Ionicons name="checkmark-circle-outline" size={20} color="#fff" />
-                <Text style={styles.buttonText}>Guardar</Text>
-                </TouchableOpacity>
+                )}
+
+                {/* Sección de Datos Personales */}
+                {usuario && (
+                <View style={styles.section}>
+                    <View style={styles.sectionHeader}>
+                        <Ionicons name="person-circle-outline" size={24} color="#8BC34A" />
+                        <Text style={styles.sectionTitle}>Datos Personales</Text>
+                    </View>
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Nombre</Text>
+                        <TextInput style={styles.input} placeholder={usuario.nombre} />
+                    </View>
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Profesión</Text>
+                        <TextInput style={styles.input} placeholder={usuario.id_profesion ? (usuario.id_profesion) : ("Ingresa tu profesion")} />
+                    </View>
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Edad</Text>
+                        <TextInput style={styles.input} placeholder={usuario.edad.toString()} keyboardType="numeric" />
+                    </View>
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Direccion</Text>
+                        <TouchableOpacity style={styles.input} onPress={() => router.push('/(perfil_usuario)/direccion')}>
+                            <Text style={styles.inputText}>Seleccionar dirección</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                )}
+
+                {/* Sección de Descripción */}
+                {usuario && (
+                <View style={styles.section}>
+                    <View style={styles.sectionHeader}>
+                    <Ionicons name="document-text-outline" size={24} color="#8BC34A" />
+                    <Text style={styles.sectionTitle}>Sobre Mí</Text>
+                    </View>
+                    <TextInput
+                    style={[styles.input, styles.textArea]}
+                    placeholder="Escribe una breve descripción..."
+                    value={usuario.descripcion}
+                    multiline
+                    numberOfLines={4}
+                    />
+                </View>
+                )}
+
+                {/* Sección de Contacto */}
+                {usuario && (
+                <View style={styles.section}>
+                    <View style={styles.sectionHeader}>
+                    <Ionicons name="call-outline" size={24} color="#8BC34A" />
+                    <Text style={styles.sectionTitle}>Contacto</Text>
+                    </View>
+                    <View style={styles.inputGroup}>
+                    <Text style={styles.label}>Correo</Text>
+                    <TextInput style={styles.input} placeholder="manuel_perez@gmail.com" keyboardType="email-address" />
+                    </View>
+                    <View style={styles.inputGroup}>
+                    <Text style={styles.label}>Teléfono</Text>
+                    <TextInput style={styles.input} placeholder="+56 9 3452 5252" keyboardType="phone-pad" />
+                    </View>
+                </View>
+                )}
+
+                {/* Botones de Guardar y Cancelar */}
+                {usuario && (
+                <View style={styles.buttonsContainer}>
+                    <TouchableOpacity style={styles.cancelButton} onPress={() => router.push('/(perfil_usuario)/mi-perfil')}>
+                    <Ionicons name="close-circle-outline" size={20} color="#fff" />
+                    <Text style={styles.buttonText}>Cancelar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.saveButton}>
+                    <Ionicons name="checkmark-circle-outline" size={20} color="#fff" />
+                    <Text style={styles.buttonText}>Guardar</Text>
+                    </TouchableOpacity>
+                </View>
+                )}
+
             </View>
-            </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
     )
 }
 
@@ -154,8 +199,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         fontSize: 16,
-        color: '#333',
+        color: '#888',
         backgroundColor: '#fff',
+    },
+    inputText: {
+        fontSize: 16,
+        color: '#888',
     },
 
     textArea: {

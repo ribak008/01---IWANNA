@@ -65,7 +65,7 @@ export default function PerfilUsuario() {
                         </TouchableOpacity>
                     )}
                     {/* SOLO MUESTRA LA ID DEL USUARIO */}
-                    <View style={{
+                    {/* <View style={{
                         justifyContent: 'center',
                         alignItems: 'center',
                         padding: 10,
@@ -80,7 +80,7 @@ export default function PerfilUsuario() {
                         }}>
                             ID: {usuario.id}
                         </Text>
-                    </View>
+                    </View> */}
 
                     {/* Sección de usuario Personales */}
                     <View style={styles.section}>

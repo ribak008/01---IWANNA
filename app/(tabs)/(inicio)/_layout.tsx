@@ -9,7 +9,7 @@ export default function InicioLayout() {
         name="index"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "INICIO" bgColor="#FFFFFF"/>
+            <HeaderPrincipal titulo= "INICIO" />
           ),
         }}
       />
@@ -17,7 +17,7 @@ export default function InicioLayout() {
         name="[idUsuario]"
         options={{
           header: (props) => (
-            <HeaderPrincipal titulo= "PERFIL DE UN WN" bgColor="#FFFFFF"/>
+            <HeaderPrincipal />
           ),
         }}
       />
