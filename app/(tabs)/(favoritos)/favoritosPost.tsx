@@ -4,7 +4,8 @@ import Post from '../../../components/post';
 
 
 
-const posts = [
+
+const postsFavoritos = [
     {
         id: 1,
         nombre: 'juanito_dev',
@@ -223,10 +224,10 @@ export default function FavoritosPost() {
             {/* CABEZERA */}          
             {/* DATA */}
             <FlatList
-                data={posts}
+                data={postsFavoritos}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                <Post datos={item} />
+                <Post datos = {item} />
             )}/>
         </SafeAreaView>
     </View>
@@ -236,6 +237,6 @@ export default function FavoritosPost() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    
   },
 });
