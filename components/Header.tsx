@@ -23,7 +23,7 @@ export default function Header({
     return (
         <Surface style={styles.container} elevation={4}>
             <LinearGradient
-                colors={['#2D3748', '#4A5568']}
+                colors={['#3B82F6', '#2563EB']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={styles.gradient}
@@ -52,7 +52,7 @@ export default function Header({
                             {showLogo && (
                                 <View style={styles.logoContainer}>
                                     <Image
-                                        source={require('../assets/images/icons/logo-sin-fondo-texto.png')}
+                                        source={require('../assets/images/icons/iwanna_manusc.png')}
                                         style={styles.logo}
                                         resizeMode="contain"
                                     />
@@ -86,8 +86,8 @@ export default function Header({
 
 const styles = StyleSheet.create({
     container: {
-        borderBottomLeftRadius: 16,
-        borderBottomRightRadius: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(255, 255, 255, 0.15)',
         overflow: 'hidden',
     },
     gradient: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 12,
+        paddingHorizontal: 16,
     },
     leftContainer: {
         width: 90,
@@ -120,9 +120,9 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     backButton: {
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
         margin: 0,
-        borderRadius: 12,
+        borderRadius: 8,
     },
     profileButton: {
         margin: 0,
@@ -134,17 +134,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 2,
-        borderColor: 'rgba(255, 255, 255, 0.2)',
+        borderWidth: 1,
+        borderColor: 'rgba(255, 255, 255, 0.3)',
         ...Platform.select({
             ios: {
                 shadowColor: '#000',
-                shadowOffset: { width: 0, height: 2 },
+                shadowOffset: { width: 0, height: 1 },
                 shadowOpacity: 0.1,
-                shadowRadius: 3,
+                shadowRadius: 2,
             },
             android: {
-                elevation: 2,
+                elevation: 1,
             },
         }),
     },
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#FFFFFF',
-        letterSpacing: 0.5,
+        letterSpacing: 0.3,
         textTransform: 'uppercase',
         fontWeight: '600',
         fontSize: 16,
@@ -167,18 +167,28 @@ const styles = StyleSheet.create({
             ios: 'Helvetica Neue',
             android: 'Roboto',
         }),
-        textShadowColor: 'rgba(0, 0, 0, 0.2)',
-        textShadowOffset: { width: 0, height: 1 },
-        textShadowRadius: 2,
     },
     logoContainer: {
-        width: 70,
-        height: 70,
+        width: 110,
+        height: 110,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'transparent',
     },
     logo: {
-        width: 65,
-        height: 65,
+        width: 100,
+        height: 100,
+        opacity: 1,
+        ...Platform.select({
+            ios: {
+                shadowColor: '#3B82F6',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 8,
+            },
+            android: {
+                elevation: 5,
+            },
+        }),
     },
 }); 
