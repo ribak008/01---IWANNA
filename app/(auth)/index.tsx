@@ -128,7 +128,7 @@ const Login = () => {
         >
             <View style={styles.contentContainer}>
                 <Image
-                    source={require('../../assets/images/logo.jpg')}
+                    source={require('../../assets/images/icons/logo-nuevo.png')}
                     style={styles.logo}
                 />
 
@@ -190,30 +190,18 @@ const Login = () => {
                 </View>
 
                 <TouchableOpacity 
-                    onPress={handleGoToRecover} 
-                    style={styles.forgotPassword}
+                    style={styles.loginButton}
+                    onPress={handleLogin}
                 >
-                    <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
+                    <Text style={styles.loginButtonText}>Iniciar Sesión</Text>
                 </TouchableOpacity>
 
-                <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-                    <TouchableOpacity 
-                        onPress={handleLogin} 
-                        onPressIn={handlePressIn}
-                        onPressOut={handlePressOut}
-                        style={[
-                            styles.loginButton,
-                            isLoading && styles.loginButtonDisabled
-                        ]}
-                        disabled={isLoading}
-                    >
-                        {isLoading ? (
-                            <Ionicons name="sync" size={24} color="#fff" style={styles.loadingIcon} />
-                        ) : (
-                            <Text style={styles.loginButtonText}>Iniciar Sesión</Text>
-                        )}
-                    </TouchableOpacity>
-                </Animated.View>
+                <TouchableOpacity 
+                    style={styles.recoverButton}
+                    onPress={handleGoToRecover}
+                >
+                    <Text style={styles.recoverButtonText}>¿Olvidaste tu contraseña?</Text>
+                </TouchableOpacity>
 
                 <View style={styles.registerContainer}>
                     <Text style={styles.registerText}>¿No tienes una cuenta? </Text>
@@ -245,20 +233,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     logo: {
-        width: 150,
-        height: 150,
+        width: 250,
+        height: 250,
         marginBottom: 30,
         resizeMode: 'contain',
     },
     title: {
         fontSize: 28,
         fontWeight: 'bold',
-        color: '#333',
+        color: '#1E293B',
         marginBottom: 10,
     },
     subtitle: {
         fontSize: 16,
-        color: '#666',
+        color: '#64748B',
         marginBottom: 30,
     },
     inputContainer: {
@@ -267,16 +255,16 @@ const styles = StyleSheet.create({
         width: '100%',
         marginBottom: 15,
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: '#E2E8F0',
         borderRadius: 10,
         paddingHorizontal: 15,
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#F8FAFC',
     },
     inputError: {
-        borderColor: '#FF3B30',
+        borderColor: '#EF4444',
     },
     errorText: {
-        color: '#FF3B30',
+        color: '#EF4444',
         fontSize: 12,
         alignSelf: 'flex-start',
         marginBottom: 10,
@@ -287,58 +275,67 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         height: 50,
-        color: '#333',
+        color: '#1E293B',
     },
     eyeIcon: {
         padding: 10,
     },
-    forgotPassword: {
-        alignSelf: 'flex-end',
-        marginBottom: 20,
-    },
-    forgotPasswordText: {
-        color: '#666',
-        fontSize: 14,
-    },
     loginButton: {
         width: '100%',
-        height: 50,
-        backgroundColor: '#8BC34A',
-        borderRadius: 10,
-        justifyContent: 'center',
+        backgroundColor: '#3B82F6',
+        padding: 16,
+        borderRadius: 12,
+        marginTop: 30,
         alignItems: 'center',
-        marginBottom: 20,
-        paddingHorizontal: 20,
-    },
-    loginButtonDisabled: {
-        opacity: 0.7,
+        ...Platform.select({
+            ios: {
+                shadowColor: '#3B82F6',
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 8,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
     },
     loginButtonText: {
-        color: '#fff',
-        fontSize: 14,
-        fontWeight: 'bold',
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontWeight: '600',
         letterSpacing: 0.5,
     },
-    loadingIcon: {
-        transform: [{ rotate: '0deg' }],
+    recoverButton: {
+        marginTop: 16,
+        padding: 10,
+        alignItems: 'center',
+    },
+    recoverButtonText: {
+        color: '#3B82F6',
+        fontSize: 14,
+        fontWeight: '500',
     },
     registerContainer: {
         flexDirection: 'row',
         marginTop: 20,
+        justifyContent: 'center',
     },
     registerText: {
-        color: '#666',
+        color: '#64748B',
+        fontSize: 14,
     },
     registerLink: {
-        color: '#8BC34A',
-        fontWeight: 'bold',
+        color: '#3B82F6',
+        fontSize: 14,
+        fontWeight: '600',
+        marginLeft: 4,
     },
     skipButton: {
         marginTop: 20,
         padding: 10,
     },
     skipButtonText: {
-        color: '#666',
+        color: '#64748B',
         fontSize: 14,
         textAlign: 'center',
         textDecorationLine: 'underline',

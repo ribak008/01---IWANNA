@@ -91,13 +91,15 @@ const Recover = () => {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.container}
         >
-            <View style={styles.contentContainer}>
-                <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
-                    <Ionicons name="arrow-back" size={24} color="#333" />
-                </TouchableOpacity>
+            <View style={styles.scrollContainer}>
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
+                        <Ionicons name="arrow-back" size={24} color="#333" />
+                    </TouchableOpacity>
+                </View>
 
                 <Image
-                    source={require('../../assets/images/logo.jpg')}
+                    source={require('../../assets/images/icons/logo-nuevo.png')}
                     style={styles.logo}
                 />
 
@@ -148,11 +150,9 @@ const Recover = () => {
                         ]}
                         disabled={isLoading}
                     >
-                        {isLoading ? (
-                            <Ionicons name="sync" size={24} color="#fff" style={styles.loadingIcon} />
-                        ) : (
-                            <Text style={styles.recoverButtonText}>Enviar Enlace</Text>
-                        )}
+                        <Text style={styles.recoverButtonText}>
+                            {isLoading ? 'Enviando...' : 'Enviar Enlace'}
+                        </Text>
                     </TouchableOpacity>
                 </Animated.View>
             </View>
@@ -165,57 +165,58 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    contentContainer: {
-        flex: 1,
+    scrollContainer: {
+        flexGrow: 1,
         padding: 20,
-        justifyContent: 'center',
         alignItems: 'center',
     },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 20,
+        width: '100%',
+    },
     backButton: {
-        position: 'absolute',
-        top: 40,
-        left: 20,
         padding: 10,
+        marginRight: 10,
     },
     logo: {
-        width: 120,
-        height: 120,
+        width: 250,
+        height: 250,
         marginBottom: 30,
         resizeMode: 'contain',
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#333',
-        marginBottom: 10,
+        color: '#1E293B',
         textAlign: 'center',
     },
     subtitle: {
-        fontSize: 14,
-        color: '#666',
+        fontSize: 16,
+        color: '#64748B',
         marginBottom: 30,
         textAlign: 'center',
-        paddingHorizontal: 20,
+    },
+    formContainer: {
+        gap: 20,
     },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: '100%',
-        marginBottom: 20,
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: '#E2E8F0',
         borderRadius: 10,
         paddingHorizontal: 15,
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#F8FAFC',
     },
     inputError: {
-        borderColor: '#FF3B30',
+        borderColor: '#EF4444',
     },
     errorText: {
-        color: '#FF3B30',
+        color: '#EF4444',
         fontSize: 12,
-        alignSelf: 'flex-start',
-        marginBottom: 10,
+        marginTop: -15,
     },
     inputIcon: {
         marginRight: 10,
@@ -223,29 +224,47 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         height: 50,
-        color: '#333',
+        color: '#1E293B',
     },
     recoverButton: {
         width: '100%',
-        height: 50,
-        backgroundColor: '#8BC34A',
-        borderRadius: 10,
-        justifyContent: 'center',
+        backgroundColor: '#3B82F6',
+        padding: 16,
+        borderRadius: 12,
+        marginTop: 30,
         alignItems: 'center',
-        marginTop: 10,
-        paddingHorizontal: 20,
+        ...Platform.select({
+            ios: {
+                shadowColor: '#3B82F6',
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 8,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
+    },
+    recoverButtonText: {
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontWeight: '600',
+        letterSpacing: 0.5,
     },
     recoverButtonDisabled: {
         opacity: 0.7,
     },
-    recoverButtonText: {
-        color: '#fff',
-        fontSize: 14,
-        fontWeight: 'bold',
-        letterSpacing: 0.5,
+    loginContainer: {
+        flexDirection: 'row',
+        marginTop: 20,
+        justifyContent: 'center',
     },
-    loadingIcon: {
-        transform: [{ rotate: '0deg' }],
+    loginText: {
+        color: '#64748B',
+    },
+    loginLink: {
+        color: '#3B82F6',
+        fontWeight: 'bold',
     },
 });
 

@@ -115,8 +115,13 @@ const Register_two_trabajador = () => {
                     style={styles.nextButton}
                     onPress={handleNext}
                 >
-                    <Text style={styles.nextButtonText}>Siguiente</Text>
-                    <Ionicons name="arrow-forward" size={24} color="#fff" />
+                    <View style={[styles.buttonIcon, { backgroundColor: '#3B82F615' }]}>
+                        <Ionicons name="arrow-forward" size={28} color="#3B82F6" />
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.nextButtonText}>Siguiente</Text>
+                        <Text style={styles.buttonSubText}>Continuar con el registro</Text>
+                    </View>
                 </TouchableOpacity>
             </ScrollView>
         </KeyboardAvoidingView>
@@ -144,11 +149,11 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#333',
+        color: '#1E293B',
     },
     subtitle: {
         fontSize: 16,
-        color: '#666',
+        color: '#64748B',
         marginBottom: 30,
     },
     formContainer: {
@@ -158,10 +163,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: '#E2E8F0',
         borderRadius: 10,
         paddingHorizontal: 15,
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#F8FAFC',
+    },
+    inputError: {
+        borderColor: '#EF4444',
+    },
+    errorText: {
+        color: '#EF4444',
+        fontSize: 12,
+        marginTop: -15,
     },
     inputIcon: {
         marginRight: 10,
@@ -169,23 +182,66 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         height: 50,
-        color: '#333',
+        color: '#1E293B',
+    },
+    eyeIcon: {
+        padding: 10,
+    },
+    registerButton: {
+        backgroundColor: '#3B82F6',
+        padding: 15,
+        borderRadius: 10,
+        marginTop: 30,
+        alignItems: 'center',
+    },
+    registerButtonText: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: 'bold',
     },
     nextButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#4CAF50',
-        padding: 15,
-        borderRadius: 10,
+        backgroundColor: '#FFFFFF',
+        padding: 16,
+        borderRadius: 16,
         marginTop: 30,
         marginBottom: 20,
+        ...Platform.select({
+            ios: {
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.15,
+                shadowRadius: 8,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
+    },
+    buttonIcon: {
+        width: 52,
+        height: 52,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 26,
+        marginRight: 12,
+    },
+    textContainer: {
+        flex: 1,
+        paddingHorizontal: 8,
     },
     nextButtonText: {
-        color: '#fff',
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginRight: 10,
+        color: '#1E293B',
+        fontSize: 16,
+        fontWeight: '700',
+        letterSpacing: 0.3,
+        marginBottom: 4,
+    },
+    buttonSubText: {
+        color: '#64748B',
+        fontSize: 14,
+        lineHeight: 18,
     },
 });
 
